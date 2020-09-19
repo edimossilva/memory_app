@@ -8,15 +8,14 @@
 
    `docker-compose up -d`
 
-1. connect to rails service
+1. config db
 
-   ```
-   docker-compose exec memory_app_back bash
-   bundle install
-   rake db:setup
-   rspec -> you can see coverage on "volume/blog-backend/coverage/index.html"
-   railss
-   ```
+   `docker-compose exec memory_app_back rake db:create`
+   `docker-compose exec memory_app_back rake db:migrate`
+   
+1. tests
+
+   `docker-compose exec memory_app_back rspec`
 
 1. access
 
@@ -24,4 +23,4 @@
 
 1. Semaphore
 
-   [![Build Status](https://semaphoreci.com/api/v1/edimossilva/memory-app-rails/branches/master/badge.svg)](https://semaphoreci.com/edimossilva/memory-app-rails)
+   ![Build Status](https://edimossilva.semaphoreci.com/badges/memory-app-rails/branches/master.svg?style=shields)
