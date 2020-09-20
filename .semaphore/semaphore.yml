@@ -1,46 +1,45 @@
 version: v1.0
-name: Docker
+name: Docker-compose tests
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: "test 1"
+  - name: "rspec 1/2"
     dependencies: []
     task:
       jobs:
-        - name: docker test 1
+        - name: rspec 1/2
           commands:
             - checkout
             - docker-compose build
             - docker-compose up -d
             - "docker-compose exec memory_app_back rake db:create"
             - "docker-compose exec memory_app_back rake db:migrate"
-            - docker-compose exec memory_app_back rspec spec/requests/authentication_request_spec.rb:7
+            - docker-compose exec memory_app_back rake spec:sliced[0,2]
             - artifact push workflow app/coverage/.resultset.json -d result_1.json
-  - name: "test 2"
+  - name: "rspec 2/2"
     dependencies: []
     task:
       jobs:
-        - name: docker test 2
+        - name: rspec 2/2
           commands:
             - checkout
             - docker-compose build
             - docker-compose up -d
             - "docker-compose exec memory_app_back rake db:create"
             - "docker-compose exec memory_app_back rake db:migrate"
-            - docker-compose exec memory_app_back rspec spec/requests/authentication_request_spec.rb:33
+            - docker-compose exec memory_app_back rake spec:sliced[1,2]
             - artifact push workflow app/coverage/.resultset.json -d result_2.json
   - name: merge tests
-    dependencies: ["test 1", "test 2"]
+    dependencies: ["rspec 1/2", "rspec 2/2"]
     task:
       jobs:
         - name: merge tests
           commands:
             - checkout
-            - artifact pull workflow result_1.json -d app/cov/input/result_1.json
-            - artifact pull workflow result_2.json -d app/cov/input/result_2.json
-            - docker-compose build
-            - docker-compose up -d
-            - docker-compose exec memory_app_back rake coverage:report
-            - artifact push workflow app/coverage/.resultset.json
+            - gem install simplecov json
+            - artifact pull workflow result_1.json -d collect_coverage/input/resultset-1.json
+            - artifact pull workflow result_2.json -d collect_coverage/input/resultset-2.json
+            - cd collect_coverage
+            - ruby simple_cov_merger.rb
