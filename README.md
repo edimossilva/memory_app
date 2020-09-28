@@ -24,3 +24,7 @@
 1. Semaphore
 
     [![Build Status](https://edimossilva.semaphoreci.com/badges/memory-app-rails/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory-app-rails)
+    
+1. Code-climate
+
+   [![Test Coverage](https://api.codeclimate.com/v1/badges/717f9f8d644f0fcfe2c2/test_coverage)](https://codeclimate.com/github/edimossilva/memory-app-rails/test_coverage)
