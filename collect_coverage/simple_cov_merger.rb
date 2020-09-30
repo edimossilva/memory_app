@@ -24,7 +24,7 @@ class SimpleCovMerger
 
     result = SimpleCov::ResultMerger.merge_results(*results)
     coverage = result.covered_percent
-    coverage_threshould = 70
+    coverage_threshould = 85
     if coverage < coverage_threshould
       puts "Current coverage is #{coverage}%, but should be at least #{coverage_threshould}%"
       exit(1)
