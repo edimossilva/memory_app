@@ -82,3 +82,5 @@ blocks:
             - 'heroku container:push --recursive'
             - 'heroku container:release web --app=memory-app-back'
             - 'heroku run rails db:migrate db:seed --app=memory-app-back'
+      secrets:
+        - name: HEROKU_API_KEY
