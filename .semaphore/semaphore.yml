@@ -5,7 +5,7 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: "rspec 1/2"
+  - name: rspec 1/2
     dependencies: []
     task:
       jobs:
@@ -14,11 +14,11 @@ blocks:
             - checkout
             - docker-compose build
             - docker-compose up -d
-            - "docker-compose exec memory_app_back rake db:create"
-            - "docker-compose exec memory_app_back rake db:migrate"
-            - docker-compose exec memory_app_back rake spec:sliced[0,2]
+            - 'docker-compose exec memory_app_back rake db:create'
+            - 'docker-compose exec memory_app_back rake db:migrate'
+            - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
             - artifact push workflow app/coverage/.resultset.json -d result_1.json
-  - name: "rspec 2/2"
+  - name: rspec 2/2
     dependencies: []
     task:
       jobs:
@@ -27,11 +27,11 @@ blocks:
             - checkout
             - docker-compose build
             - docker-compose up -d
-            - "docker-compose exec memory_app_back rake db:create"
-            - "docker-compose exec memory_app_back rake db:migrate"
-            - docker-compose exec memory_app_back rake spec:sliced[1,2]
+            - 'docker-compose exec memory_app_back rake db:create'
+            - 'docker-compose exec memory_app_back rake db:migrate'
+            - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow app/coverage/.resultset.json -d result_2.json
-  - name: "rubocop lint"
+  - name: rubocop lint
     dependencies: []
     task:
       jobs:
@@ -42,7 +42,10 @@ blocks:
             - gem install rubocop-rails
             - rubocop
   - name: merge tests
-    dependencies: ["rspec 1/2", "rspec 2/2", "rubocop lint"]
+    dependencies:
+      - rspec 1/2
+      - rspec 2/2
+      - rubocop lint
     task:
       jobs:
         - name: merge tests
@@ -57,21 +60,25 @@ blocks:
             - cp -r coverage ../
             - cd ..
             - sed -i 's+./../app+app+g' coverage/.resultset.json
-            - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
             - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r d341aee07bf1ff51e397e80382d5ff14905e9f9b620ec5562094a9662f279755 -p ./app
   - name: deploy heroku
     skip:
-      when: "branch != 'master'"
-    dependencies: ["rspec 1/2", "rspec 2/2", "rubocop lint"]
+      when: branch != 'master'
+    dependencies:
+      - rspec 1/2
+      - rspec 2/2
+      - rubocop lint
     task:
       jobs:
         - name: deploy heroku
           commands:
             - checkout
-            - heroku container:login
-            - heroku git:remote -a memory-app-back
-            - heroku container:push --recursive
-            - heroku container:release web --app=memory-app-back
-            - heroku run rails db:migrate db:seed --app=memory-app-back
+            - 'curl https://cli-assets.heroku.com/install.sh | sh'
+            - 'heroku container:login'
+            - 'heroku git:remote -a memory-app-back'
+            - 'heroku container:push --recursive'
+            - 'heroku container:release web --app=memory-app-back'
+            - 'heroku run rails db:migrate db:seed --app=memory-app-back'
