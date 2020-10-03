@@ -4,6 +4,6 @@ COPY ./app /app
 
 RUN bundle install
 
-RUN mkdir -p tmp tmp/pids
+RUN mkdir -p tmp/pids
 
 CMD bundle exec puma -C config/puma.rb
