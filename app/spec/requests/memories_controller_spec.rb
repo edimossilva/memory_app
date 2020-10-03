@@ -45,4 +45,17 @@ RSpec.describe 'Memory', type: :request do
       end
     end
   end
+
+  context '#index' do
+    before(:each) do
+      create_list(:memory, 3)
+      get('/memories')
+    end
+
+    it { expect(response).to have_http_status(:ok) }
+
+    it 'contains all items' do
+      expect(json_response_data.count).to eq(3)
+    end
+  end
 end
