@@ -26,19 +26,19 @@
 					"enabled": true
 				}
 			],
-			"url": "https://memory-app-back.herokuapp.com/memories/2",
+			"url": "https://memory-app-back.herokuapp.com/memories/3",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"method": "PUT",
+			"method": "DELETE",
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1601807285360,
+			"time": 1601824436041,
 			"name": "delete mamory",
 			"description": "",
 			"collectionId": "661c2a7a-2b95-8e8d-e548-f95bc457056b",
@@ -78,16 +78,22 @@
 		},
 		{
 			"id": "44e6bcf6-d9e8-62f7-997f-a6346d799b7e",
-			"headers": "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDE4OTMzMzgsInVzZXJfaWQiOjF9.8aUIIuFKFWfNvWN-9wau2brPHCeO1UeVOluQ4BVJ8FE\n",
+			"headers": "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDE4OTMzMzgsInVzZXJfaWQiOjF9.8aUIIuFKFWfNvWN-9wau2brPHCeO1UeVOluQ4BVJ8FE\nContent-Type: application/json\n",
 			"headerData": [
 				{
 					"key": "Authorization",
 					"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDE4OTMzMzgsInVzZXJfaWQiOjF9.8aUIIuFKFWfNvWN-9wau2brPHCeO1UeVOluQ4BVJ8FE",
 					"description": "",
 					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
 				}
 			],
-			"url": "https://memory-app-back.herokuapp.com/memories/2",
+			"url": "https://memory-app-back.herokuapp.com/memories/3",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -99,12 +105,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1601807285360,
+			"time": 1601824277935,
 			"name": "edit mamory",
 			"description": "",
 			"collectionId": "661c2a7a-2b95-8e8d-e548-f95bc457056b",
 			"responses": [],
-			"rawModeData": "{\n\t\"key\":\"valmir5\",\n\t\"value\":\"lindo2\",\n\t\"visibility\":false\n}"
+			"rawModeData": "{\n\t\"key\":\"valmir6\",\n\t\"value\":\"edimo\",\n\t\"visibility\":\"false\"\n}"
 		},
 		{
 			"id": "bfeca940-9b7f-3567-aefb-c8587ea58c41",
@@ -152,24 +158,24 @@
 					"enabled": true
 				}
 			],
-			"url": "https://memory-app-back.herokuapp.com/memories/2",
+			"url": "https://memory-app-back.herokuapp.com/memories/",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"method": "DELETE",
+			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1601807322331,
+			"time": 1601824467299,
 			"name": "create mamory",
 			"description": "",
 			"collectionId": "661c2a7a-2b95-8e8d-e548-f95bc457056b",
 			"responses": [],
-			"rawModeData": ""
+			"rawModeData": "{\n\t\"key\" : \"edimo2\",\n\t\"value\" : \"lindo\"\n}"
 		}
 	]
 }
