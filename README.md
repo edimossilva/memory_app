@@ -37,3 +37,6 @@
 1. Heroku
 
    https://memory-app-back.herokuapp.com/
+   
+1. postman requests example
+   https://github.com/edimossilva/memory-app-rails/blob/master/memoryapp.postman_collection.json
