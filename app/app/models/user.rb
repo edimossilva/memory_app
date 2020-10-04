@@ -13,8 +13,4 @@ class User < ApplicationRecord
   def owner?(entity)
     entity.user == self
   end
-
-  def access_level?
-    registred? || admin?
-  end
 end
