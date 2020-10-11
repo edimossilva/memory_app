@@ -1,25 +1,21 @@
 # frozen_string_literal: true
 
 class AuthenticationController < ApplicationController
-  before_action :authorize_request, except: :login
-  # POST /auth/login
+  before_action :authorize_request, except: %i[login sign_up]
+
   def login
     user = User.find_by(username: login_params[:username])
 
     if user&.authenticate(login_params[:password])
-      token = encode_user(user)
-      time = Time.zone.now + 24.hours.to_i
-      json = {
-        token: token,
-        exp: time.strftime('%m-%d-%Y %H:%M'),
-        username: user.username,
-        userId: user.id,
-        accessLevel: user.access_level
-      }
+      json = user_to_auth_json(user)
       render json: json, status: :ok
     else
       render_unauthorized
     end
+  end
+
+  def sign_up
+    redirect_to '/auth/google_oauth2'
   end
 
   private

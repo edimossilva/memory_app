@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include Auth::JsonWebTokenHelper
   include Pundit
 
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_destroyed
-    render status: :no_content
+    render json: {}, status: :no_content
   end
 
   def render_not_found(exception)
