@@ -24,7 +24,7 @@
 
 1. Semaphore (parallel tests / lint)
 
-    [![Build Status](https://edimossilva.semaphoreci.com/badges/memory-app-rails/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory-app-rails)
+   [![Build Status](https://edimossilva.semaphoreci.com/badges/memory-app-rails/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory-app-rails)
 
 1. Code-climate - Test Coverage
 
@@ -33,11 +33,11 @@
 1. Code-climate - Maintainability
 
    [![Maintainability](https://api.codeclimate.com/v1/badges/717f9f8d644f0fcfe2c2/maintainability)](https://codeclimate.com/github/edimossilva/memory-app-rails/maintainability)
-   
+
 1. Heroku
 
    https://memory-app-back.herokuapp.com/
-   
-1. postman requests example
 
-   https://github.com/edimossilva/memory-app-rails/blob/master/memoryapp.postman_collection.json
+1. Swagger
+
+   https://memory-app-back.herokuapp.com/api-docs/index.html

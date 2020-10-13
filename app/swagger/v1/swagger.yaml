@@ -147,7 +147,7 @@ paths:
                 visibility:
                   type: boolean
     delete:
-      summary: Update Memory - Needs Authorization header from /auth/login
+      summary: Delete Memory - Needs Authorization header from /auth/login
       tags:
         - Memories
       parameters:
