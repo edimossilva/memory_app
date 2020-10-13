@@ -48,7 +48,7 @@ paths:
 
   '/memories':
     get:
-      summary: Return all Memories - Needs Authorization header from /auth/login
+      summary: Return all Memories
       tags:
         - Memories
       responses:
@@ -72,7 +72,7 @@ paths:
                     visibility:
                       type: boolean
     post:
-      summary: Create Memory - Needs Authorization header from /auth/login
+      summary: Create Memory
       tags:
         - Memories
       responses:
@@ -107,7 +107,7 @@ paths:
                   type: boolean
   '/memories/{memoryId}':
     put:
-      summary: Update Memory - Needs Authorization header from /auth/login
+      summary: Update Memory
       tags:
         - Memories
       parameters:
@@ -147,7 +147,7 @@ paths:
                 visibility:
                   type: boolean
     delete:
-      summary: Delete Memory - Needs Authorization header from /auth/login
+      summary: Delete Memory
       tags:
         - Memories
       parameters:
