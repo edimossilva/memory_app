@@ -60,6 +60,7 @@ paths:
   '/auth/login':
     post:
       summary: Authorization
+      description: "example data: username:registered_user1, password:111"
       tags:
         - Login
       responses:
