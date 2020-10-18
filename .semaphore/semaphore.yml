@@ -1,92 +1,13 @@
 version: v1.0
-name: Docker-compose tests
+name: Initial Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: rspec 1/2
-    dependencies: []
+  - name: 'Block #1'
     task:
       jobs:
-        - name: rspec 1/2
+        - name: 'Job #1'
           commands:
             - checkout
-            - touch .env
-            - docker-compose build
-            - docker-compose up -d
-            - 'docker-compose exec memory_app_back rake db:create'
-            - 'docker-compose exec memory_app_back rake db:migrate'
-            - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
-            - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
-      secrets:
-        - name: RAILS_MASTER_KEY
-  - name: rspec 2/2
-    dependencies: []
-    task:
-      jobs:
-        - name: rspec 2/2
-          commands:
-            - checkout
-            - touch .env
-            - docker-compose build
-            - docker-compose up -d
-            - 'docker-compose exec memory_app_back rake db:create'
-            - 'docker-compose exec memory_app_back rake db:migrate'
-            - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
-            - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
-      secrets:
-        - name: RAILS_MASTER_KEY
-  - name: rubocop lint
-    dependencies: []
-    task:
-      jobs:
-        - name: rubocop lint
-          commands:
-            - checkout
-            - cd backend_rails
-            - gem install rubocop-rails
-            - rubocop
-  - name: merge tests
-    dependencies:
-      - rspec 1/2
-      - rspec 2/2
-      - rubocop lint
-    task:
-      jobs:
-        - name: merge tests
-          commands:
-            - checkout
-            - gem install simplecov -v 0.17
-            - gem install json
-            - artifact pull workflow result_1.json -d collect_coverage/input/resultset-1.json
-            - artifact pull workflow result_2.json -d collect_coverage/input/resultset-2.json
-            - cd collect_coverage
-            - ruby simple_cov_merger.rb
-            - cp -r coverage ../
-            - cd ..
-            - sed -i 's+./../backend_rails+backend_rails+g' coverage/.resultset.json
-            - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
-            - chmod +x ./cc-test-reporter
-            - ./cc-test-reporter before-build
-            - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r d341aee07bf1ff51e397e80382d5ff14905e9f9b620ec5562094a9662f279755 -p ./backend_rails
-  - name: deploy heroku
-    skip:
-      when: branch != 'master'
-    dependencies:
-      - rspec 1/2
-      - rspec 2/2
-      - rubocop lint
-    task:
-      jobs:
-        - name: deploy heroku
-          commands:
-            - checkout
-            - 'curl https://cli-assets.heroku.com/install.sh | sh'
-            - 'heroku container:login'
-            - 'heroku git:remote -a memory-app-back'
-            - 'heroku container:push --recursive'
-            - 'heroku container:release web --app=memory-app-back'
-            - 'heroku run rails db:migrate db:seed --app=memory-app-back'
-      secrets:
-        - name: HEROKU_API_KEY
