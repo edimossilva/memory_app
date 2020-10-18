@@ -92,6 +92,7 @@ blocks:
         - name: deploy heroku
           commands:
             - checkout
+            - touch .env
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
             - 'heroku container:login'
             - 'heroku git:remote -a memory-app-back'
