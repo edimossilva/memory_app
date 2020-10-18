@@ -18,7 +18,7 @@
 
 1. Semaphore (parallel tests / lint)
 
-   [![Build Status](https://edimossilva.semaphoreci.com/badges/memory-app-rails/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory-app-rails)
+   [![Build Status](https://edimossilva.semaphoreci.com/badges/memory_app/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory_app)
 
 1. Code-climate - Test Coverage
 
