@@ -5,7 +5,19 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: rspec 1/2
+  - name: 'Frontend Unit '
+    dependencies: []
+    task:
+      jobs:
+        - name: jest unit
+          commands:
+            - checkout
+            - touch .env
+            - docker-compose build
+            - docker-compose up -d memory_app_vue
+            - 'docker-compose exec memory_app_vue yarn '
+            - 'docker-compose exec memory_app_vue yarn test:unit'
+  - name: backend unit 1/2
     dependencies: []
     task:
       jobs:
@@ -21,7 +33,7 @@ blocks:
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
       secrets:
         - name: RAILS_MASTER_KEY
-  - name: rspec 2/2
+  - name: backend unit 2/2
     dependencies: []
     task:
       jobs:
@@ -37,7 +49,7 @@ blocks:
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
       secrets:
         - name: RAILS_MASTER_KEY
-  - name: rubocop lint
+  - name: backend lint
     dependencies: []
     task:
       jobs:
@@ -47,11 +59,11 @@ blocks:
             - cd backend_rails
             - gem install rubocop-rails
             - rubocop
-  - name: merge tests
+  - name: backend merge tests
     dependencies:
-      - rspec 1/2
-      - rspec 2/2
-      - rubocop lint
+      - backend unit 1/2
+      - backend unit 2/2
+      - backend lint
     task:
       jobs:
         - name: merge tests
@@ -69,14 +81,14 @@ blocks:
             - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
-            - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r d341aee07bf1ff51e397e80382d5ff14905e9f9b620ec5562094a9662f279755 -p ./backend_rails
+            - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r e4c6b536aedf8301f0f2dc185cc611fa04fa0fea765fd12697b10b4f9b5e6b9a -p ./backend_rails
   - name: deploy heroku
     skip:
       when: branch != 'master'
     dependencies:
-      - rspec 1/2
-      - rspec 2/2
-      - rubocop lint
+      - backend unit 1/2
+      - backend unit 2/2
+      - backend lint
     task:
       jobs:
         - name: deploy heroku

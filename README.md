@@ -18,15 +18,15 @@
 
 1. Semaphore (parallel tests / lint)
 
-   [![Build Status](https://edimossilva.semaphoreci.com/badges/memory-app-rails/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory-app-rails)
+   [![Build Status](https://edimossilva.semaphoreci.com/badges/memory_app/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory_app)
 
 1. Code-climate - Test Coverage
 
-   [![Test Coverage](https://api.codeclimate.com/v1/badges/717f9f8d644f0fcfe2c2/test_coverage)](https://codeclimate.com/github/edimossilva/memory-app-rails/test_coverage)
+   [![Test Coverage](https://api.codeclimate.com/v1/badges/acf7bd7bd4f5d1a4e7bc/test_coverage)](https://codeclimate.com/github/edimossilva/memory_app/test_coverage)
 
 1. Code-climate - Maintainability
 
-   [![Maintainability](https://api.codeclimate.com/v1/badges/717f9f8d644f0fcfe2c2/maintainability)](https://codeclimate.com/github/edimossilva/memory-app-rails/maintainability)
+   [![Maintainability](https://api.codeclimate.com/v1/badges/acf7bd7bd4f5d1a4e7bc/maintainability)](https://codeclimate.com/github/edimossilva/memory_app/maintainability)
 
 1. Heroku
 
