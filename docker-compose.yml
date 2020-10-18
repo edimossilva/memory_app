@@ -40,7 +40,7 @@ services:
     ports:
       - '8080:8080'
     tty: true
-    command: yarn serve
+    command: sh -c "yarn && yarn serve"
 volumes:
   db_memory_app_volume:
 # docker-compose build
