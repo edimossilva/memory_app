@@ -81,7 +81,7 @@ blocks:
             - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
-            - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r d341aee07bf1ff51e397e80382d5ff14905e9f9b620ec5562094a9662f279755 -p ./backend_rails
+            - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r e4c6b536aedf8301f0f2dc185cc611fa04fa0fea765fd12697b10b4f9b5e6b9a -p ./backend_rails
   - name: deploy heroku
     skip:
       when: branch != 'master'
