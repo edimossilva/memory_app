@@ -47,3 +47,5 @@
 1. Docker image
 
    https://hub.docker.com/repository/docker/edimossilva/memory_app_rails
+   https://hub.docker.com/repository/docker/edimossilva/memory_app_vue
+   https://hub.docker.com/repository/docker/edimossilva/memory_e2e
