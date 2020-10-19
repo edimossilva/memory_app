@@ -20,7 +20,6 @@ blocks:
         - name: cypress e2e
           commands:
             - checkout
-            - touch .env
             - docker-compose build
             - docker-compose up -d memory_e2e
             - 'docker-compose exec memory_e2e cypress run'
