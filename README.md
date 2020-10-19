@@ -8,9 +8,17 @@
 
    `docker-compose exec memory_app_back rake db:create rake db:migrate`
 
-1. tests
+1. tests backend unit
 
    `docker-compose exec memory_app_back rspec`
+
+1. tests frontend unit
+
+   `docker-compose exec memory_app_vue yarn test:unit`
+
+1. tests frontend e2e
+
+   `docker-compose exec memory_e2e cypress run`
 
 1. access
 
@@ -39,3 +47,5 @@
 1. Docker image
 
    https://hub.docker.com/repository/docker/edimossilva/memory_app_rails
+   https://hub.docker.com/repository/docker/edimossilva/memory_app_vue
+   https://hub.docker.com/repository/docker/edimossilva/memory_e2e
