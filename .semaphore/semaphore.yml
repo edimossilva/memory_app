@@ -5,7 +5,7 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: 'Frontend Unit '
+  - name: 'Frontend tests'
     dependencies: []
     task:
       jobs:
@@ -17,6 +17,13 @@ blocks:
             - docker-compose up -d memory_app_vue
             - 'docker-compose exec memory_app_vue yarn '
             - 'docker-compose exec memory_app_vue yarn test:unit'
+        - name: cypress e2e
+          commands:
+            - checkout
+            - touch .env
+            - docker-compose build
+            - docker-compose up -d memory_e2e
+            - 'docker-compose exec memory_e2e cypress run'
   - name: backend unit 1/2
     dependencies: []
     task:

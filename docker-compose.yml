@@ -41,6 +41,16 @@ services:
       - '8080:8080'
     tty: true
     command: sh -c "yarn && yarn serve"
+
+  memory_e2e:
+    image: edimossilva/memory_e2e
+    container_name: memory_e2e
+    tty: true
+    volumes:
+      - ./e2e/cypress:/app
+    command: sh
+
+
 volumes:
   db_memory_app_volume:
 # docker-compose build

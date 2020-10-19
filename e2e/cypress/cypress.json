@@ -1,0 +1,5 @@
+{
+  "pluginsFile": "plugins/index.js",
+  "baseUrl": "http://memory_app_vue:8080",
+  "video": false
+}
