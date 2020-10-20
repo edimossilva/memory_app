@@ -25,7 +25,7 @@ blocks:
             - docker-compose up -d
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
             - 'docker-compose exec memory_e2e cypress run'
-  - name: backend unit 1/2
+  - name: backend unit/lint
     dependencies: []
     task:
       jobs:
@@ -38,12 +38,6 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
-      secrets:
-        - name: RAILS_MASTER_KEY
-  - name: backend unit 2/2
-    dependencies: []
-    task:
-      jobs:
         - name: rspec 2/2
           commands:
             - checkout
@@ -53,23 +47,17 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
-      secrets:
-        - name: RAILS_MASTER_KEY
-  - name: backend lint
-    dependencies: []
-    task:
-      jobs:
         - name: rubocop lint
           commands:
             - checkout
             - cd backend_rails
             - gem install rubocop-rails
             - rubocop
+      secrets:
+        - name: RAILS_MASTER_KEY
   - name: backend merge tests
     dependencies:
-      - backend unit 1/2
-      - backend unit 2/2
-      - backend lint
+      - backend unit/lint
     task:
       jobs:
         - name: merge tests
@@ -92,9 +80,7 @@ blocks:
     skip:
       when: branch != 'master'
     dependencies:
-      - backend unit 1/2
-      - backend unit 2/2
-      - backend lint
+      - backend unit/lint
     task:
       jobs:
         - name: deploy heroku
