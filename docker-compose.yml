@@ -51,6 +51,8 @@ services:
       - ./e2e/cypress:/app
     command: sh
     network_mode: host
+    environment:
+    - DISPLAY
 
 volumes:
   db_memory_app_volume:
