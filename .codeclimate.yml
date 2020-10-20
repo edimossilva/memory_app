@@ -1,3 +1,5 @@
 exclude_patterns:
   - "app/db/*"
   - "app/spec/*"
+  - "cypress/specs/*"
+
