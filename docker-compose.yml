@@ -28,7 +28,7 @@ services:
       DATABASE_HOST: 'db_memory_app'
       DATABASE_PORT: '5432'
     tty: true
-    command: sh
+    command: rails s -b 0
     ports:
       - '3000:3000'
 
@@ -41,6 +41,7 @@ services:
       - '8080:8080'
     tty: true
     command: sh -c "yarn && yarn serve"
+    network_mode: host
 
   memory_e2e:
     image: edimossilva/memory_e2e
@@ -49,7 +50,7 @@ services:
     volumes:
       - ./e2e/cypress:/app
     command: sh
-
+    network_mode: host
 
 volumes:
   db_memory_app_volume:

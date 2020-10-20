@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1 data-cy="home__title">Home</h1>
     <btn
       label="add"
       :onClick="onClickAddButton"
