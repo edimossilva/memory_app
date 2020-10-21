@@ -1,11 +1,11 @@
 version: v1.0
-name: Docker-compose tests
+name: CI/CD Semaphore2.0
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: 'Frontend tests'
+  - name: 'Frontend unit'
     dependencies: []
     task:
       jobs:
@@ -29,13 +29,14 @@ blocks:
             - docker-compose build
             - docker-compose up -d
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
+            - sleep 2
             - 'docker-compose exec memory_e2e cypress run'
 
   - name: backend unit/lint
     dependencies: []
     task:
       jobs:
-        - name: rspec 1/2
+        - name: unit 1/2
           commands:
             - checkout
             - touch .env
@@ -44,7 +45,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
-        - name: rspec 2/2
+        - name: unit 2/2
           commands:
             - checkout
             - touch .env
@@ -53,7 +54,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
-        - name: rubocop lint
+        - name: lint
           commands:
             - checkout
             - cd backend_rails
@@ -82,14 +83,14 @@ blocks:
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
             - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r e4c6b536aedf8301f0f2dc185cc611fa04fa0fea765fd12697b10b4f9b5e6b9a -p ./backend_rails
-  - name: deploy heroku
+  - name: deploy
     skip:
       when: branch != 'master'
     dependencies:
       - backend unit/lint
     task:
       jobs:
-        - name: deploy heroku
+        - name: heroku
           commands:
             - checkout
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
