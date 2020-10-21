@@ -22,7 +22,7 @@
 
 1. access
 
-   `http://localhost:3000`
+   `http://localhost:8080`
 
 1. Semaphore (parallel tests / lint)
 
