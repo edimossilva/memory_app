@@ -29,6 +29,7 @@ blocks:
             - docker-compose build
             - docker-compose up -d
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
+            - sleep 2
             - 'docker-compose exec memory_e2e cypress run'
 
   - name: backend unit/lint
