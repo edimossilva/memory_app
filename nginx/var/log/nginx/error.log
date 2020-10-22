@@ -1,2 +1,57 @@
 2020/10/22 18:24:56 [error] 22#22: *1 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
 2020/10/22 18:24:56 [error] 22#22: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8081", referrer: "http://localhost:8081/"
+2020/10/22 18:45:16 [emerg] 29#29: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to [::]:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to [::]:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to [::]:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to [::]:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: bind() to [::]:80 failed (98: Address already in use)
+2020/10/22 18:45:16 [emerg] 29#29: still could not bind()
+2020/10/22 18:59:48 [emerg] 1#1: unexpected "}" in /etc/nginx/nginx.conf:9
+2020/10/22 19:00:40 [emerg] 1#1: unexpected "}" in /etc/nginx/nginx.conf:9
+2020/10/22 19:01:06 [error] 21#21: *2 open() "/etc/nginx/sites/coverage/index.html" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /index.html HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:01:13 [error] 21#21: *2 open() "/etc/nginx/sites/coverage/index" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /index HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:02:51 [error] 21#21: *4 "/etc/nginx/sites/coverage/index.html" is not found (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:04:39 [error] 21#21: *2 "/etc/nginx/sites/coverage/index.html" is not found (2: No such file or directory), client: 172.19.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:04:40 [error] 21#21: *2 "/etc/nginx/sites/coverage/index.html" is not found (2: No such file or directory), client: 172.19.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:04:41 [error] 21#21: *2 "/etc/nginx/sites/coverage/index.html" is not found (2: No such file or directory), client: 172.19.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:04:41 [error] 21#21: *2 "/etc/nginx/sites/coverage/index.html" is not found (2: No such file or directory), client: 172.19.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:04:45 [error] 21#21: *2 open() "/etc/nginx/sites/coverage/index" failed (2: No such file or directory), client: 172.19.0.1, server: , request: "GET /index HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:11:28 [error] 21#21: *1 open() "/usr/share/nginx/html/index" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /index HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:11:36 [error] 21#21: *1 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:14:15 [error] 21#21: *4 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:14:16 [error] 21#21: *4 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:16:30 [notice] 32#32: signal process started
+2020/10/22 19:16:35 [error] 33#33: *6 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:18:31 [error] 21#21: *1 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:21:12 [error] 21#21: *2 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:21:13 [error] 21#21: *2 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:21:13 [error] 21#21: *2 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:21:13 [error] 21#21: *2 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:21:14 [error] 21#21: *2 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:22:24 [error] 21#21: *3 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:24:56 [error] 21#21: *5 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:25:34 [error] 21#21: *5 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:25:35 [error] 21#21: *5 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:07 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:08 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:08 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:08 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:08 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:33 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:34 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:34 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:34 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:34 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:27:35 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:28:03 [error] 21#21: *7 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:32:35 [error] 21#21: *12 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 19:32:46 [error] 21#21: *1 open() "/usr/share/nginx/html/coverage/assets/0.10.2/images/ui-bg_highlight-soft_75_cccccc_1x100.png" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /assets/0.10.2/images/ui-bg_highlight-soft_75_cccccc_1x100.png HTTP/1.1", host: "localhost:8081", referrer: "http://localhost:8081/assets/0.10.2/application.css"
+2020/10/22 19:32:46 [error] 21#21: *2 open() "/usr/share/nginx/html/coverage/assets/0.10.2/images/ui-bg_glass_75_e6e6e6_1x400.png" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /assets/0.10.2/images/ui-bg_glass_75_e6e6e6_1x400.png HTTP/1.1", host: "localhost:8081", referrer: "http://localhost:8081/assets/0.10.2/application.css"
+2020/10/22 19:32:46 [error] 21#21: *3 open() "/usr/share/nginx/html/coverage/assets/0.10.2/images/ui-icons_888888_256x240.png" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /assets/0.10.2/images/ui-icons_888888_256x240.png HTTP/1.1", host: "localhost:8081", referrer: "http://localhost:8081/assets/0.10.2/application.css"
+2020/10/22 19:32:46 [error] 21#21: *4 open() "/usr/share/nginx/html/coverage/assets/0.10.2/favicon.png" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /assets/0.10.2/favicon.png HTTP/1.1", host: "localhost:8081", referrer: "http://localhost:8081/"
+2020/10/22 19:33:45 [error] 21#21: *4 open() "/usr/share/nginx/html/coverage/example.html" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /example.html HTTP/1.1", host: "localhost:8081"

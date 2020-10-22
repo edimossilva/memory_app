@@ -58,6 +58,7 @@ services:
     container_name: nginx
     volumes:
       - ./nginx/usr/share/nginx/html:/usr/share/nginx/html
+      - ./backend_rails/coverage:/usr/share/nginx/html/coverage
       - ./nginx/etc/nginx:/etc/nginx
       - ./nginx/var/log/nginx:/var/log/nginx
       - ./nginx/var/run:/var/run
