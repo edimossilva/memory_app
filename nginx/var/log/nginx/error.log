@@ -1,0 +1,2 @@
+2020/10/22 18:24:56 [error] 22#22: *1 directory index of "/usr/share/nginx/html/" is forbidden, client: 172.19.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8081"
+2020/10/22 18:24:56 [error] 22#22: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8081", referrer: "http://localhost:8081/"

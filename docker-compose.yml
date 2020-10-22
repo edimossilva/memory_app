@@ -59,6 +59,9 @@ services:
     volumes:
       - ./nginx/usr/share/nginx/html:/usr/share/nginx/html
       - ./nginx/etc/nginx:/etc/nginx
+      - ./nginx/var/log/nginx:/var/log/nginx
+      - ./nginx/var/run:/var/run
+      - ./nginx/lib/systemd/system:/lib/systemd/system
     ports:
       - '8081:80'
 
