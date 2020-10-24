@@ -13,7 +13,6 @@ blocks:
           commands:
             - checkout
             - touch .env
-            - docker-compose build
             - docker-compose up -d memory_app_vue
             - 'docker-compose exec memory_app_vue yarn'
             - 'docker-compose exec memory_app_vue yarn test:unit'
@@ -26,10 +25,8 @@ blocks:
           commands:
             - checkout
             - touch .env
-            - docker-compose build
-            - docker-compose up -d
+            - docker-compose up -d memory_app_back memory_app_vue
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
-            - sleep 2
             - 'docker-compose exec memory_e2e cypress run'
 
   - name: backend unit/lint
@@ -40,8 +37,7 @@ blocks:
           commands:
             - checkout
             - touch .env
-            - docker-compose build
-            - docker-compose up -d
+            - docker-compose up -d memory_app_back
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
@@ -49,8 +45,7 @@ blocks:
           commands:
             - checkout
             - touch .env
-            - docker-compose build
-            - docker-compose up -d
+            - docker-compose up -d memory_app_back
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
