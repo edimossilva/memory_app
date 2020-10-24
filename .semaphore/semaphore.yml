@@ -42,6 +42,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
+
         - name: unit 2/2
           commands:
             - checkout
@@ -50,6 +51,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
+
         - name: lint
           commands:
             - checkout
@@ -58,6 +60,7 @@ blocks:
             - rubocop
       secrets:
         - name: RAILS_MASTER_KEY
+
   - name: backend merge tests
     dependencies:
       - backend unit/lint
@@ -79,6 +82,7 @@ blocks:
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
             - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r e4c6b536aedf8301f0f2dc185cc611fa04fa0fea765fd12697b10b4f9b5e6b9a -p ./backend_rails
+
   - name: deploy
     skip:
       when: branch != 'master'
