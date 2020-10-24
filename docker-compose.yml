@@ -1,10 +1,10 @@
 version: '3'
 services:
-  db_memory_app:
+  memory_app_db:
     image: postgres
-    container_name: db_memory_app
+    container_name: memory_app_db
     volumes:
-      - db_memory_app_volume:/data/postgres
+      - memory_app_db_volume:/data/postgres
     environment:
       POSTGRES_PASSWORD: 'postgres'
       POSTGRES_HOST_AUTH_METHOD: 'trust'
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./backend_rails:/app
     depends_on:
-      - db_memory_app
+      - memory_app_db
     env_file:
       - .env
     environment:
@@ -25,7 +25,7 @@ services:
       RAILS_MASTER_KEY: '${RAILS_MASTER_KEY}'
       DATABASE_USERNAME: 'postgres'
       DATABASE_PASSWORD: 'postgres'
-      DATABASE_HOST: 'db_memory_app'
+      DATABASE_HOST: 'memory_app_db'
       DATABASE_PORT: '5432'
     tty: true
     command: rails s -b 0
@@ -43,19 +43,17 @@ services:
     command: sh -c "yarn && yarn serve"
     network_mode: host
 
-  memory_e2e:
-    image: edimossilva/memory_e2e
-    container_name: memory_e2e
-    tty: true
+  memory_app_e2e:
+    image: cypress/included:3.2.0
+    container_name: memory_app_e2e
+    working_dir: /e2e
     volumes:
-      - ./e2e/cypress:/app
-    command: sh
+      - ./e2e/cypress:/e2e
     network_mode: host
     environment:
-    - DISPLAY
-
+      - CYPRESS_baseUrl=http://localhost:8080
 volumes:
-  db_memory_app_volume:
+  memory_app_db_volume:
 # docker-compose build
 # docker-compose up -d
 # docker-compose exec memory_app_back rake db:create
