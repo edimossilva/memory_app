@@ -30,7 +30,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
             - 'docker-compose up memory_app_e2e'
 
-  - name: backend unit/lint
+  - name: backend unit
     dependencies: []
     task:
       jobs:
@@ -61,9 +61,21 @@ blocks:
       secrets:
         - name: RAILS_MASTER_KEY
 
+  - name: backend lint
+    dependencies: []
+    task:
+      jobs:
+        - name: lint
+          commands:
+            - checkout
+            - cd backend_rails
+            - gem install rubocop-rails
+            - rubocop
+
   - name: backend merge tests
     dependencies:
-      - backend unit/lint
+      - backend unit
+      - backend lint
     task:
       jobs:
         - name: merge tests
@@ -87,7 +99,8 @@ blocks:
     skip:
       when: branch != 'master'
     dependencies:
-      - backend unit/lint
+      - backend unit
+      - backend lint
     task:
       jobs:
         - name: heroku
