@@ -27,7 +27,7 @@ blocks:
             - touch .env
             - docker-compose up -d memory_app_back memory_app_vue
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
-            - 'docker-compose exec memory_e2e cypress run'
+            - 'docker-compose exec memory_app_e2e cypress run'
 
   - name: backend unit/lint
     dependencies: []
