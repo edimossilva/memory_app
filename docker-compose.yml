@@ -19,7 +19,7 @@ services:
     depends_on:
       - memory_app_db
     env_file:
-      - .env
+      - ./backend_rails/.env
     environment:
       RUBYOPT: '-W:no-deprecated -W:no-experimental'
       RAILS_MASTER_KEY: '${RAILS_MASTER_KEY}'
@@ -58,13 +58,14 @@ services:
     container_name: memory_app_nginx
     volumes:
       - ./nginx/usr/share/nginx/html:/usr/share/nginx/html
-      - ./backend_rails/coverage:/usr/share/nginx/html/coverage:ro
+      - ./frontend_vue/dist:/usr/share/nginx/html/vue_client
       - ./nginx/etc/nginx:/etc/nginx
       - ./nginx/var/log/nginx:/var/log/nginx
       - ./nginx/var/run:/var/run
       - ./nginx/lib/systemd/system:/lib/systemd/system
     ports:
       - '80:80'
+    network_mode: host
 
 volumes:
   memory_app_db_volume:

@@ -12,7 +12,7 @@ blocks:
         - name: jest unit
           commands:
             - checkout
-            - touch .env
+            - touch ./backend_rails/.env
             - docker-compose up -d memory_app_vue
             - docker-compose exec memory_app_vue yarn
             - 'docker-compose exec memory_app_vue yarn test:unit'
@@ -24,7 +24,7 @@ blocks:
         - name: cypress e2e
           commands:
             - checkout
-            - touch .env
+            - touch ./backend_rails/.env
             - docker-compose up -d memory_app_back memory_app_vue
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
             - docker-compose up memory_app_e2e
@@ -38,10 +38,6 @@ blocks:
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
         - name: unit 2/2
           commands:
-            - checkout
-            - touch .env
-            - docker-compose up -d memory_app_back
-            - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
       secrets:
@@ -49,7 +45,7 @@ blocks:
       prologue:
         commands:
           - checkout
-          - touch .env
+          - touch ./backend_rails/.env
           - docker-compose up -d memory_app_back
           - 'docker-compose exec memory_app_back rake db:create db:migrate'
   - name: backend lint
