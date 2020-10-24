@@ -5,7 +5,7 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: 'Frontend unit'
+  - name: Frontend unit
     dependencies: []
     task:
       jobs:
@@ -14,11 +14,11 @@ blocks:
             - checkout
             - touch .env
             - docker-compose up -d memory_app_vue
-            - 'docker-compose exec memory_app_vue yarn'
+            - docker-compose exec memory_app_vue yarn
             - 'docker-compose exec memory_app_vue yarn test:unit'
-
-  - name: 'Integration tests'
-    dependencies: []
+  - name: Integration tests
+    dependencies:
+      - Frontend unit
     task:
       jobs:
         - name: cypress e2e
@@ -27,18 +27,13 @@ blocks:
             - touch .env
             - docker-compose up -d memory_app_back memory_app_vue
             - 'docker-compose exec memory_app_back rake db:create db:migrate db:seed'
-            - 'docker-compose up memory_app_e2e'
-
-  - name: backend unit/lint
+            - docker-compose up memory_app_e2e
+  - name: backend unit
     dependencies: []
     task:
       jobs:
         - name: unit 1/2
           commands:
-            - checkout
-            - touch .env
-            - docker-compose up -d memory_app_back
-            - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[0,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
         - name: unit 2/2
@@ -49,20 +44,31 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
-        - name: lint
+      secrets:
+        - name: RAILS_MASTER_KEY
+      prologue:
+        commands:
+          - checkout
+          - touch .env
+          - docker-compose up -d memory_app_back
+          - 'docker-compose exec memory_app_back rake db:create db:migrate'
+  - name: backend lint
+    dependencies: []
+    task:
+      jobs:
+        - name: rubocop
           commands:
             - checkout
             - cd backend_rails
             - gem install rubocop-rails
             - rubocop
-      secrets:
-        - name: RAILS_MASTER_KEY
   - name: backend merge tests
     dependencies:
-      - backend unit/lint
+      - backend unit
+      - backend lint
     task:
       jobs:
-        - name: merge tests
+        - name: simplecov/codeclimate
           commands:
             - checkout
             - gem install simplecov -v 0.17
@@ -82,7 +88,8 @@ blocks:
     skip:
       when: branch != 'master'
     dependencies:
-      - backend unit/lint
+      - backend unit
+      - backend lint
     task:
       jobs:
         - name: heroku
