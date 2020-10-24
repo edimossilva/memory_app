@@ -18,7 +18,7 @@
 
 1. tests frontend e2e
 
-   `docker-compose exec memory_e2e cypress run`
+   `docker-compose up -d memory_app_e2e`
 
 1. access
 
