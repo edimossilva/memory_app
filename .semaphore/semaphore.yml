@@ -52,12 +52,6 @@ blocks:
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
 
-        - name: lint
-          commands:
-            - checkout
-            - cd backend_rails
-            - gem install rubocop-rails
-            - rubocop
       secrets:
         - name: RAILS_MASTER_KEY
 
