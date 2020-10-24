@@ -53,18 +53,18 @@ services:
     environment:
       - CYPRESS_baseUrl=http://localhost:8080
 
-  nginx:
+  memory_app_nginx:
     image: nginx
-    container_name: nginx
+    container_name: memory_app_nginx
     volumes:
       - ./nginx/usr/share/nginx/html:/usr/share/nginx/html
-      - ./backend_rails/coverage:/usr/share/nginx/html/coverage
+      - ./backend_rails/coverage:/usr/share/nginx/html/coverage:ro
       - ./nginx/etc/nginx:/etc/nginx
       - ./nginx/var/log/nginx:/var/log/nginx
       - ./nginx/var/run:/var/run
       - ./nginx/lib/systemd/system:/lib/systemd/system
     ports:
-      - '8081:80'
+      - '80:80'
 
 volumes:
   memory_app_db_volume:
