@@ -16,9 +16,7 @@
 
    `docker-compose exec memory_app_vue yarn test:unit`
 
-1. tests frontend e2e
-
-   `docker-compose exec memory_e2e cypress run`
+1. tests frontend e2e ops `docker-compose exec memory_e2e cypress run`
 
 1. access
 
