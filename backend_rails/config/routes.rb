@@ -18,6 +18,5 @@ Rails.application.routes.draw do
   get '/auth/check' => 'authentication#check'
   get '/auth/:provider/callback' => 'sessions#omniauth'
 
-  get '/test' => 'test#index'
   resources :memories
 end
