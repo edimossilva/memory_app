@@ -17,6 +17,7 @@ blocks:
             - docker-compose exec memory_app_vue yarn
             - 'docker-compose exec memory_app_vue yarn test:unit'
   - name: Integration tests
+    dependencies: []
     task:
       jobs:
         - name: cypress e2e
