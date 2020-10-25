@@ -1,0 +1,37 @@
+2020/10/24 14:06:28 [error] 21#21: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 172.19.0.1, server: localhost, request: "GET /rails HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost"
+2020/10/24 14:08:00 [emerg] 1#1: "upstream" directive is not allowed here in /etc/nginx/nginx.conf:3
+2020/10/24 14:08:17 [emerg] 1#1: "upstream" directive is not allowed here in /etc/nginx/nginx.conf:3
+2020/10/24 14:21:49 [error] 21#21: *1 open() "/usr/share/nginx/html/js/app.js" failed (2: No such file or directory), client: ::1, server: localhost, request: "GET /js/app.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 14:21:49 [error] 21#21: *1 open() "/usr/share/nginx/html/js/chunk-vendors.js" failed (2: No such file or directory), client: ::1, server: localhost, request: "GET /js/chunk-vendors.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 14:21:49 [error] 21#21: *1 open() "/usr/share/nginx/html/js/about.js" failed (2: No such file or directory), client: ::1, server: localhost, request: "GET /js/about.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 14:21:49 [error] 21#21: *1 open() "/usr/share/nginx/html/js/app.js" failed (2: No such file or directory), client: ::1, server: localhost, request: "GET /js/app.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 14:23:40 [error] 21#21: *5 open() "/usr/share/nginx/html/auth/login" failed (2: No such file or directory), client: ::1, server: localhost, request: "POST /auth/login HTTP/1.1", host: "localhost"
+2020/10/24 14:24:00 [error] 21#21: *5 open() "/usr/share/nginx/html/api/login" failed (2: No such file or directory), client: ::1, server: localhost, request: "POST /api/login HTTP/1.1", host: "localhost"
+2020/10/24 14:52:57 [error] 21#21: *1 open() "/usr/share/nginx/html/index.html" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /client HTTP/1.1", host: "localhost"
+2020/10/24 14:55:10 [error] 21#21: *1 rewrite or internal redirection cycle while internally redirecting to "/client/index.html", client: 127.0.0.1, server: localhost, request: "GET /client HTTP/1.1", host: "localhost"
+2020/10/24 14:58:52 [error] 22#22: *1 open() "/usr/share/nginx/html/vue_client/index.html" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /client HTTP/1.1", host: "localhost"
+2020/10/24 15:11:28 [error] 21#21: *4 directory index of "/usr/share/nginx/html/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", host: "memory_app.com"
+2020/10/24 15:11:32 [error] 21#21: *4 open() "/usr/share/nginx/html/vue_client/index.html" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /client HTTP/1.1", host: "memory_app.com"
+2020/10/24 15:17:39 [error] 22#22: *1 open() "/usr/share/nginx/html/css/app.5c9713c3.css" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /css/app.5c9713c3.css HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:39 [error] 22#22: *3 open() "/usr/share/nginx/html/js/app.df0d485a.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/app.df0d485a.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:39 [error] 22#22: *4 open() "/usr/share/nginx/html/js/chunk-vendors.df3a031f.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/chunk-vendors.df3a031f.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:40 [error] 22#22: *4 open() "/usr/share/nginx/html/js/about.1973c9f2.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/about.1973c9f2.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:40 [error] 22#22: *3 open() "/usr/share/nginx/html/js/app.df0d485a.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/app.df0d485a.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:46 [error] 22#22: *3 open() "/usr/share/nginx/html/css/app.5c9713c3.css" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /css/app.5c9713c3.css HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:46 [error] 22#22: *4 open() "/usr/share/nginx/html/js/app.df0d485a.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/app.df0d485a.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:46 [error] 22#22: *1 open() "/usr/share/nginx/html/js/chunk-vendors.df3a031f.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/chunk-vendors.df3a031f.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:46 [error] 22#22: *1 open() "/usr/share/nginx/html/js/about.1973c9f2.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/about.1973c9f2.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:17:46 [error] 22#22: *1 open() "/usr/share/nginx/html/js/app.df0d485a.js" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /js/app.df0d485a.js HTTP/1.1", host: "localhost", referrer: "http://localhost/client"
+2020/10/24 15:19:08 [error] 21#21: *1 open() "/usr/share/nginx/html/index" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /index HTTP/1.1", host: "localhost"
+2020/10/24 17:46:38 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:46:38 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:46:38 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:46:38 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:46:38 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:46:38 [emerg] 1#1: still could not bind()
+2020/10/24 17:49:50 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:49:50 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:49:50 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:49:50 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:49:50 [emerg] 1#1: bind() to 0.0.0.0:80 failed (98: Address already in use)
+2020/10/24 17:49:50 [emerg] 1#1: still could not bind()

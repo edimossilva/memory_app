@@ -1,0 +1,24 @@
+# prefix example
+#prefix match => greet || greeting || greet/example
+# location /greet {
+#   return 200 'hello from prefix match /greet';
+# }
+
+# exactly match
+# location = /greet {
+#   return 200 'hello from exactly /greet';
+# }
+
+# regex match - case sensitive
+# location ~ /greet[0-9] {
+#   return 200 'hello from regex /greet[0-9]';
+# }
+
+# regex match - case insensitive
+# location ~* /greet[0-9] {
+#   return 200 'hello from regex /greet[0-9]';
+# }
+
+#location /inspect {
+#  return 200 "$host\n$uri\n$args\n$arg_name";
+#}

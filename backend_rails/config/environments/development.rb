@@ -52,4 +52,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   # config.reload_classes_only_on_change = false
   config.hosts << "memory-app-back.herokuapp.com"
+  config.hosts << "memory_app.com"
 end
