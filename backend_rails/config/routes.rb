@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :admin_users
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   root to: "authentication#sign_up"
@@ -10,5 +11,6 @@ Rails.application.routes.draw do
   get '/auth/check' => 'authentication#check'
   get '/auth/:provider/callback' => 'sessions#omniauth'
 
+  get '/test' => 'test#index'
   resources :memories
 end
