@@ -25,7 +25,7 @@ blocks:
           commands:
             - checkout
             - touch .env
-            - docker-compose up -d memory_app_back memory_app_vue
+            - docker-compose up -d memory_app_db memory_app_back memory_app_vue
             - 'docker-compose exec memory_app_back rake db:create'
             - 'docker-compose exec memory_app_back rake db:migrate '
             - 'docker-compose exec memory_app_back rake db:seed'
