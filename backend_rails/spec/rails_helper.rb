@@ -18,6 +18,8 @@ require 'faker'
 # coverage
 require 'simplecov'
 SimpleCov.start do
+  track_files '{app,lib}/**/*.rb'
+
   add_filter 'spec'
 end
 include Auth::JsonWebTokenHelper
