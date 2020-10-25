@@ -15,6 +15,7 @@ class SimpleCovMerger
     require 'simplecov'
     require 'json'
 
+    SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
     SimpleCov.filters = []
 
     results = resultsets.map do |file|
@@ -23,8 +24,9 @@ class SimpleCovMerger
     end.flatten
 
     result = SimpleCov::ResultMerger.merge_results(*results)
-    puts "Current coverage is #{result.covered_percent}%"
+    result.format!
 
+    puts "Current coverage is #{result.covered_percent}%"
     SimpleCov::ResultMerger.store_result(result)
   end
 
