@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AuthenticationController < ApplicationController
+class AuthenticationController < ApiController
   skip_before_action :verify_authenticity_token
 
   before_action :authorize_request, except: %i[login sign_up]

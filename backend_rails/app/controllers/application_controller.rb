@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
 
-  before_action :authorize_request
-
   def render_created(entity)
     render json: { data: entity }, status: :created
   end
