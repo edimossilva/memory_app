@@ -16,4 +16,5 @@ RSpec.describe AdminUser, type: :model do
     it 'is not valid' do
       expect(admin).to be_invalid
     end
-  endend
+  end
+end

@@ -5,6 +5,6 @@ class TestController < ApplicationController
   before_action :authenticate_admin_user!
 
   def index
-    render_ok("edimo")
+    render_ok('edimo')
   end
 end
