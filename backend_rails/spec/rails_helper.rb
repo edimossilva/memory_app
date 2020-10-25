@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+# coverage
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'spec'
+  add_filter 'config'
+  add_filter 'db'
+  add_group 'Controllers', '/app/controllers'
+  add_group 'Models', '/app/models'
+  add_group 'Helpers', '/app/helpers'
+  add_group 'Dashboards', '/app/dashboards'
+  add_group 'Policeis', '/app/policies'
+  track_files "/app/**/*.rb"
+end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
@@ -11,17 +24,12 @@ end
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+
+
+
 require 'support/factory_bot'
 require 'support/json_response_helper'
 require 'faker'
-
-# coverage
-require 'simplecov'
-SimpleCov.start do
-  track_files '{app,lib}/**/*.rb'
-
-  add_filter 'spec'
-end
 include Auth::JsonWebTokenHelper
 include JsonResponseHelper
 # Requires supporting ruby files with custom matchers and macros, etc, in
