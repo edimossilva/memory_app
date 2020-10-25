@@ -33,6 +33,8 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:migrate '
             - 'docker-compose exec memory_app_back rake db:seed'
             - docker-compose up memory_app_e2e
+          secrets:
+            - name: RAILS_MASTER_KEY
   - name: backend unit
     dependencies: []
     task:
