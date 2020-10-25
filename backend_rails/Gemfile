@@ -69,3 +69,5 @@ gem 'omniauth-google-oauth2'
 gem 'rswag'
 
 gem 'devise'
+
+gem 'administrate'

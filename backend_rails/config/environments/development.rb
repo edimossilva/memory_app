@@ -56,4 +56,7 @@ Rails.application.configure do
 
   # config.reload_classes_only_on_change = false
   config.hosts << "memory-app-back.herokuapp.com"
+  config.assets.debug = false
+  config.assets.check_precompiled_asset = false
+
 end
