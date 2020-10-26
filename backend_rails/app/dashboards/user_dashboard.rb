@@ -11,7 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
     memories: Field::HasMany,
     id: Field::Number,
     username: Field::String,
-    password_digest: Field::String,
+    password: Field::String,
     access_level: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -23,10 +23,8 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    memories
     id
     username
-    password_digest
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +33,6 @@ class UserDashboard < Administrate::BaseDashboard
     memories
     id
     username
-    password_digest
     access_level
     created_at
     updated_at
@@ -45,9 +42,8 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    memories
     username
-    password_digest
+    password
     access_level
   ].freeze
 
