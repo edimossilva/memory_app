@@ -6,7 +6,7 @@
 
 1. config db
 
-   `docker-compose exec memory_app_back rake db:create rake db:migrate`
+   `docker-compose exec memory_app_back rake db:create db:migrate db:seed`
 
 1. tests backend unit
 

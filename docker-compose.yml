@@ -19,7 +19,7 @@ services:
     depends_on:
       - memory_app_db
     env_file:
-      - .env
+      - ./backend_rails/.env
     environment:
       RUBYOPT: '-W:no-deprecated -W:no-experimental'
       RAILS_MASTER_KEY: '${RAILS_MASTER_KEY}'
