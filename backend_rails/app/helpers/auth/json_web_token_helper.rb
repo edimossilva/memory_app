@@ -39,22 +39,8 @@ module Auth
       begin
         # rubocop:disable Rails/HelperInstanceVariable
         @current_user = user_by_token(header)
-      rescue ActiveRecord::RecordNotFound => e
-        render_unauthorized(e.message)
       rescue JWT::DecodeError
         render_unauthorized
-      end
-    end
-
-    def public_request
-      header = request.headers['Authorization']
-      return unless header
-
-      header = header.split(' ').last
-      begin
-        @current_user = user_by_token(header)
-      rescue JWT::DecodeError => e
-        render_unauthorized(e.message)
       end
     end
 
