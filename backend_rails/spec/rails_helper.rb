@@ -30,6 +30,7 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'support/json_response_helper'
 require 'faker'
+require 'capybara/rails'
 include Auth::JsonWebTokenHelper
 include JsonResponseHelper
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -90,4 +91,6 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  Capybara.server_port = 30000
 end
