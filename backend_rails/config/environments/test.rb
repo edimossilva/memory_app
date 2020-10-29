@@ -47,4 +47,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+  config.relative_url_root = '/'
+  config.assets.debug = false
+  config.assets.check_precompiled_asset = false
 end

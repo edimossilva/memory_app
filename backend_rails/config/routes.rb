@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   devise_for :admin_users
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  root to: "authentication#sign_up"
+  root to: "home#hello"
 
   post '/auth/login' => 'authentication#login'
   get '/auth/sign_up' => 'authentication#sign_up'
