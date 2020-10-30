@@ -13,7 +13,7 @@ describe "Admin::MemoriesController", type: :system, js:true do
       # save_and_open_screenshot
       # select "User #1", :from => "memory_user_id-selectized"
       # binding.pry
-      find('label', text: 'User2').click
+      find('label', text: 'User').click
       # find('div', text: "User #1").click
       find('.selectize-dropdown .option[data-selectable]', text: "User ##{user.id}").click
 
@@ -23,7 +23,6 @@ describe "Admin::MemoriesController", type: :system, js:true do
       fill_in 'Key', with: 'name'
       fill_in 'Value', with: 'example'
       click_button 'Create Memory'
-      # save_and_open_screenshot
       expect(page).to have_content 'Memory was successfully created.'
     end
   end
