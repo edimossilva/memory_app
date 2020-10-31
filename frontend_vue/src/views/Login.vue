@@ -41,12 +41,12 @@
 </template>
 
 <script>
-import { doLoginApi } from "../services/api";
+import { doLoginApi } from '../services/api';
 export default {
   data() {
     return {
-      username: "registered_user1",
-      password: "111",
+      username: 'registered_user1',
+      password: '111',
     };
   },
   methods: {
@@ -55,12 +55,21 @@ export default {
       doLoginApi(username, password).then(
         (result) => {
           localStorage.token = result.data.token;
-          this.$router.push({ name: "Home" });
+          this.$router.push({ name: 'Home' });
         },
         (error) => {
+          this.showError();
           console.error(error.response.data.error_message);
         }
       );
+    },
+    showError() {
+      this.$buefy.dialog.alert({
+        message: 'Invalid Login or password.',
+        type: 'is-danger',
+        ariaRole: 'alertdialog',
+        ariaModal: true,
+      });
     },
   },
 };
