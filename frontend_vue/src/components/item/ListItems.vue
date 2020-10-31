@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="m-4">
+    <div class="mb-4">
       <b-field label="search" label-position="inside" type="is-primary">
         <b-input type="text" v-model="filter" data-cy="filter"></b-input>
       </b-field>
