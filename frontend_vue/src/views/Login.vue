@@ -1,15 +1,42 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" v-model="username" data-cy="username"/>
+  <div class="container">
+    <div class="notification is-light">
+      <div>
+        <b-field
+          label="Username"
+          label-position="inside"
+          type="is-primary"
+          class="mx-4 mb-4"
+        >
+          <b-input type="text" v-model="username" data-cy="username"> </b-input>
+        </b-field>
+      </div>
+
+      <div>
+        <b-field
+          label="Password"
+          label-position="inside"
+          type="is-primary"
+          class="mx-4"
+        >
+          <b-input
+            @keyup.enter.native="doLogin"
+            type="password"
+            v-model="password"
+            autocomplete="new-password"
+            data-cy="password"
+          ></b-input>
+        </b-field>
+      </div>
+      <b-button
+        class="m-4"
+        @click="doLogin()"
+        type="is-primary"
+        data-cy="loginButton"
+        outlined
+        >Login</b-button
+      >
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" v-model="password" autocomplete="new-password" data-cy="password"/>
-    </div>
-    <button @click="doLogin(username, password)" data-cy="loginButton">Login</button>
   </div>
 </template>
 
@@ -19,21 +46,22 @@ export default {
   data() {
     return {
       username: "registered_user1",
-      password: "111"
+      password: "111",
     };
   },
   methods: {
-    doLogin(username, password) {
+    doLogin() {
+      const { username, password } = this;
       doLoginApi(username, password).then(
-        result => {
+        (result) => {
           localStorage.token = result.data.token;
           this.$router.push({ name: "Home" });
         },
-        error => {
+        (error) => {
           console.error(error.response.data.error_message);
         }
       );
-    }
-  }
+    },
+  },
 };
 </script>
