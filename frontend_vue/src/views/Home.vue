@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1 data-cy="home__title">Home</h1>
     <btn
       label="add"
       :onClick="onClickAddButton"
@@ -12,16 +11,16 @@
 </template>
 
 <script>
-import Btn from "@/components/Btn.vue";
-import ListItems from "@/components/item/ListItems.vue";
-import CreateItemModal from "@/modals/CreateItemModal.vue";
+import Btn from '@/components/Btn.vue';
+import ListItems from '@/components/item/ListItems.vue';
+import CreateItemModal from '@/modals/CreateItemModal.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: { Btn, ListItems, CreateItemModal },
   methods: {
     onClickAddButton() {
-      this.$modal.show("create-item-modal");
+      this.$modal.show('create-item-modal');
     },
   },
 };

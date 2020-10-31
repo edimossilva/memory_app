@@ -13,7 +13,7 @@
           Copy
         </a>
         <a
-          class="card-footer-item"
+          class="card-footer-item has-text-danger"
           :dataId="item.key"
           @click.prevent="onRemoveButtonClick"
           >Remove</a

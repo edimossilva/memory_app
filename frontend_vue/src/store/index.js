@@ -1,11 +1,15 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: [],
+    items: [
+      { key: 'telefone', value: '0123456789' },
+      { key: 'endereco', value: 'rua tal' },
+      { key: 'pais', value: 'br' },
+    ],
   },
   mutations: {
     addItem(state, item) {
@@ -21,10 +25,10 @@ export default new Vuex.Store({
   },
   actions: {
     addItem({ commit }, item) {
-      commit("addItem", { ...item });
+      commit('addItem', { ...item });
     },
     removeItem({ commit }, item) {
-      commit("removeItem", item);
+      commit('removeItem', item);
     },
   },
   modules: {},
