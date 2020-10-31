@@ -35,7 +35,7 @@
         </b-field>
 
         <b-button
-          class="m-4"
+          class="m-2"
           @click="onCreateButtonClick()"
           type="is-primary"
           data-cy="addButton"
