@@ -94,11 +94,10 @@ blocks:
         - name: heroku
           commands:
             - checkout
-            - touch ./backend_rails/.env
             - touch .env
-            - docker-compose up -d memory_app_vue
-            - docker-compose exec memory_app_vue yarn
-            - docker-compose exec memory_app_vue yarn build
+            - cd frontend_vue
+            - yarn
+            - yarn build
             - mv frontend_vue/dist/* backend_rails/public/
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
             - 'heroku container:login'
