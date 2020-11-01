@@ -85,8 +85,7 @@ blocks:
   - name: deploy
     # skip:
     #   when: branch != 'master'
-    dependencies:
-      - []
+    dependencies: []
       # - Integration tests
       # - backend lint
       # - backend unit
