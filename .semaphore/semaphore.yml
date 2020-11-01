@@ -83,8 +83,8 @@ blocks:
             - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r e4c6b536aedf8301f0f2dc185cc611fa04fa0fea765fd12697b10b4f9b5e6b9a -p ./backend_rails
             - artifact push workflow collect_coverage/coverage/index.html -d index.html
   - name: deploy
-    skip:
-      when: branch != 'master'
+    # skip:
+    #   when: branch != 'master'
     dependencies:
       - Integration tests
       - backend lint
@@ -94,6 +94,9 @@ blocks:
         - name: heroku
           commands:
             - checkout
+            - docker-compose up memory_app_vue
+            - docker-compose exec memory_app_vue yarn build
+            - mv frontend_vue/dist/* backend_rails/public/
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
             - 'heroku container:login'
             - 'heroku git:remote -a memory-app-back'
