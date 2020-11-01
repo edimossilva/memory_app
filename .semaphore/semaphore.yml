@@ -97,8 +97,8 @@ blocks:
             - touch ./backend_rails/.env
             - touch .env
             - docker-compose up -d memory_app_vue
-            # - docker-compose exec memory_app_vue yarn --frozen-lockfile
-            - docker-compose exec memory_app_vue yarn build
+            - docker-compose exec memory_app_vue npm run install
+            - docker-compose exec memory_app_vue npm run build
             - mv frontend_vue/dist/* backend_rails/public/
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
             - 'heroku container:login'
