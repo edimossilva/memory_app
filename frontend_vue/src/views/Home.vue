@@ -14,10 +14,7 @@
         aria-modal
       >
         <template #default="props">
-          <add-item-modal
-            v-bind="formProps"
-            @close="props.close"
-          ></add-item-modal>
+          <add-item-modal @close="props.close"></add-item-modal>
         </template>
       </b-modal>
     </section>

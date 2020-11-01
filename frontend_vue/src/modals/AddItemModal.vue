@@ -6,6 +6,10 @@
         <button type="button" class="delete" @click="$emit('close')" />
       </header>
       <section class="modal-card-body">
+        <p v-if="errorMessage" class="help is-danger mb-4">
+          {{ errorMessage }}
+        </p>
+
         <b-field
           label="Key"
           label-position="inside"
@@ -33,15 +37,16 @@
             data-cy="value"
           ></b-input>
         </b-field>
-
-        <b-button
-          class="m-2"
-          @click="onCreateButtonClick()"
-          type="is-primary"
-          data-cy="addButton"
-          outlined
-          >Add</b-button
-        >
+        <b-field>
+          <b-button
+            class="m-2"
+            @click="onCreateButtonClick()"
+            type="is-primary"
+            data-cy="addButton"
+            outlined
+            >Add</b-button
+          >
+        </b-field>
       </section>
     </div>
   </form>
@@ -56,6 +61,7 @@ export default {
   data() {
     return {
       item: { key: "", value: "" },
+      errorMessage: "",
     };
   },
   methods: {
@@ -69,7 +75,8 @@ export default {
         },
         (error) => {
           // this.showError();
-          console.error(error.response.data.error_message);
+          this.item = {};
+          this.errorMessage = error.response.data.error_message;
         }
       );
     },
