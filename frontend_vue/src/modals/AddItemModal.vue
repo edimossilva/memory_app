@@ -68,8 +68,8 @@ export default {
     ...mapActions(["addItem"]),
     onCreateButtonClick() {
       createItemApi(this.item).then(
-        () => {
-          this.addItem(this.item);
+        (response) => {
+          this.addItem(response.data.data);
           this.item = {};
           this.$emit("close");
         },
