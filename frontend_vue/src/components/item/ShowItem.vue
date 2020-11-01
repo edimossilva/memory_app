@@ -14,7 +14,7 @@
         </a>
         <a
           class="card-footer-item has-text-danger"
-          :dataId="item.key"
+          :data-cy="`show_item__delete_button_${item.key}`"
           @click.prevent="onRemoveButtonClick"
         >
           Remove

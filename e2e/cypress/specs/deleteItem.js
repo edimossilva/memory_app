@@ -1,28 +1,20 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe("Delete item", () => {
-  const key1 = "key1";
-  describe("When visit home", () => {
+  const key1 = `key1${Date.now()}`;
+  const value1 = `value1${Date.now()}`;
+
+  describe("When item exists", () => {
     beforeEach(() => {
-      cy.visit("/");
+      cy.login()
+      cy.wait(200)
+      cy.createItem(key1, value1)
     });
-    describe("When create item", () => {
-      beforeEach(() => {
-        cy.get("button").click();
-        cy.get(".create-item-modal--input-key-js").type(key1);
-        cy.get(".create-item-modal--input-value-js").type("value1");
-        cy.get(".create-item-modal--button-create-js").click();
-      });
 
-      describe("When click delete", () => {
-        beforeEach(() => {
-          cy.get(`.show-item---button-remove-js[dataId=${key1}]`).click();
-        });
-
-        it("should not display item", () => {
-          cy.contains(key1).should("not.exist");
-        });
-      });
+    it("should be deleted when click on delete button", () => {
+      cy.get(`[data-cy=show_item__delete_button_${key1}]`).should("exist");
+      cy.get(`[data-cy=show_item__delete_button_${key1}]`).click();
+      cy.get(`[data-cy=show_item__delete_button_${key1}]`).should("not.exist");
     });
   });
 });
