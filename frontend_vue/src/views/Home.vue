@@ -2,7 +2,7 @@
   <div class="home">
     <list-items class="m-4"></list-items>
     <section>
-      <b-button type="is-primary" @click="isComponentModalActive = true"
+      <b-button data-cy="home__add_item_button" type="is-primary" @click="isComponentModalActive = true"
         >Add</b-button
       >
       <b-modal
