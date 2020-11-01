@@ -48,22 +48,30 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
+import { createItemApi } from "../services/itemsApi";
 
 export default {
-  name: 'AddItemModal',
+  name: "AddItemModal",
   data() {
     return {
-      item: { key: '', value: '' },
+      item: { key: "", value: "" },
     };
   },
   methods: {
-    ...mapActions(['addItem']),
+    ...mapActions(["addItem"]),
     onCreateButtonClick() {
-      this.addItem(this.item);
-      this.$modal.hide('create-item-modal');
-      this.item = {};
-      this.$emit('close');
+      createItemApi(this.item).then(
+        () => {
+          this.addItem(this.item);
+          this.item = {};
+          this.$emit("close");
+        },
+        (error) => {
+          // this.showError();
+          console.error(error.response.data.error_message);
+        }
+      );
     },
   },
 };

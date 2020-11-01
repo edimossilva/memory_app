@@ -25,21 +25,16 @@
 </template>
 
 <script>
-import ListItems from '@/components/item/ListItems.vue';
-import AddItemModal from '@/modals/AddItemModal.vue';
+import ListItems from "@/components/item/ListItems.vue";
+import AddItemModal from "@/modals/AddItemModal.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: { ListItems, AddItemModal },
   data() {
     return {
       isComponentModalActive: false,
     };
-  },
-  methods: {
-    onClickAddButton() {
-      this.$modal.show('create-item-modal');
-    },
   },
 };
 </script>
