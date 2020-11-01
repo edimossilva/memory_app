@@ -39,6 +39,8 @@ module Auth
       begin
         # rubocop:disable Rails/HelperInstanceVariable
         @current_user = user_by_token(header)
+      rescue JWT::ExpiredSignature
+        render_unauthorized('Signature Expired')
       rescue JWT::DecodeError
         render_unauthorized
       end

@@ -1,28 +1,37 @@
 <template>
   <div class="home">
-    <h1 data-cy="home__title">Home</h1>
-    <btn
-      label="add"
-      :onClick="onClickAddButton"
-      dataId="home__add-item-button-js"
-    ></btn>
-    <create-item-modal></create-item-modal>
-    <list-items></list-items>
+    <list-items class="m-4"></list-items>
+    <section>
+      <b-button type="is-primary" @click="isComponentModalActive = true"
+        >Add</b-button
+      >
+      <b-modal
+        v-model="isComponentModalActive"
+        has-modal-card
+        trap-focus
+        :destroy-on-hide="false"
+        aria-role="dialog"
+        aria-modal
+      >
+        <template #default="props">
+          <add-item-modal @close="props.close"></add-item-modal>
+        </template>
+      </b-modal>
+    </section>
   </div>
 </template>
 
 <script>
-import Btn from "@/components/Btn.vue";
 import ListItems from "@/components/item/ListItems.vue";
-import CreateItemModal from "@/modals/CreateItemModal.vue";
+import AddItemModal from "@/modals/AddItemModal.vue";
 
 export default {
   name: "Home",
-  components: { Btn, ListItems, CreateItemModal },
-  methods: {
-    onClickAddButton() {
-      this.$modal.show("create-item-modal");
-    },
+  components: { ListItems, AddItemModal },
+  data() {
+    return {
+      isComponentModalActive: false,
+    };
   },
 };
 </script>

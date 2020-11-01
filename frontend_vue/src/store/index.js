@@ -5,7 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: [],
+    items: [
+      { key: "telefone", value: "0123456789" },
+      { key: "endereco", value: "rua tal" },
+      { key: "pais", value: "br" },
+    ],
   },
   mutations: {
     addItem(state, item) {
@@ -14,6 +18,9 @@ export default new Vuex.Store({
     removeItem(state, item) {
       const index = state.items.findIndex((i) => i.key === item.key);
       state.items.splice(index, 1);
+    },
+    setItems(state, items) {
+      state.items = items;
     },
     // mutate(state, payload) {
     //   state[payload.property] = payload.value;
@@ -25,6 +32,9 @@ export default new Vuex.Store({
     },
     removeItem({ commit }, item) {
       commit("removeItem", item);
+    },
+    setItems({ commit }, items) {
+      commit("setItems", items);
     },
   },
   modules: {},

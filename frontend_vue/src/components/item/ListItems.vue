@@ -1,19 +1,35 @@
 <template>
   <div>
-    <h1>ListItems</h1>
-    <input type="text" v-model="filter" class="list-items__filter-js" />
-
-    <div v-for="item in filteredItems" :key="item.key">
-      <show-item :item="item"></show-item>
+    <div class="mb-4">
+      <b-field label="search" label-position="inside" type="is-primary">
+        <b-input type="text" v-model="filter" data-cy="filter"></b-input>
+      </b-field>
+    </div>
+    <div class="columns is-multiline is-mobile">
+      <div class="column is-half" v-for="item in filteredItems" :key="item.key">
+        <show-item :item="item"></show-item>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import ShowItem from "@/components/item/ShowItem.vue";
+import { getItemsApi } from "../../services/itemsApi";
+
 export default {
   name: "ListItems",
+  mounted() {
+    getItemsApi().then(
+      (response) => {
+        this.setItems(response.data.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  },
   data() {
     return {
       item: { key: "", value: "" },
@@ -28,6 +44,9 @@ export default {
       if (filter) return items.filter((item) => item.key.includes(filter));
       return items;
     },
+  },
+  methods: {
+    ...mapActions(["setItems"]),
   },
 };
 </script>

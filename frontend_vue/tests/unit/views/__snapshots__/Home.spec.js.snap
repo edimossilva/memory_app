@@ -2,9 +2,10 @@
 
 exports[`Home.vue Matchs Snapshot 1`] = `
 <div class="home">
-  <h1 data-cy="home__title">Home</h1>
-  <btn-stub label="add" onclick="function () { [native code] }" dataid="home__add-item-button-js"></btn-stub>
-  <create-item-modal-stub></create-item-modal-stub>
-  <list-items-stub></list-items-stub>
+  <list-items-stub class="m-4"></list-items-stub>
+  <section>
+    <b-button type="is-primary">Add</b-button>
+    <b-modal has-modal-card="" trap-focus="" aria-role="dialog" aria-modal=""></b-modal>
+  </section>
 </div>
 `;
