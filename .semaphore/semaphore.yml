@@ -5,18 +5,6 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Frontend unit
-    dependencies: []
-    task:
-      jobs:
-        - name: jest unit
-          commands:
-            - checkout
-            - touch .env
-            - touch ./backend_rails/.env
-            - docker-compose up -d memory_app_vue
-            - docker-compose exec memory_app_vue yarn
-            - 'docker-compose exec memory_app_vue yarn test:unit'
   - name: Integration tests
     dependencies: []
     task:
@@ -98,7 +86,6 @@ blocks:
     skip:
       when: branch != 'master'
     dependencies:
-      - Frontend unit
       - Integration tests
       - backend lint
       - backend unit

@@ -12,9 +12,6 @@
 
    `docker-compose exec memory_app_back rspec`
 
-1. tests frontend unit
-
-   `docker-compose exec memory_app_vue yarn test:unit`
 
 1. tests frontend e2e
 
