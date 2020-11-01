@@ -14,24 +14,39 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import ShowItem from '@/components/item/ShowItem.vue';
+import { mapState, mapActions } from "vuex";
+import ShowItem from "@/components/item/ShowItem.vue";
+import { getItemsApi } from "../../services/itemsApi";
+
 export default {
-  name: 'ListItems',
+  name: "ListItems",
+  mounted() {
+    getItemsApi().then(
+      (response) => {
+        this.setItems(response.data.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  },
   data() {
     return {
-      item: { key: '', value: '' },
-      filter: '',
+      item: { key: "", value: "" },
+      filter: "",
     };
   },
   components: { ShowItem },
   computed: {
-    ...mapState(['items']),
+    ...mapState(["items"]),
     filteredItems() {
       const { items, filter } = this;
       if (filter) return items.filter((item) => item.key.includes(filter));
       return items;
     },
+  },
+  methods: {
+    ...mapActions(["setItems"]),
   },
 };
 </script>

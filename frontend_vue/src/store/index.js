@@ -1,14 +1,14 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     items: [
-      { key: 'telefone', value: '0123456789' },
-      { key: 'endereco', value: 'rua tal' },
-      { key: 'pais', value: 'br' },
+      { key: "telefone", value: "0123456789" },
+      { key: "endereco", value: "rua tal" },
+      { key: "pais", value: "br" },
     ],
   },
   mutations: {
@@ -19,16 +19,22 @@ export default new Vuex.Store({
       const index = state.items.findIndex((i) => i.key === item.key);
       state.items.splice(index, 1);
     },
+    setItems(state, items) {
+      state.items = items;
+    },
     // mutate(state, payload) {
     //   state[payload.property] = payload.value;
     // },
   },
   actions: {
     addItem({ commit }, item) {
-      commit('addItem', { ...item });
+      commit("addItem", { ...item });
     },
     removeItem({ commit }, item) {
-      commit('removeItem', item);
+      commit("removeItem", item);
+    },
+    setItems({ commit }, items) {
+      commit("setItems", items);
     },
   },
   modules: {},
