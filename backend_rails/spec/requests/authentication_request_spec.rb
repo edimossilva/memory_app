@@ -59,7 +59,7 @@ RSpec.describe 'Authentications', type: :request do
   end
 
   describe '#check' do
-    describe 'Whhen user is authorized' do
+    describe 'When user is authorized' do
       let!(:registred_user) { create(:user, :registred) }
       let!(:registred_headers) { header_for_user(registred_user) }
 
@@ -73,6 +73,23 @@ RSpec.describe 'Authentications', type: :request do
         expect(json_response['username']).to eq(registred_user.username)
         expect(json_response['accessLevel']).to eq(registred_user.access_level)
         expect(json_response['userId']).to eq(registred_user.id)
+      end
+    end
+
+    describe 'When header is outdated' do
+      let!(:registred_user) { create(:user, :registred) }
+      let!(:registred_headers) { header_for_user(registred_user) }
+
+      before(:each) do
+        allow_any_instance_of(Auth::JsonWebTokenHelper).to receive(:user_by_token).and_raise(JWT::ExpiredSignature)
+
+        get '/auth/check', headers:registred_headers
+      end
+
+      it { expect(response).to have_http_status(:unauthorized) }
+
+      it "responds with user token and data" do
+        expect(json_response_error).to eq("Signature Expired")
       end
     end
 
