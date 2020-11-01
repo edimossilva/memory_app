@@ -102,7 +102,7 @@ blocks:
             - docker-compose up -d memory_app_vue
             - docker-compose exec memory_app_vue npm install
             - docker-compose exec memory_app_vue npm run build
-            - cp -R frontend_vue/dist/* backend_rails/public/
+            - cp -r frontend_vue/dist/* backend_rails/public/
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
             - 'heroku container:login'
             - 'heroku git:remote -a memory-app-back'
