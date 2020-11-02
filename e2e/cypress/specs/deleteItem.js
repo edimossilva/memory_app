@@ -12,9 +12,9 @@ describe("Delete item", () => {
 
     it("should be deleted when click on delete button", () => {
       cy.get(`[data-cy=show_item__delete_button_${key1}]`).should("exist");
-      cy.get(`[data-cy=show_item__delete_button_${key1}]`).click();
+      cy.get(`[data-cy=show_item__delete_button_${key1}]`).click();+
       cy.wait(500)
-      cy.get(`[data-cy=show_item__delete_button_${key1}]`).should("exist");
+      cy.get(`[data-cy=show_item__delete_button_${key1}]`).should("not.exist");
     });
   });
 });
