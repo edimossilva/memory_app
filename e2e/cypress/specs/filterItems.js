@@ -9,7 +9,6 @@ describe("Filrer items", () => {
   describe("When item exists", () => {
     beforeEach(() => {
       cy.login()
-      cy.wait(200)
       cy.createItem(key1, value1)
       cy.createItem(key2, value2)
     });

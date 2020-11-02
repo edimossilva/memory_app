@@ -7,7 +7,6 @@ describe("Delete item", () => {
   describe("When item exists", () => {
     beforeEach(() => {
       cy.login()
-      cy.wait(200)
       cy.createItem(key1, value1)
     });
 
