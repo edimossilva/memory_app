@@ -1,39 +1,27 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe("Delete item", () => {
-  const key1 = "key1";
-  const value1 = "value1";
-  const key2 = "key2";
-  const value2 = "value2";
+describe("Filrer items", () => {
+  const key1 = `key1${Date.now()}`;
+  const value1 = `value1${Date.now()}`;
+  const key2 = `key2${Date.now()}`;
+  const value2 = `value2${Date.now()}`;
 
-  describe("When visit home", () => {
+  describe("When item exists", () => {
     beforeEach(() => {
-      cy.visit("/");
+      cy.login()
+      cy.wait(200)
+      cy.createItem(key1, value1)
+      cy.createItem(key2, value2)
     });
 
-    describe("When create items", () => {
-      beforeEach(() => {
-        cy.get("[dataId=home__add-item-button-js]").click();
-        cy.get(".create-item-modal--input-key-js").type(key1);
-        cy.get(".create-item-modal--input-value-js").type(value1);
-        cy.get(".create-item-modal--button-create-js").click();
+    it("should be filter items by key", () => {
+      cy.get(`[data-cy=show_item__card_${key1}]`).should("exist");
+      cy.get(`[data-cy=show_item__card_${key2}]`).should("exist");
 
-        cy.get("[dataId=home__add-item-button-js]").click();
-        cy.get(".create-item-modal--input-key-js").type(key2);
-        cy.get(".create-item-modal--input-value-js").type(value2);
-        cy.get(".create-item-modal--button-create-js").click();
-      });
+      cy.get('[data-cy=list_items__filter_input]').type('key1');
 
-      describe("When fill filter", () => {
-        beforeEach(() => {
-          cy.get(".list-items__filter-js").type("y1");
-        });
-
-        it("should see only filtered item", () => {
-          cy.contains("key1").should("exist");
-          cy.contains("key2").should("not.exist");
-        });
-      });
+      cy.get(`[data-cy=show_item__card_${key1}]`).should("exist");
+      cy.get(`[data-cy=show_item__card_${key2}]`).should("not.exist");
     });
   });
 });
