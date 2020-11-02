@@ -50,6 +50,10 @@ services:
     volumes:
       - ./e2e/cypress:/e2e
     network_mode: host
+    entrypoint: ''
+    command: sh
+    tty: true
+
 volumes:
   memory_app_db_volume:
 # docker-compose build
