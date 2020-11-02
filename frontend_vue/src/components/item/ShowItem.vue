@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="card">
+    <div
+      class="card"
+      :data-cy="`show_item__card_${item.key}`"
+    >
       <div class="card-content">
         <div class="content">{{ item.key }}: {{ item.value }}</div>
       </div>
@@ -14,7 +17,7 @@
         </a>
         <a
           class="card-footer-item has-text-danger"
-          :dataId="item.key"
+          :data-cy="`show_item__delete_button_${item.key}`"
           @click.prevent="onRemoveButtonClick"
         >
           Remove

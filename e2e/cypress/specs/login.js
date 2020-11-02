@@ -10,9 +10,9 @@ describe("Login", () => {
       cy.get('[data-cy=loginButton]').click();
     });
 
-    it("Shold be redirected to home page", () => {
+    it("Shold be redirected to List items page", () => {
       cy.url().should('not.include', '/login')
-      cy.get('[data-cy=home__title]').should("exist");
+      cy.get('[data-cy=list_items]').should("exist");
     });
   });
 
@@ -25,7 +25,7 @@ describe("Login", () => {
 
     it("Shold stay at login page", () => {
       cy.url().should('include', '/login')
-      cy.get('[data-cy=home__title]').should("not.exist");
+      cy.contains("Invalid Login or password.");
     });
   });
 });

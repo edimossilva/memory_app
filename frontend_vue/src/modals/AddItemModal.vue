@@ -6,7 +6,7 @@
         <button type="button" class="delete" @click="$emit('close')" />
       </header>
       <section class="modal-card-body">
-        <p v-if="errorMessage" class="help is-danger mb-4">
+        <p v-if="errorMessage" class="help is-danger mb-4" data-cy="add_item_modal__error_message">
           {{ errorMessage }}
         </p>
 
@@ -20,7 +20,7 @@
             @keyup.enter.native="onCreateButtonClick"
             type="text"
             v-model="item.key"
-            data-cy="key"
+            data-cy="add_item_modal__key_input"
           ></b-input>
         </b-field>
 
@@ -34,7 +34,7 @@
             @keyup.enter.native="onCreateButtonClick"
             type="text"
             v-model="item.value"
-            data-cy="value"
+            data-cy="add_item_modal__value_input"
           ></b-input>
         </b-field>
         <b-field>
@@ -42,7 +42,7 @@
             class="m-2"
             @click="onCreateButtonClick()"
             type="is-primary"
-            data-cy="addButton"
+            data-cy="add_item_modal__add_button"
             outlined
             >Add</b-button
           >

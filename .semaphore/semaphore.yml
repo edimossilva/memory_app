@@ -14,13 +14,14 @@ blocks:
             - checkout
             - touch .env
             - touch ./backend_rails/.env
-            - docker-compose up -d memory_app_db
-            - docker-compose up -d memory_app_back
             - docker-compose up -d memory_app_vue
+            - docker-compose up -d memory_app_back
+            - docker-compose up -d memory_app_e2e
+            - docker-compose ps
             - 'docker-compose exec memory_app_back rake db:create'
-            - 'docker-compose exec memory_app_back rake db:migrate '
+            - 'docker-compose exec memory_app_back rake db:migrate'
             - 'docker-compose exec memory_app_back rake db:seed'
-            - docker-compose up memory_app_e2e
+            - 'docker-compose exec memory_app_e2e xvfb-run -a cypress run'
       secrets:
         - name: RAILS_MASTER_KEY
   - name: backend unit

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div data-cy="list_items">
     <div class="mb-4">
       <b-field label="search" label-position="inside" type="is-primary">
-        <b-input type="text" v-model="filter" data-cy="filter"></b-input>
+        <b-input type="text" v-model="filter" data-cy="list_items__filter_input"></b-input>
       </b-field>
     </div>
     <div class="columns is-multiline is-mobile">
