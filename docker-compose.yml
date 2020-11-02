@@ -28,7 +28,7 @@ services:
       DATABASE_HOST: 'memory_app_db'
       DATABASE_PORT: '5432'
     tty: true
-    command: sh
+    command: rails s -b 0
     ports:
       - '3000:3000'
 
