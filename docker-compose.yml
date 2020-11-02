@@ -44,7 +44,7 @@ services:
     network_mode: host
 
   memory_app_e2e:
-    image: cypress/included:3.2.0
+    image: cypress/included:3.5.0
     container_name: memory_app_e2e
     working_dir: /e2e
     volumes:
