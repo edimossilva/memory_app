@@ -21,7 +21,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create'
             - 'docker-compose exec memory_app_back rake db:migrate'
             - 'docker-compose exec memory_app_back rake db:seed'
-            - 'docker-compose exec memory_app_e2e cypress run'
+            - 'docker-compose exec memory_app_e2e xvfb-run -a cypress run'
       secrets:
         - name: RAILS_MASTER_KEY
   - name: backend unit
