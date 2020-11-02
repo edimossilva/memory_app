@@ -18,6 +18,7 @@ blocks:
             - docker-compose up -d memory_app_back
             - docker-compose up -d memory_app_vue
             - docker-compose up -d memory_app_e2e
+            - docker-compose ps
             - 'docker-compose exec memory_app_back rake db:create'
             - 'docker-compose exec memory_app_back rake db:migrate'
             - 'docker-compose exec memory_app_back rake db:seed'
