@@ -13,7 +13,7 @@ RSpec.describe Memory, type: :model do
 
     describe 'uniqueness' do
       subject { create(:memory) }
-      it { should validate_uniqueness_of(:key).case_insensitive }
+      it { should validate_uniqueness_of(:key).scoped_to(:user_id).case_insensitive }
     end
   end
 end
