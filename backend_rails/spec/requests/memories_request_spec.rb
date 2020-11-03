@@ -51,6 +51,23 @@ RSpec.describe 'Memory', type: :request do
         expect(json_response_error).to eq("Validation failed: Key can't be blank, Value can't be blank")
       end
     end
+
+    context 'when memory with key alread exists for another user' do
+      let!(:memory) { create(:memory, user: user2, key: 'existing_key') }
+      let!(:create_memory_params) do
+        {
+          key: 'existing_key',
+          value: '88123456789',
+          visibility: true
+        }
+      end
+
+      before(:each) do
+        post('/memories', params: create_memory_params, headers: registred_headers)
+      end
+
+      it { expect(response).to have_http_status(:created) }
+    end
   end
 
   context '#destroy' do
