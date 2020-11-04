@@ -92,10 +92,10 @@ blocks:
     skip:
       # when: branch != 'master'
       when: false
-    dependencies:
-      - Integration tests
-      - backend lint
-      - backend unit
+    # dependencies:
+    #   - Integration tests
+    #   - backend lint
+    #   - backend unit
     task:
       jobs:
         - name: heroku
