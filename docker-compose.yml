@@ -48,6 +48,9 @@ services:
   memory_app_e2e:
     image: cypress/included:3.2.0
     container_name: memory_app_e2e
+    depends_on:
+      - memory_app_back
+      - memory_app_vue
     working_dir: /e2e
     volumes:
       - ./e2e/cypress:/e2e
