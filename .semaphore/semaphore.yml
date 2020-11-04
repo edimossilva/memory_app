@@ -5,7 +5,7 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Integration tests
+  - name: integration tests
     dependencies: []
     task:
       jobs:
@@ -90,12 +90,12 @@ blocks:
             - artifact push workflow collect_coverage/coverage/index.html -d index.html
   - name: deploy
     skip:
-      # when: branch != 'master'
-      when: false
-    dependencies: []
-    #   - Integration tests
-    #   - backend lint
-    #   - backend unit
+      when: branch != 'master'
+      # when: false
+    dependencies:
+      - integration tests
+      - backend lint
+      - backend unit
     task:
       jobs:
         - name: heroku
