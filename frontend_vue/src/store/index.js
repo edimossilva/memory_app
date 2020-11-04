@@ -5,11 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: [
-      { key: "telefone", value: "0123456789" },
-      { key: "endereco", value: "rua tal" },
-      { key: "pais", value: "br" },
-    ],
+    items: [],
   },
   mutations: {
     addItem(state, item) {

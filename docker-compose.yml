@@ -27,6 +27,7 @@ services:
       DATABASE_PASSWORD: 'postgres'
       DATABASE_HOST: 'memory_app_db'
       DATABASE_PORT: '5432'
+      OMNIAUTH_CALLBACK_URL: 'http://localhost:8080/omniauth_callback'
     tty: true
     command: rails s -b 0
     # command: sh

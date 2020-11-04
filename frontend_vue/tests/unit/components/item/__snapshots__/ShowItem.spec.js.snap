@@ -2,13 +2,13 @@
 
 exports[`ListItems.vue Matchs Snapshot 1`] = `
 <div>
-  <div class="card">
+  <div data-cy="show_item__card_mockKey1" class="card">
     <div class="card-content">
       <div class="content">mockKey1: mockValue1</div>
     </div>
     <footer class="card-footer"><a dataid="mockKey1" class="card-footer-item">
         Copy
-      </a> <a dataid="mockKey1" class="card-footer-item has-text-danger">
+      </a> <a data-cy="show_item__delete_button_mockKey1" class="card-footer-item has-text-danger">
         Remove
       </a></footer>
   </div>

@@ -36,18 +36,26 @@
         outlined
         >Login</b-button
       >
+      <a class="m-4 button is-danger is-outlined" :href="omniauthUrl"
+        >Login Gmail</a
+      >
     </div>
   </div>
 </template>
 
 <script>
-import { doLoginApi } from "../services/api";
+import { doLoginApi, OMNIAUTH_URL } from "../services/api";
 export default {
   data() {
     return {
       username: "registered_user1",
       password: "111",
     };
+  },
+  computed: {
+    omniauthUrl() {
+      return OMNIAUTH_URL;
+    },
   },
   methods: {
     doLogin() {

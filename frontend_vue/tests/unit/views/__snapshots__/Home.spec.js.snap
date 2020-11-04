@@ -4,7 +4,7 @@ exports[`Home.vue Matchs Snapshot 1`] = `
 <div class="home">
   <list-items-stub class="m-4"></list-items-stub>
   <section>
-    <b-button type="is-primary">Add</b-button>
+    <b-button data-cy="home__add_item_button" type="is-primary">Add</b-button>
     <b-modal has-modal-card="" trap-focus="" aria-role="dialog" aria-modal=""></b-modal>
   </section>
 </div>
