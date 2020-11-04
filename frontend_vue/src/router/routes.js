@@ -1,5 +1,6 @@
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import OmniauthCallback from "../components/auth/OmniauthCallback.vue";
 
 export const routes = [
   {
@@ -14,6 +15,14 @@ export const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: "/omniauth_callback",
+    name: "OmniauthCallback",
+    component: OmniauthCallback,
     meta: {
       requiresAuth: false,
     },

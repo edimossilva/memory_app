@@ -27,6 +27,7 @@ services:
       DATABASE_PASSWORD: 'postgres'
       DATABASE_HOST: 'memory_app_db'
       DATABASE_PORT: '5432'
+      OMNIAUTH_CALLBACK_URL: 'http://localhost:8080/omniauth_callback'
     tty: true
     command: rails s -b 0
     # command: sh
@@ -47,6 +48,9 @@ services:
   memory_app_e2e:
     image: cypress/included:3.2.0
     container_name: memory_app_e2e
+    depends_on:
+      - memory_app_back
+      - memory_app_vue
     working_dir: /e2e
     volumes:
       - ./e2e/cypress:/e2e

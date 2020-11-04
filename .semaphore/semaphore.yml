@@ -5,13 +5,14 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Integration tests
+  - name: integration tests
     dependencies: []
     task:
       jobs:
         - name: cypress e2e
           commands:
             - checkout
+            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - touch .env
             - touch ./backend_rails/.env
             - docker-compose up -d memory_app_vue
@@ -23,7 +24,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:seed'
             - 'docker-compose exec memory_app_e2e xvfb-run -a cypress run'
       secrets:
-        - name: RAILS_MASTER_KEY
+        - name: memory-app-heroku
   - name: backend unit
     dependencies: []
     task:
@@ -42,10 +43,11 @@ blocks:
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
       secrets:
-        - name: RAILS_MASTER_KEY
+        - name: memory-app-heroku
       prologue:
         commands:
           - checkout
+          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
           - touch .env
           - touch ./backend_rails/.env
           - docker-compose up -d memory_app_back
@@ -60,6 +62,9 @@ blocks:
             - cd backend_rails
             - gem install rubocop-rails
             - rubocop
+      secrets:
+        - name: memory-app-heroku
+
   - name: backend merge tests
     dependencies:
       - backend unit
@@ -86,8 +91,9 @@ blocks:
   - name: deploy
     skip:
       when: branch != 'master'
+      # when: false
     dependencies:
-      - Integration tests
+      - integration tests
       - backend lint
       - backend unit
     task:
@@ -98,6 +104,7 @@ blocks:
               when: true
           commands:
             - checkout
+            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - touch ./backend_rails/.env
             - touch .env
             - docker-compose up -d memory_app_vue
@@ -111,4 +118,4 @@ blocks:
             - 'heroku container:release web --app=memory-app-back'
             - 'heroku run rails db:migrate db:seed --app=memory-app-back'
       secrets:
-        - name: HEROKU_API_KEY
+        - name: memory-app-heroku
