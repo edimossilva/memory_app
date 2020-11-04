@@ -92,7 +92,7 @@ blocks:
     skip:
       # when: branch != 'master'
       when: false
-    # dependencies:
+    dependencies: []
     #   - Integration tests
     #   - backend lint
     #   - backend unit
