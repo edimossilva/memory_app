@@ -85,7 +85,8 @@ blocks:
             - artifact push workflow collect_coverage/coverage/index.html -d index.html
   - name: deploy
     skip:
-      when: branch != 'master'
+      # when: branch != 'master'
+      when: true
     dependencies:
       - Integration tests
       - backend lint
