@@ -86,7 +86,7 @@ blocks:
   - name: deploy
     skip:
       # when: branch != 'master'
-      when: true
+      when: false
     dependencies:
       - Integration tests
       - backend lint
