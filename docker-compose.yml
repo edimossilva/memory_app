@@ -29,6 +29,7 @@ services:
       DATABASE_PORT: '5432'
     tty: true
     command: rails s -b 0
+    # command: sh
     ports:
       - '3000:3000'
 
