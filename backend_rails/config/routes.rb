@@ -20,7 +20,5 @@ Rails.application.routes.draw do
 
   resources :memories
 
-  get '*path', to: redirect('/'), constraints: -> (request) do
-    !request.xhr? && request.format.html?
-  end
+  get '/*path' => 'vue#index'
 end
