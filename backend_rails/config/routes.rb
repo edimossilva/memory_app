@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#omniauth'
 
   resources :memories
+
+  get '*path', to: redirect('/'), constraints: -> (request) do
+    !request.xhr? && request.format.html?
+  end
 end
