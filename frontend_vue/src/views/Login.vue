@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { doLoginApi, OMNIAUTH_URL } from "../services/api";
+import { doLoginApi, OMNIAUTH_URL } from "../services/authApi";
 export default {
   data() {
     return {

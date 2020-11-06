@@ -1,7 +1,7 @@
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import OmniauthCallback from "../components/auth/OmniauthCallback.vue";
-import { checkAuthApi } from "../services/api";
+import { checkAuthApi } from "../services/authApi";
 
 const checkToken = function (to, from, next) {
   checkAuthApi()
