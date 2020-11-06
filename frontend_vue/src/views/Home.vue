@@ -13,8 +13,9 @@
         has-modal-card
         trap-focus
         :destroy-on-hide="false"
-        aria-role="dialog"
-        aria-modal
+        aria-role="dialog" aria-modal
+
+
       >
         <template #default="props">
           <add-item-modal @close="props.close"></add-item-modal>
