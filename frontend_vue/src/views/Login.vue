@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import { doLoginApi, OMNIAUTH_URL } from '../services/api';
+import { doLoginApi, OMNIAUTH_URL } from "../services/api";
 export default {
   data() {
     return {
-      username: 'registered_user1',
-      password: '111',
+      username: "registered_user1",
+      password: "111",
     };
   },
   mounted() {
@@ -69,7 +69,7 @@ export default {
       doLoginApi(username, password).then(
         (result) => {
           localStorage.token = result.data.token;
-          this.$router.push({ name: 'Home' });
+          this.$router.push({ name: "Home" });
         },
         (error) => {
           this.showError();
@@ -79,17 +79,17 @@ export default {
     },
     showError() {
       this.$buefy.dialog.alert({
-        message: 'Invalid Login or password.',
-        type: 'is-danger',
-        ariaRole: 'alertdialog',
+        message: "Invalid Login or password.",
+        type: "is-danger",
+        ariaRole: "alertdialog",
         ariaModal: true,
       });
     },
     showTokenExpired() {
       this.$buefy.dialog.alert({
-        message: 'Token Expired :(',
-        type: 'is-danger',
-        ariaRole: 'alertdialog',
+        message: "Token Expired :(",
+        type: "is-danger",
+        ariaRole: "alertdialog",
         ariaModal: true,
       });
     },
