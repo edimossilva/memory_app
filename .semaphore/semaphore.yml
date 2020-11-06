@@ -67,7 +67,7 @@ blocks:
             - checkout
             - cd frontend_vue
             - yarn
-            - yarn lint --no-fix
+            - yarn lint --no-fix --max-warnings 0
       secrets:
         - name: memory-app-heroku
 
