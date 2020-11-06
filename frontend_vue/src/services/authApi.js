@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOST, getRequestConfig } from './api'
+import { HOST, getRequestConfig } from "./api";
 
 export const OMNIAUTH_URL = `${HOST}/auth/sign_up`;
 const LOGIN_URL = `${HOST}/auth/login`;

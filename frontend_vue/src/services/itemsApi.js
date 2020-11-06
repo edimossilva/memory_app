@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOST, getRequestConfig } from './api'
+import { HOST, getRequestConfig } from "./api";
 
 const ITEMS_RESOURCE_URL = `${HOST}/memories`;
 
