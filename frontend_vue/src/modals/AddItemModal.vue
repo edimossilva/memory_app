@@ -6,7 +6,11 @@
         <button type="button" class="delete" @click="$emit('close')" />
       </header>
       <section class="modal-card-body">
-        <p v-if="errorMessage" class="help is-danger mb-4" data-cy="add_item_modal__error_message">
+        <p
+          v-if="errorMessage"
+          class="help is-danger mb-4"
+          data-cy="add_item_modal__error_message"
+        >
           {{ errorMessage }}
         </p>
 

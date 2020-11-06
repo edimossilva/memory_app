@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="card"
-      :data-cy="`show_item__card_${item.key}`"
-    >
+    <div class="card" :data-cy="`show_item__card_${item.key}`">
       <div class="card-content">
         <div class="content">{{ item.key }}: {{ item.value }}</div>
       </div>

@@ -52,23 +52,29 @@ blocks:
           - touch ./backend_rails/.env
           - docker-compose up -d memory_app_back
           - 'docker-compose exec memory_app_back rake db:create db:migrate'
-  - name: backend lint
+  - name: lint
     dependencies: []
     task:
       jobs:
-        - name: rubocop
+        - name: backend lint
           commands:
             - checkout
             - cd backend_rails
             - gem install rubocop-rails
             - rubocop
+        - name: frontend lint
+          commands:
+            - checkout
+            - cd frontend_vue
+            - yarn
+            - yarn lint --no-fix --max-warnings 0
       secrets:
         - name: memory-app-heroku
 
   - name: backend merge tests
     dependencies:
       - backend unit
-      - backend lint
+      - lint
     task:
       jobs:
         - name: simplecov/codeclimate
@@ -94,7 +100,7 @@ blocks:
       # when: false
     dependencies:
       - integration tests
-      - backend lint
+      - lint
       - backend unit
     task:
       jobs:
