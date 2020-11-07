@@ -48,6 +48,7 @@
             @click="onConfirmClick(item)"
             type="is-primary"
             data-cy="item_modal__confirm_button"
+            icon-left="save"
             outlined
           >
             {{ buttonLabel }}</b-button

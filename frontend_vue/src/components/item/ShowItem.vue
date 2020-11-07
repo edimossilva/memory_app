@@ -10,7 +10,7 @@
           :dataId="item.key"
           @click.prevent="onCopyButtonClick"
         >
-          Copy
+          <b-icon icon="copy" size="is-small"> </b-icon>
         </a>
 
         <a
@@ -18,14 +18,14 @@
           :data-cy="`show_item__edit_button_${item.key}`"
           @click.prevent="onEditButtonClick"
         >
-          Edit
+          <b-icon icon="edit" size="is-small"> </b-icon>
         </a>
         <a
           class="card-footer-item has-text-danger"
           :data-cy="`show_item__delete_button_${item.key}`"
           @click.prevent="onRemoveButtonClick"
         >
-          Remove
+          <b-icon icon="trash-alt" size="is-small"> </b-icon>
         </a>
       </footer>
     </div>

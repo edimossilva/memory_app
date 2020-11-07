@@ -10,6 +10,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/vue-fontawesome": "fortawesome/vue-fontawesome",
     "axios": "^0.20.0",
     "buefy": "^0.9.4",
     "core-js": "^3.6.5",
