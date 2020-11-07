@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <main-menu></main-menu>
     <list-items class="m-4"></list-items>
     <section>
       <b-button
@@ -27,10 +28,11 @@
 <script>
 import ListItems from "@/components/item/ListItems.vue";
 import AddItemModal from "@/modals/AddItemModal.vue";
+import MainMenu from "@/components/menus/MainMenu.vue";
 
 export default {
   name: "Home",
-  components: { ListItems, AddItemModal },
+  components: { ListItems, AddItemModal, MainMenu },
   data() {
     return {
       isComponentModalActive: false,
