@@ -7,8 +7,10 @@
         data-cy="home__add_item_button"
         type="is-primary"
         @click="onAddButtonClick"
-        >Add</b-button
+        icon-left="plus"
       >
+        Add
+      </b-button>
       <b-modal
         v-model="isComponentModalActive"
         has-modal-card
@@ -19,8 +21,8 @@
       >
         <template #default="props">
           <item-modal
-            titleLabel="Add Item"
-            buttonLabel="Add"
+            titleLabel="Create Item"
+            buttonLabel="Save"
             :errorMessage="itemModalErrorMessage"
             :onConfirmClick="onCreateModalConfirmButtonClick"
             @close="props.close"
