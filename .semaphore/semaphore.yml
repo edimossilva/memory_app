@@ -14,6 +14,7 @@ blocks:
             - checkout
             - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - touch .env
+            - echo "VUE_APP_API_URL=http://localhost:3000" > frontend_vue/.env
             - touch ./backend_rails/.env
             - docker-compose up -d memory_app_vue
             - docker-compose up -d memory_app_back

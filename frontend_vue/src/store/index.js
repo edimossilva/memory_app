@@ -18,6 +18,10 @@ export default new Vuex.Store({
     setItems(state, items) {
       state.items = items;
     },
+    editItem(state, updatedItem) {
+      const foundItem = state.items.find((item) => item.id === updatedItem.id);
+      Object.assign(foundItem, updatedItem);
+    },
     // mutate(state, payload) {
     //   state[payload.property] = payload.value;
     // },
@@ -31,6 +35,9 @@ export default new Vuex.Store({
     },
     setItems({ commit }, items) {
       commit("setItems", items);
+    },
+    editItem({ commit }, item) {
+      commit("editItem", item);
     },
   },
   modules: {},

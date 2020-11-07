@@ -1,23 +1,30 @@
 <template>
   <div class="home">
+    <main-menu></main-menu>
     <list-items class="m-4"></list-items>
     <section>
       <b-button
         data-cy="home__add_item_button"
         type="is-primary"
-        @click="isComponentModalActive = true"
+        @click="onAddButtonClick"
         >Add</b-button
       >
       <b-modal
         v-model="isComponentModalActive"
         has-modal-card
         trap-focus
-        :destroy-on-hide="false"
+        :destroy-on-hide="true"
         aria-role="dialog"
         aria-modal
       >
         <template #default="props">
-          <add-item-modal @close="props.close"></add-item-modal>
+          <item-modal
+            titleLabel="Add Item"
+            buttonLabel="Add"
+            :errorMessage="itemModalErrorMessage"
+            :onConfirmClick="onCreateModalConfirmButtonClick"
+            @close="props.close"
+          ></item-modal>
         </template>
       </b-modal>
     </section>
@@ -26,15 +33,38 @@
 
 <script>
 import ListItems from "@/components/item/ListItems.vue";
-import AddItemModal from "@/modals/AddItemModal.vue";
+import ItemModal from "@/modals/ItemModal.vue";
+import MainMenu from "@/components/menus/MainMenu.vue";
+import { createItemApi } from "../services/itemsApi";
+import { mapActions } from "vuex";
 
 export default {
   name: "Home",
-  components: { ListItems, AddItemModal },
+  components: { ListItems, ItemModal, MainMenu },
   data() {
     return {
       isComponentModalActive: false,
+      itemModalErrorMessage: "",
     };
+  },
+  methods: {
+    ...mapActions(["addItem"]),
+    onAddButtonClick() {
+      this.isComponentModalActive = true;
+      this.itemModalErrorMessage = "";
+    },
+    onCreateModalConfirmButtonClick(item) {
+      createItemApi(item).then(
+        (response) => {
+          this.addItem(response.data.data);
+          this.isComponentModalActive = false;
+        },
+        (error) => {
+          this.item = {};
+          this.itemModalErrorMessage = error.response.data.error_message;
+        }
+      );
+    },
   },
 };
 </script>

@@ -2,6 +2,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import OmniauthCallback from "../components/auth/OmniauthCallback.vue";
 import { checkAuthApi } from "../services/authApi";
+import { logout } from "../services/auth/authService";
 
 const checkToken = function (to, from, next) {
   checkAuthApi()
@@ -10,8 +11,7 @@ const checkToken = function (to, from, next) {
     })
     .catch((error) => {
       console.log(error.response.data);
-      localStorage.token = "";
-      next({ name: "Login", query: { tokenExpired: true } });
+      logout({ tokenExpired: true });
     });
 };
 

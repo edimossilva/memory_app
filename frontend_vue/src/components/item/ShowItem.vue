@@ -12,6 +12,14 @@
         >
           Copy
         </a>
+
+        <a
+          class="card-footer-item"
+          :data-cy="`show_item__edit_button_${item.key}`"
+          @click.prevent="onEditButtonClick"
+        >
+          Edit
+        </a>
         <a
           class="card-footer-item has-text-danger"
           :data-cy="`show_item__delete_button_${item.key}`"
@@ -21,21 +29,49 @@
         </a>
       </footer>
     </div>
+
+    <b-modal
+      v-model="isComponentModalActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="true"
+      aria-role="dialog"
+      aria-modal
+    >
+      <template #default="props">
+        <item-modal
+          titleLabel="Edit Item"
+          buttonLabel="Save"
+          :errorMessage="itemModalErrorMessage"
+          :initialItem="item"
+          :onConfirmClick="onEditModalConfirmButtonClick"
+          @close="props.close"
+        >
+        </item-modal>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import { deleteItemApi } from "../../services/itemsApi";
+import { deleteItemApi, editItemApi } from "../../services/itemsApi";
+import ItemModal from "@/modals/ItemModal.vue";
 
 export default {
   name: "ShowItem",
   props: {
     item: { type: Object, required: true },
   },
-  components: {},
+  components: { ItemModal },
+  data() {
+    return {
+      isComponentModalActive: false,
+      itemModalErrorMessage: "",
+    };
+  },
   methods: {
-    ...mapActions(["removeItem"]),
+    ...mapActions(["removeItem", "editItem"]),
     onRemoveButtonClick() {
       deleteItemApi(this.item.id).then(
         () => {
@@ -57,6 +93,21 @@ export default {
           ariaModal: true,
         });
       });
+    },
+    onEditButtonClick() {
+      this.isComponentModalActive = true;
+      this.itemModalErrorMessage = "";
+    },
+    onEditModalConfirmButtonClick(item) {
+      editItemApi(item).then(
+        (response) => {
+          this.editItem(response.data.data);
+          this.isComponentModalActive = false;
+        },
+        (error) => {
+          this.itemModalErrorMessage = error.response.data.error_message;
+        }
+      );
     },
   },
 };

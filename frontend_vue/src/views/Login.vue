@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="notification is-light">
+    <div class="box">
       <div>
         <b-field
           label="Username"

@@ -11,9 +11,9 @@ describe("Create task", () => {
 
   describe('When fill data properly', () => {
     beforeEach(() => {
-      cy.get('[data-cy=add_item_modal__key_input]').type(key1);
-      cy.get('[data-cy=add_item_modal__value_input]').type(value1);
-      cy.get('[data-cy=add_item_modal__add_button]').click();
+      cy.get('[data-cy=item_modal__key_input]').type(key1);
+      cy.get('[data-cy=item_modal__value_input]').type(value1);
+      cy.get('[data-cy=item_modal__confirm_button]').click();
     });
 
     it("Should contains formated key: value", () => {
@@ -23,13 +23,13 @@ describe("Create task", () => {
 
   describe('When fill data not properly (repeated key)', () => {
     beforeEach(() => {
-      cy.get('[data-cy=add_item_modal__key_input]').type(key1);
-      cy.get('[data-cy=add_item_modal__value_input]').type(value1);
-      cy.get('[data-cy=add_item_modal__add_button]').click();
+      cy.get('[data-cy=item_modal__key_input]').type(key1);
+      cy.get('[data-cy=item_modal__value_input]').type(value1);
+      cy.get('[data-cy=item_modal__confirm_button]').click();
     });
 
     it("Should has error for invalid key", () => {
-      cy.get('[data-cy=add_item_modal__error_message]').should("exist");
+      cy.get('[data-cy=item_modal__error_message]').should("exist");
     });
   });
 });

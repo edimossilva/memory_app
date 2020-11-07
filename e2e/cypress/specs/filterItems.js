@@ -12,7 +12,10 @@ describe("Filrer items", () => {
       cy.createItem(key1, value1)
       cy.createItem(key2, value2)
     });
-
+    afterEach(() => {
+      cy.deleteItemByKey(key1)
+      cy.deleteItemByKey(key2)
+    })
     it("should be filter items by key", () => {
       cy.get(`[data-cy=show_item__card_${key1}]`).should("exist");
       cy.get(`[data-cy=show_item__card_${key2}]`).should("exist");

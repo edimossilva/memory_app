@@ -7,6 +7,11 @@ export const createItemApi = (item) => {
   return axios.post(ITEMS_RESOURCE_URL, item, getRequestConfig());
 };
 
+export const editItemApi = (item) => {
+  const editUrl = `${ITEMS_RESOURCE_URL}/${item.id}`;
+  return axios.put(editUrl, item, getRequestConfig());
+};
+
 export const getItemsApi = () => {
   return axios.get(ITEMS_RESOURCE_URL, getRequestConfig());
 };

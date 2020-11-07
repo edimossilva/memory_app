@@ -2,14 +2,14 @@
   <form action="">
     <div name="create-item-modal" class="modal-card" style="width: auto">
       <header class="modal-card-head">
-        <p class="modal-card-title">Add memory</p>
+        <p class="modal-card-title">{{ titleLabel }}</p>
         <button type="button" class="delete" @click="$emit('close')" />
       </header>
       <section class="modal-card-body">
         <p
           v-if="errorMessage"
           class="help is-danger mb-4"
-          data-cy="add_item_modal__error_message"
+          data-cy="item_modal__error_message"
         >
           {{ errorMessage }}
         </p>
@@ -21,10 +21,10 @@
           class="mx-4"
         >
           <b-input
-            @keyup.enter.native="onCreateButtonClick"
+            @keyup.enter.native="onConfirmClick"
             type="text"
             v-model="item.key"
-            data-cy="add_item_modal__key_input"
+            data-cy="item_modal__key_input"
           ></b-input>
         </b-field>
 
@@ -35,20 +35,22 @@
           class="mx-4"
         >
           <b-input
-            @keyup.enter.native="onCreateButtonClick"
+            @keyup.enter.native="onConfirmClick"
             type="text"
             v-model="item.value"
-            data-cy="add_item_modal__value_input"
+            data-cy="item_modal__value_input"
           ></b-input>
         </b-field>
+
         <b-field>
           <b-button
             class="m-2"
-            @click="onCreateButtonClick()"
+            @click="onConfirmClick(item)"
             type="is-primary"
-            data-cy="add_item_modal__add_button"
+            data-cy="item_modal__confirm_button"
             outlined
-            >Add</b-button
+          >
+            {{ buttonLabel }}</b-button
           >
         </b-field>
       </section>
@@ -57,33 +59,41 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { createItemApi } from "../services/itemsApi";
-
 export default {
-  name: "AddItemModal",
+  name: "ItemModal",
+  props: {
+    titleLabel: {
+      type: String,
+      required: true,
+    },
+    buttonLabel: {
+      type: String,
+      required: true,
+    },
+    errorMessage: {
+      type: String,
+      required: true,
+    },
+    initialItem: {
+      type: Object,
+      required: false,
+    },
+    onConfirmClick: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       item: { key: "", value: "" },
-      errorMessage: "",
     };
   },
-  methods: {
-    ...mapActions(["addItem"]),
-    onCreateButtonClick() {
-      createItemApi(this.item).then(
-        (response) => {
-          this.addItem(response.data.data);
-          this.item = {};
-          this.$emit("close");
-        },
-        (error) => {
-          // this.showError();
-          this.item = {};
-          this.errorMessage = error.response.data.error_message;
-        }
-      );
-    },
+  mounted() {
+    if (this.initialItem) {
+      Object.assign(this.item, this.initialItem);
+    } else {
+      this.item = {};
+    }
   },
 };
 </script>
