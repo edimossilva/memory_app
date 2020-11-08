@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :admin_users
       resources :memories
       resources :users
+      resources :tags
 
       root to: "admin_users#index"
     end
