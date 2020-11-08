@@ -114,9 +114,12 @@ blocks:
             - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - touch ./backend_rails/.env
             - touch .env
-            - docker-compose up -d memory_app_vue
-            - docker-compose exec memory_app_vue npm install
-            - docker-compose exec memory_app_vue npm run build
+            - cd frontend_vue
+            - curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+            - yarn
+            - yarn -v
+            - yarn build
+            - cd ..
             - cp -r frontend_vue/dist/* backend_rails/public/
             - 'curl https://cli-assets.heroku.com/install.sh | sh'
             - 'heroku container:login'
