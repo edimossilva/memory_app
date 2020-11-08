@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :memories, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :password,
