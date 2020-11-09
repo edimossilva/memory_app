@@ -10,6 +10,7 @@ describe("Filrer items", () => {
     beforeEach(() => {
       cy.login()
       cy.createItem(key1, value1)
+      cy.wait(600)
       cy.createItem(key2, value2)
     });
     afterEach(() => {
