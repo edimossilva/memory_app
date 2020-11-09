@@ -8,6 +8,20 @@ components:
       name: Authorization
 
   schemas:
+    TagResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        name:
+          type: string
+    TagData:
+      type: object
+      properties:
+        name:
+          type: string
     MemoryResponse:
       type: object
       properties:
@@ -190,6 +204,91 @@ paths:
       responses:
         '204':
           description: Memory deleted
+
+  '/tags':
+    get:
+      summary: Return all tags
+      tags:
+        - tags
+      responses:
+        '200':
+          description: token generated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+    post:
+      summary: Create Tag
+      tags:
+        - tags
+      responses:
+        '201':
+          description: Tag created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoryData'
+
+  '/tags/{tagId}':
+    put:
+      summary: Update Tag
+      tags:
+        - tags
+      parameters:
+        - in: path
+          name: tagId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Tag updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoryData'
+    get:
+      summary: Find Tag
+      tags:
+        - tags
+      parameters:
+        - in: path
+          name: tagId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Tag updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+    delete:
+      summary: Delete Tag
+      tags:
+        - tags
+      parameters:
+        - in: path
+          name: tagId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '204':
+          description: Tag deleted
 servers:
   - url: https://memory-app-back.herokuapp.com
   - url: http://localhost:3000
