@@ -3,8 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Memory, type: :model do
-  describe 'relationshipd' do
+  describe 'relationship' do
     it { should belong_to(:user).required }
+    it { should belong_to(:tag).optional }
   end
 
   describe 'validations' do
