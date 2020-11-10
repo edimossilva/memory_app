@@ -5,42 +5,7 @@ class MemoriesController < ApiController
 
   before_action :authorize_request
 
-  def create
-    memory = Memory.create!(create_params)
-    render_created(memory)
-  end
-
-  def destroy
-    memory = Memory.find_by!(search_params)
-
-    authorize memory, :owner?
-
-    memory.destroy!
-
-    render_destroyed
-  end
-
-  def index
-    render_ok(Memory.where(user: current_user))
-  end
-
-  def show
-    memory = Memory.find_by!(search_params)
-
-    authorize memory, :owner?
-
-    render_ok(memory)
-  end
-
-  def update
-    memory = Memory.find_by!(search_params)
-
-    authorize memory, :owner?
-
-    memory.update!(update_params)
-
-    render_ok(memory)
-  end
+  self.resource_class = Memory
 
   private
 
