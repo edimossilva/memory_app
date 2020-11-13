@@ -10,27 +10,16 @@ export default new Vuex.Store({
     isLogged: {},
   },
   mutations: {
-    addItem(state, item) {
-      state.items.push(item);
+    addElement(state, {property, element}) {
+      state[property].push(element);
     },
-    addTag(state, tag) {
-      state.tags.push(tag);
+    removeElement(state, { property, element }) {
+      const index = state[property].findIndex((i) => i.id === element.id);
+      state[property].splice(index, 1);
     },
-    removeItem(state, item) {
-      const index = state.items.findIndex((i) => i.key === item.key);
-      state.items.splice(index, 1);
-    },
-    removeTag(state, tag) {
-      const index = state.tags.findIndex((i) => i.name === tag.name);
-      state.tags.splice(index, 1);
-    },
-    editItem(state, updatedItem) {
-      const foundItem = state.items.find((item) => item.id === updatedItem.id);
-      Object.assign(foundItem, updatedItem);
-    },
-    editTag(state, updatedTag) {
-      const foundTag = state.tags.find((item) => item.id === updatedTag.id);
-      Object.assign(foundTag, updatedTag);
+    editElement(state, { property, element }) {
+      const foundItem = state[property].find((i) => i.id === element.id);
+      Object.assign(foundItem, element);
     },
     mutate(state, { property, value }) {
       state[property] = value;
@@ -38,16 +27,16 @@ export default new Vuex.Store({
   },
   actions: {
     addItem({ commit }, item) {
-      commit("addItem", { ...item });
+      commit("addElement", { property: 'items', element: item });
     },
     addTag({ commit }, tag) {
-      commit("addTag", { ...tag });
+      commit("addElement", { property: 'tags', element: tag });
     },
     removeItem({ commit }, item) {
-      commit("removeItem", item);
+      commit("removeElement", { property: 'items', element: item });
     },
     removeTag({ commit }, tag) {
-      commit("removeTag", tag);
+      commit("removeElement", { property: 'tags', element: tag });
     },
     setItems({ commit }, items) {
       commit("mutate", { property: "items", value: items });
@@ -56,10 +45,10 @@ export default new Vuex.Store({
       commit("mutate", { property: "tags", value: tags });
     },
     editItem({ commit }, item) {
-      commit("editItem", item);
+      commit("editElement", { property: 'items', element: item });
     },
     editTag({ commit }, tag) {
-      commit("editTag", tag);
+      commit("editElement", { property: 'tags', element: tag });
     },
     setIsLogged({ commit }, isLogged) {
       commit("mutate", { property: "isLogged", value: isLogged });
