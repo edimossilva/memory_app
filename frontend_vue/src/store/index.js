@@ -10,7 +10,7 @@ export default new Vuex.Store({
     isLogged: {},
   },
   mutations: {
-    addElement(state, {property, element}) {
+    addElement(state, { property, element }) {
       state[property].push(element);
     },
     removeElement(state, { property, element }) {
@@ -27,16 +27,16 @@ export default new Vuex.Store({
   },
   actions: {
     addItem({ commit }, item) {
-      commit("addElement", { property: 'items', element: item });
+      commit("addElement", { property: "items", element: item });
     },
     addTag({ commit }, tag) {
-      commit("addElement", { property: 'tags', element: tag });
+      commit("addElement", { property: "tags", element: tag });
     },
     removeItem({ commit }, item) {
-      commit("removeElement", { property: 'items', element: item });
+      commit("removeElement", { property: "items", element: item });
     },
     removeTag({ commit }, tag) {
-      commit("removeElement", { property: 'tags', element: tag });
+      commit("removeElement", { property: "tags", element: tag });
     },
     setItems({ commit }, items) {
       commit("mutate", { property: "items", value: items });
@@ -45,10 +45,10 @@ export default new Vuex.Store({
       commit("mutate", { property: "tags", value: tags });
     },
     editItem({ commit }, item) {
-      commit("editElement", { property: 'items', element: item });
+      commit("editElement", { property: "items", element: item });
     },
     editTag({ commit }, tag) {
-      commit("editElement", { property: 'tags', element: tag });
+      commit("editElement", { property: "tags", element: tag });
     },
     setIsLogged({ commit }, isLogged) {
       commit("mutate", { property: "isLogged", value: isLogged });
