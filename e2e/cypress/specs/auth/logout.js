@@ -24,7 +24,6 @@ describe("Logout", () => {
 
     it("should be redirected to login", () => {
       cy.url().should('include', '/login')
-      cy.contains("Token Expired :(");
     });
   });
 });

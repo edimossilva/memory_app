@@ -1,4 +1,4 @@
 exclude_patterns:
   - "app/db/*"
   - "backend_rails/spec/*"
-  - "e2e/cypress/specs/**"
+  - "e2e/cypress/**"
