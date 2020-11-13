@@ -3,7 +3,7 @@
     <list-tags class="m-4"> </list-tags>
     <section>
       <b-button
-        data-cy="home__add_tag_button"
+        data-cy="tags__add_tag_button"
         type="is-primary"
         @click="onAddButtonClick"
         icon-left="plus"

@@ -9,6 +9,10 @@ describe("Create task", () => {
     cy.get('[data-cy=home__add_item_button]').click();
   });
 
+  after(() => {
+    cy.deleteItemByKey(key1)
+  });
+
   describe('When fill data properly', () => {
     beforeEach(() => {
       cy.get('[data-cy=item_modal__key_input]').type(key1);

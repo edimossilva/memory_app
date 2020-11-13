@@ -17,6 +17,7 @@ Cypress.Commands.add("login", () => {
   cy.get('[data-cy=loginButton]').click();
   cy.wait(600)
 })
+
 Cypress.Commands.add("createItem", (key, value) => {
   cy.visit("/");
   cy.get('[data-cy=home__add_item_button]').click();
@@ -25,12 +26,24 @@ Cypress.Commands.add("createItem", (key, value) => {
   cy.get('[data-cy=item_modal__confirm_button]').click();
   cy.wait(600)
 })
-Cypress.Commands.add("deleteItemByKey", (key, value) => {
+
+Cypress.Commands.add("deleteItemByKey", (key) => {
   cy.visit("/");
-  cy.get(`[data-cy=show_item__delete_button_${key}]`).should("exist");
   cy.get(`[data-cy=show_item__delete_button_${key}]`).click();
 })
 
+Cypress.Commands.add("createTag", (name) => {
+  cy.visit('/tags')
+  cy.get('[data-cy=tags__add_tag_button]').click();
+  cy.get('[data-cy=tag_modal__name_input]').type(name);
+  cy.get('[data-cy=tag_modal__confirm_button]').click();
+  cy.wait(600)
+})
+
+Cypress.Commands.add("deleteTagByName", (name) => {
+  cy.visit("/tags");
+  cy.get(`[data-cy=show_tag__delete_button_${name}]`).click();
+})
 //
 //
 // -- This is a child command --

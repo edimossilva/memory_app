@@ -21,7 +21,7 @@ export default new Vuex.Store({
       state.items.splice(index, 1);
     },
     removeTag(state, tag) {
-      const index = state.items.findIndex((i) => i.key === tag.key);
+      const index = state.tags.findIndex((i) => i.name === tag.name);
       state.tags.splice(index, 1);
     },
     editItem(state, updatedItem) {
