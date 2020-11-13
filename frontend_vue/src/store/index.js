@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: [],
+    isLogged: {},
   },
   mutations: {
     addItem(state, item) {
@@ -15,16 +16,13 @@ export default new Vuex.Store({
       const index = state.items.findIndex((i) => i.key === item.key);
       state.items.splice(index, 1);
     },
-    setItems(state, items) {
-      state.items = items;
-    },
     editItem(state, updatedItem) {
       const foundItem = state.items.find((item) => item.id === updatedItem.id);
       Object.assign(foundItem, updatedItem);
     },
-    // mutate(state, payload) {
-    //   state[payload.property] = payload.value;
-    // },
+    mutate(state, { property, value }) {
+      state[property] = value;
+    },
   },
   actions: {
     addItem({ commit }, item) {
@@ -34,10 +32,13 @@ export default new Vuex.Store({
       commit("removeItem", item);
     },
     setItems({ commit }, items) {
-      commit("setItems", items);
+      commit("mutate", { property: "items", value: items });
     },
     editItem({ commit }, item) {
       commit("editItem", item);
+    },
+    setIsLogged({ commit }, isLogged) {
+      commit("mutate", { property: "isLogged", value: isLogged });
     },
   },
   modules: {},

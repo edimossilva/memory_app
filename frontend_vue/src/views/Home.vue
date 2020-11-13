@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <main-menu></main-menu>
     <list-items class="m-4"></list-items>
     <section>
       <b-button
@@ -36,13 +35,12 @@
 <script>
 import ListItems from "@/components/item/ListItems.vue";
 import ItemModal from "@/modals/ItemModal.vue";
-import MainMenu from "@/components/menus/MainMenu.vue";
 import { createItemApi } from "../services/itemsApi";
 import { mapActions } from "vuex";
 
 export default {
   name: "Home",
-  components: { ListItems, ItemModal, MainMenu },
+  components: { ListItems, ItemModal },
   data() {
     return {
       isComponentModalActive: false,

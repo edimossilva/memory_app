@@ -1,9 +1,21 @@
 <template>
   <div id="app">
+    <main-menu v-show="isLogged"></main-menu>
     <router-view />
   </div>
 </template>
+<script>
+import MainMenu from "@/components/menus/MainMenu.vue";
+import { mapState } from "vuex";
 
+export default {
+  name: "App",
+  components: { MainMenu },
+  computed: {
+    ...mapState(["isLogged"]),
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
