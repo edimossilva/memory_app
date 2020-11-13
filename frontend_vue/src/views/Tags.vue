@@ -1,14 +1,14 @@
 <template>
-  <div class="home">
-    <list-items class="m-4"></list-items>
+  <div>
+    <list-tags class="m-4"> </list-tags>
     <section>
       <b-button
-        data-cy="home__add_item_button"
+        data-cy="tags__add_tag_button"
         type="is-primary"
         @click="onAddButtonClick"
         icon-left="plus"
       >
-        Add Item
+        Add Tag
       </b-button>
       <b-modal
         v-model="isComponentModalActive"
@@ -19,13 +19,13 @@
         aria-modal
       >
         <template #default="props">
-          <item-modal
-            titleLabel="Create Item"
+          <tag-modal
+            titleLabel="Create tag"
             buttonLabel="Save"
-            :errorMessage="itemModalErrorMessage"
+            :errorMessage="tagModalErrorMessage"
             :onConfirmClick="onCreateModalConfirmButtonClick"
             @close="props.close"
-          ></item-modal>
+          ></tag-modal>
         </template>
       </b-modal>
     </section>
@@ -33,38 +33,40 @@
 </template>
 
 <script>
-import ListItems from "@/components/item/ListItems.vue";
-import ItemModal from "@/modals/ItemModal.vue";
-import { createItemApi } from "../services/itemsApi";
+import ListTags from "@/components/tag/ListTags.vue";
+import { createTagApi } from "../services/tagsApi";
 import { mapActions } from "vuex";
+import TagModal from "@/modals/TagModal.vue";
 
 export default {
-  name: "Home",
-  components: { ListItems, ItemModal },
+  name: "Tags",
+  components: { ListTags, TagModal },
   data() {
     return {
       isComponentModalActive: false,
-      itemModalErrorMessage: "",
+      tagModalErrorMessage: "",
     };
   },
   methods: {
-    ...mapActions(["addItem"]),
+    ...mapActions(["addTag"]),
     onAddButtonClick() {
       this.isComponentModalActive = true;
-      this.itemModalErrorMessage = "";
+      this.tagModalErrorMessage = "";
     },
-    onCreateModalConfirmButtonClick(item) {
-      createItemApi(item).then(
+    onCreateModalConfirmButtonClick(tag) {
+      createTagApi(tag).then(
         (response) => {
-          this.addItem(response.data.data);
+          this.addTag(response.data.data);
           this.isComponentModalActive = false;
         },
         (error) => {
-          this.item = {};
-          this.itemModalErrorMessage = error.response.data.error_message;
+          this.tag = {};
+          this.tagModalErrorMessage = error.response.data.error_message;
         }
       );
     },
   },
 };
 </script>
+
+<style></style>

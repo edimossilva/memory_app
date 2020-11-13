@@ -1,5 +1,6 @@
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import Tags from "../views/Tags.vue";
 import OmniauthCallback from "../components/auth/OmniauthCallback.vue";
 import { checkAuthApi } from "../services/authApi";
 import { logout } from "../services/auth/authService";
@@ -20,6 +21,17 @@ export const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: {
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      checkToken(to, from, next);
+    },
+  },
+  {
+    path: "/tags",
+    name: "Tags",
+    component: Tags,
     meta: {
       requiresAuth: true,
     },

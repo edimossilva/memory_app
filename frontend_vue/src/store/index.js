@@ -6,38 +6,52 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     items: [],
+    tags: [],
+    isLogged: {},
   },
   mutations: {
-    addItem(state, item) {
-      state.items.push(item);
+    addElement(state, { property, element }) {
+      state[property].push(element);
     },
-    removeItem(state, item) {
-      const index = state.items.findIndex((i) => i.key === item.key);
-      state.items.splice(index, 1);
+    removeElement(state, { property, element }) {
+      const index = state[property].findIndex((i) => i.id === element.id);
+      state[property].splice(index, 1);
     },
-    setItems(state, items) {
-      state.items = items;
+    editElement(state, { property, element }) {
+      const foundItem = state[property].find((i) => i.id === element.id);
+      Object.assign(foundItem, element);
     },
-    editItem(state, updatedItem) {
-      const foundItem = state.items.find((item) => item.id === updatedItem.id);
-      Object.assign(foundItem, updatedItem);
+    mutate(state, { property, value }) {
+      state[property] = value;
     },
-    // mutate(state, payload) {
-    //   state[payload.property] = payload.value;
-    // },
   },
   actions: {
     addItem({ commit }, item) {
-      commit("addItem", { ...item });
+      commit("addElement", { property: "items", element: item });
+    },
+    addTag({ commit }, tag) {
+      commit("addElement", { property: "tags", element: tag });
     },
     removeItem({ commit }, item) {
-      commit("removeItem", item);
+      commit("removeElement", { property: "items", element: item });
+    },
+    removeTag({ commit }, tag) {
+      commit("removeElement", { property: "tags", element: tag });
     },
     setItems({ commit }, items) {
-      commit("setItems", items);
+      commit("mutate", { property: "items", value: items });
+    },
+    setTags({ commit }, tags) {
+      commit("mutate", { property: "tags", value: tags });
     },
     editItem({ commit }, item) {
-      commit("editItem", item);
+      commit("editElement", { property: "items", element: item });
+    },
+    editTag({ commit }, tag) {
+      commit("editElement", { property: "tags", element: tag });
+    },
+    setIsLogged({ commit }, isLogged) {
+      commit("mutate", { property: "isLogged", value: isLogged });
     },
   },
   modules: {},

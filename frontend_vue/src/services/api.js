@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const HOST =
   process.env.VUE_APP_API_URL || "https://memory-app-back.herokuapp.com";
 
@@ -10,4 +12,12 @@ export const getRequestConfig = () => {
   };
 
   return requestConfig;
+};
+
+export const deleteApi = (url) => {
+  return axios.delete(url, getRequestConfig());
+};
+
+export const editApi = (url, resource) => {
+  return axios.put(url, resource, getRequestConfig());
 };
