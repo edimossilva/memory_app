@@ -8,7 +8,7 @@
         @click="onAddButtonClick"
         icon-left="plus"
       >
-        Add
+        Add Item
       </b-button>
       <b-modal
         v-model="isComponentModalActive"

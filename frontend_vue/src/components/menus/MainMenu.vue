@@ -1,5 +1,19 @@
 <template>
   <b-navbar>
+    <template slot="brand">
+      <b-navbar-item>
+        <a href="https://github.com/edimossilva/memory_app">
+          <img
+            src="https://icons-for-free.com/iconfiles/png/512/part+1+github-1320568339880199515.png"
+            alt="Lightweight UI components for Vue.js based on Bulma"
+          />
+        </a>
+      </b-navbar-item>
+    </template>
+    <template slot="start">
+      <b-navbar-item href="/"> Items </b-navbar-item>
+      <b-navbar-item href="/tags"> Tags </b-navbar-item>
+    </template>
     <template slot="end">
       <b-navbar-item tag="div">
         <b-navbar-item
