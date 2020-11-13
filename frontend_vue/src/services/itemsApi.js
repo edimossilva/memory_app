@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOST, getRequestConfig } from "./api";
+import { HOST, getRequestConfig, deleteApi, editApi } from "./api";
 
 const ITEMS_RESOURCE_URL = `${HOST}/memories`;
 
@@ -8,8 +8,7 @@ export const createItemApi = (item) => {
 };
 
 export const editItemApi = (item) => {
-  const editUrl = `${ITEMS_RESOURCE_URL}/${item.id}`;
-  return axios.put(editUrl, item, getRequestConfig());
+  return editApi(`${ITEMS_RESOURCE_URL}/${item.id}`, item);
 };
 
 export const getItemsApi = () => {
@@ -17,6 +16,5 @@ export const getItemsApi = () => {
 };
 
 export const deleteItemApi = (itemId) => {
-  const deleteUrl = `${ITEMS_RESOURCE_URL}/${itemId}`;
-  return axios.delete(deleteUrl, getRequestConfig());
+  return deleteApi(`${ITEMS_RESOURCE_URL}/${itemId}`);
 };

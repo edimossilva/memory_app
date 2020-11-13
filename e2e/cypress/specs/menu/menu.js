@@ -1,8 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe("Menu", () => {
-  const name = `tag${Date.now()}`;
-
   beforeEach(() => {
     cy.login()
     cy.visit('/')

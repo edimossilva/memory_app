@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HOST, getRequestConfig } from "./api";
+import { HOST, getRequestConfig, deleteApi, editApi } from "./api";
 
 const TAGS_RESOURCE_URL = `${HOST}/tags`;
 
@@ -8,8 +8,7 @@ export const createTagApi = (tag) => {
 };
 
 export const editTagApi = (tag) => {
-  const editUrl = `${TAGS_RESOURCE_URL}/${tag.id}`;
-  return axios.put(editUrl, tag, getRequestConfig());
+  return editApi(`${TAGS_RESOURCE_URL}/${tag.id}`, tag);
 };
 
 export const getTagsApi = () => {
@@ -17,6 +16,5 @@ export const getTagsApi = () => {
 };
 
 export const deleteTagApi = (tagId) => {
-  const deleteUrl = `${TAGS_RESOURCE_URL}/${tagId}`;
-  return axios.delete(deleteUrl, getRequestConfig());
+  return deleteApi(`${TAGS_RESOURCE_URL}/${tagId}`);
 };
