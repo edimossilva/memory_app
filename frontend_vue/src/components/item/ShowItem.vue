@@ -86,12 +86,16 @@ export default {
     onCopyButtonClick() {
       const { item, $copyText, $buefy } = this;
       $copyText(item.value).then(() => {
-        $buefy.dialog.alert({
-          message: `"${item.value}" copied to clipboard :)`,
-          type: "is-primary",
-          ariaRole: "alertdialog",
-          ariaModal: true,
-        });
+        if ((item.value).includes('http://') || (item.value).includes('https://')) {
+            window.open(item.value, '_blank');
+        } else {
+            $buefy.dialog.alert({
+              message: `"${item.value}" copied to clipboard :)`,
+              type: "is-primary",
+              ariaRole: "alertdialog",
+              ariaModal: true,
+            });
+        }
       });
     },
     onEditButtonClick() {
