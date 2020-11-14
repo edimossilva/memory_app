@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   scope 'api/v1' do
     resources :memories
     resources :tags
+    resources :memory_tags
   end
 
   get '/*path' => 'vue#index'
