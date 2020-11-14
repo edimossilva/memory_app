@@ -15,7 +15,7 @@ RSpec.describe 'Tag', type: :request do
       end
 
       before(:each) do
-        post('/tags', params: create_tag_params, headers: registred_headers)
+        post('/api/v1/tags', params: create_tag_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:created) }
@@ -33,7 +33,7 @@ RSpec.describe 'Tag', type: :request do
       end
 
       before(:each) do
-        post('/tags', params: create_tag_params, headers: registred_headers)
+        post('/api/v1/tags', params: create_tag_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
@@ -50,7 +50,7 @@ RSpec.describe 'Tag', type: :request do
       end
 
       before(:each) do
-        post('/tags', params: create_tag_params, headers: registred_headers)
+        post('/api/v1/tags', params: create_tag_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:created) }
@@ -62,7 +62,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When find Tag' do
       before(:each) do
-        delete("/tags/#{tag.id}", headers: registred_headers)
+        delete("/api/v1/tags/#{tag.id}", headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:no_content) }
@@ -70,7 +70,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When not find Tag' do
       before(:each) do
-        delete('/tags/999', headers: registred_headers)
+        delete('/api/v1/tags/999', headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:not_found) }
@@ -82,7 +82,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When is not owner' do
       before(:each) do
-        delete("/tags/#{tag.id}", headers: registred_headers2)
+        delete("/api/v1/tags/#{tag.id}", headers: registred_headers2)
       end
 
       it { expect(response).to have_http_status(:unauthorized) }
@@ -95,7 +95,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When data is valid' do
       before(:each) do
-        get("/tags/#{tag.id}", headers: registred_headers)
+        get("/api/v1/tags/#{tag.id}", headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:ok) }
@@ -107,7 +107,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When not find item' do
       before(:each) do
-        put('/tags/999', headers: registred_headers)
+        put('/api/v1/tags/999', headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:not_found) }
@@ -119,7 +119,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When Tag not belongs to user' do
       before(:each) do
-        put("/tags/#{tag.id}", headers: registred_headers2)
+        put("/api/v1/tags/#{tag.id}", headers: registred_headers2)
       end
 
       it { expect(response).to have_http_status(:unauthorized) }
@@ -134,7 +134,7 @@ RSpec.describe 'Tag', type: :request do
     before(:each) do
       create_list(:tag, 3)
       create_list(:tag, 2, user: registred_user)
-      get('/tags', headers: registred_headers)
+      get('/api/v1/tags', headers: registred_headers)
     end
 
     it { expect(response).to have_http_status(:ok) }
@@ -153,7 +153,7 @@ RSpec.describe 'Tag', type: :request do
       end
 
       before(:each) do
-        put("/tags/#{tag.id}", params: update_memory_params, headers: registred_headers)
+        put("/api/v1/tags/#{tag.id}", params: update_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:ok) }
@@ -169,7 +169,7 @@ RSpec.describe 'Tag', type: :request do
       end
 
       before(:each) do
-        put("/tags/#{tag.id}", params: update_memory_params, headers: registred_headers)
+        put("/api/v1/tags/#{tag.id}", params: update_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
@@ -181,7 +181,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When not find item' do
       before(:each) do
-        put('/tags/999', headers: registred_headers)
+        put('/api/v1/tags/999', headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:not_found) }
@@ -193,7 +193,7 @@ RSpec.describe 'Tag', type: :request do
 
     describe 'When Tag not belongs to user' do
       before(:each) do
-        put("/tags/#{tag.id}", headers: registred_headers2)
+        put("/api/v1/tags/#{tag.id}", headers: registred_headers2)
       end
 
       it { expect(response).to have_http_status(:unauthorized) }

@@ -7,13 +7,13 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
 
   namespace :admin do
-      resources :admin_users
-      resources :memories
-      resources :users
-      resources :tags
+    resources :admin_users
+    resources :memories
+    resources :users
+    resources :tags
 
-      root to: "admin_users#index"
-    end
+    root to: "admin_users#index"
+  end
 
   scope 'auth' do
     post '/login' => 'authentication#login'
@@ -22,8 +22,10 @@ Rails.application.routes.draw do
     get '/:provider/callback' => 'sessions#omniauth'
   end
 
-  resources :memories
-  resources :tags
+  scope 'api/v1' do
+    resources :memories
+    resources :tags
+  end
 
   get '/*path' => 'vue#index'
 

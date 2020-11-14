@@ -120,7 +120,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthUser'
 
-  '/memories':
+  '/api/v1/memories':
     get:
       summary: Return all Memories
       tags:
@@ -151,7 +151,7 @@ paths:
             schema:
               $ref: '#/components/schemas/MemoryData'
 
-  '/memories/{memoryId}':
+  '/api/v1/memories/{memoryId}':
     put:
       summary: Update Memory
       tags:
@@ -205,7 +205,7 @@ paths:
         '204':
           description: Memory deleted
 
-  '/tags':
+  '/api/v1/tags':
     get:
       summary: Return all tags
       tags:
@@ -236,7 +236,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TagData'
 
-  '/tags/{tagId}':
+  '/api/v1/tags/{tagId}':
     put:
       summary: Update Tag
       tags:

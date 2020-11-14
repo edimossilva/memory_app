@@ -19,7 +19,7 @@ RSpec.describe 'Memory', type: :request do
       end
 
       before(:each) do
-        post('/memories', params: create_memory_params, headers: registred_headers)
+        post('/api/v1/memories', params: create_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:created) }
@@ -42,7 +42,7 @@ RSpec.describe 'Memory', type: :request do
       end
 
       before(:each) do
-        post('/memories', params: create_memory_params, headers: registred_headers)
+        post('/api/v1/memories', params: create_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
@@ -63,7 +63,7 @@ RSpec.describe 'Memory', type: :request do
       end
 
       before(:each) do
-        post('/memories', params: create_memory_params, headers: registred_headers)
+        post('/api/v1/memories', params: create_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:created) }
@@ -75,7 +75,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When find memory' do
       before(:each) do
-        delete("/memories/#{memory.id}", headers: registred_headers)
+        delete("/api/v1/memories/#{memory.id}", headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:no_content) }
@@ -83,7 +83,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When not find memory' do
       before(:each) do
-        delete('/memories/999', headers: registred_headers)
+        delete('/api/v1/memories/999', headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:not_found) }
@@ -95,7 +95,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When is not owner' do
       before(:each) do
-        delete("/memories/#{memory.id}", headers: registred_headers2)
+        delete("/api/v1/memories/#{memory.id}", headers: registred_headers2)
       end
 
       it { expect(response).to have_http_status(:unauthorized) }
@@ -108,7 +108,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When data is valid' do
       before(:each) do
-        get("/memories/#{memory.id}", headers: registred_headers)
+        get("/api/v1/memories/#{memory.id}", headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:ok) }
@@ -120,7 +120,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When not find item' do
       before(:each) do
-        put('/memories/999', headers: registred_headers)
+        put('/api/v1/memories/999', headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:not_found) }
@@ -132,7 +132,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When memory not belongs to user' do
       before(:each) do
-        put("/memories/#{memory.id}", headers: registred_headers2)
+        put("/api/v1/memories/#{memory.id}", headers: registred_headers2)
       end
 
       it { expect(response).to have_http_status(:unauthorized) }
@@ -147,7 +147,7 @@ RSpec.describe 'Memory', type: :request do
     before(:each) do
       create_list(:memory, 3)
       create_list(:memory, 2, user: registred_user)
-      get('/memories', headers: registred_headers)
+      get('/api/v1/memories', headers: registred_headers)
     end
 
     it { expect(response).to have_http_status(:ok) }
@@ -170,7 +170,7 @@ RSpec.describe 'Memory', type: :request do
       end
 
       before(:each) do
-        put("/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+        put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:ok) }
@@ -192,7 +192,7 @@ RSpec.describe 'Memory', type: :request do
       end
 
       before(:each) do
-        put("/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+        put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:unprocessable_entity) }
@@ -204,7 +204,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When not find item' do
       before(:each) do
-        put('/memories/999', headers: registred_headers)
+        put('/api/v1/memories/999', headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:not_found) }
@@ -216,7 +216,7 @@ RSpec.describe 'Memory', type: :request do
 
     describe 'When memory not belongs to user' do
       before(:each) do
-        put("/memories/#{memory.id}", headers: registred_headers2)
+        put("/api/v1/memories/#{memory.id}", headers: registred_headers2)
       end
 
       it { expect(response).to have_http_status(:unauthorized) }
