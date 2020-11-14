@@ -20,7 +20,7 @@ class ApiController < ApplicationController
   end
 
   def index
-    render_ok(resource_class.where(user: current_user))
+    render_list_ok(resource_class.where(user: current_user))
   end
 
   def show
