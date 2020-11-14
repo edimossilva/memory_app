@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_193408) do
+ActiveRecord::Schema.define(version: 2020_11_14_194500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2020_11_14_193408) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.index ["user_id", "key"], name: "index_memories_on_user_id_and_key", unique: true
+  end
+
+  create_table "memories_tags", force: :cascade do |t|
+    t.integer "memory_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["memory_id"], name: "index_memories_tags_on_memory_id"
+    t.index ["tag_id"], name: "index_memories_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
