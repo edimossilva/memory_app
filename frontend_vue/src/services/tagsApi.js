@@ -1,7 +1,7 @@
 import axios from "axios";
 import { HOST, getRequestConfig, deleteApi, editApi } from "./api";
 
-const TAGS_RESOURCE_URL = `${HOST}/tags`;
+const TAGS_RESOURCE_URL = `${HOST}/api/v1/tags`;
 
 export const createTagApi = (tag) => {
   return axios.post(TAGS_RESOURCE_URL, tag, getRequestConfig());

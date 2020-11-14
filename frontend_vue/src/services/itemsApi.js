@@ -1,7 +1,7 @@
 import axios from "axios";
 import { HOST, getRequestConfig, deleteApi, editApi } from "./api";
 
-const ITEMS_RESOURCE_URL = `${HOST}/memories`;
+const ITEMS_RESOURCE_URL = `${HOST}/api/v1/memories`;
 
 export const createItemApi = (item) => {
   return axios.post(ITEMS_RESOURCE_URL, item, getRequestConfig());
