@@ -146,7 +146,8 @@ export default {
       return this.tags.map((tag) => tag.name);
     },
     selectedTagsNames() {
-      return this.item.tags.map((tag) => tag.name);
+      if (this.item.tags) return this.item.tags.map((tag) => tag.name);
+      return [];
     },
     filteredTagsArray() {
       return this.subArrays(this.allTagsNames, this.selectedTagsNames).filter(
@@ -164,6 +165,7 @@ export default {
       }
       const selectedTag = this.tags.find((tag) => tag.name == selectedTagName);
       this.item.tags.push(selectedTag);
+      this.item = { ...this.item };
     },
     subArrays(array1, array2) {
       return array1.filter((item1) => {
