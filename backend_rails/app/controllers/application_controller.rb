@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   private
 
   def serialize_data(entity)
-    if entity.instance_of?(Array) || entity.instance_of?(ActiveRecord::Relation)
+    if entity.is_a?(Array) || entity.is_a?(ActiveRecord::Relation)
       entity.map(&:serialize)
     else
       entity.serialize
