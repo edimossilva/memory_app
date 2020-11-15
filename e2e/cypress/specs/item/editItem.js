@@ -7,7 +7,7 @@ describe("Edit item", () => {
   const value2 = `value2${now}`;
   const key1updated = `${key1}-updated`;
   const value1updated = `value1${now}-updated`;
-
+  const tagName1 = 'tagName1'
 
   describe("When new data is valid", () => {
     beforeEach(() => {
@@ -47,6 +47,27 @@ describe("Edit item", () => {
       cy.get('[data-cy=item_modal__confirm_button]').click();
       cy.wait(500)
       cy.contains("Validation failed: Key can't be blank");
+    });
+  });
+
+  describe('When use tags', () => {
+    beforeEach(() => {
+      cy.login()
+      cy.createItem(key2, value2)
+      cy.createTag(tagName1)
+      cy.visit('/')
+    });
+
+    it("Should contains edited tags", () => {
+      cy.get(`[data-cy=show_item__edit_button_${key2}]`).click();
+
+      cy.get('[data-cy=item_modal__tag_autocomplete]').type(tagName1);
+      cy.get('.dropdown-item').click();
+      cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
+      cy.get('[data-cy=item_modal__confirm_button]').click();
+
+
+      cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
     });
   });
 });

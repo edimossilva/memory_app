@@ -60,6 +60,7 @@
               dropdown-position="top"
               :open-on-focus="true"
               :clear-on-select="true"
+              data-cy="item_modal__tag_autocomplete"
             >
               <!-- <template slot="footer">
             <a @click="showAddFruit">
@@ -75,6 +76,7 @@
                 v-for="tag in item.tags"
                 :key="tag.id"
                 class="tag is-medium is-info mx-2"
+                :data-cy="`item_modal__tag_spam_${tag.name}`"
               >
                 {{ tag.name }}
               </span>
