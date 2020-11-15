@@ -135,7 +135,7 @@ export default {
 
   mounted() {
     if (this.initialItem) {
-      Object.assign(this.item, this.initialItem);
+      this.item = { ...this.initialItem };
     } else {
       this.item = {};
     }
@@ -145,17 +145,17 @@ export default {
     allTagsNames() {
       return this.tags.map((tag) => tag.name);
     },
-    selectedTagsNames() {
+    itemTagsNames() {
       if (this.item.tags) return this.item.tags.map((tag) => tag.name);
       return [];
     },
     filteredTagsArray() {
-      return this.subArrays(this.allTagsNames, this.selectedTagsNames).filter(
-        (typedValue) => {
-          const searchValue = typedValue.toString().toLowerCase();
-          return searchValue.indexOf(this.tagName.toLowerCase()) >= 0;
-        }
-      );
+      const { subArrays, allTagsNames, itemTagsNames, tagName } = this;
+
+      return subArrays(allTagsNames, itemTagsNames).filter((typedValue) => {
+        const searchValue = typedValue.toString().toLowerCase();
+        return searchValue.indexOf(tagName.toLowerCase()) >= 0;
+      });
     },
   },
   methods: {

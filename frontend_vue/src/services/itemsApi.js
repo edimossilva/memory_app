@@ -8,7 +8,14 @@ export const createItemApi = (item) => {
 };
 
 export const editItemApi = (item) => {
-  return editApi(`${ITEMS_RESOURCE_URL}/${item.id}`, item);
+  const { key, value } = item;
+  const tags_ids = item.tags.map((tag) => tag.id);
+  const itemJson = {
+    key,
+    value,
+    tags_ids: tags_ids,
+  };
+  return editApi(`${ITEMS_RESOURCE_URL}/${item.id}`, itemJson);
 };
 
 export const getItemsApi = () => {
