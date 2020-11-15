@@ -127,7 +127,7 @@ export default {
   },
   data() {
     return {
-      item: { key: "", value: "" },
+      item: {},
       tagName: "",
       selected: null,
     };
@@ -137,7 +137,7 @@ export default {
     if (this.initialItem) {
       this.item = { ...this.initialItem };
     } else {
-      this.item = {};
+      this.item = { key: "", value: "", tags: [] };
     }
   },
   computed: {

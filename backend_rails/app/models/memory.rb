@@ -8,6 +8,14 @@ class Memory < ApplicationRecord
   validates :key, :value, presence: true
   validates :key, uniqueness: { scope: :user_id, case_sensitive: false }
 
+  def associate_memory_tags(new_memory_tags)
+    new_memory_tags.each do |new_memory_tag|
+      new_memory_tag.memory_id = id
+    end
+
+    new_memory_tags
+  end
+
   def serialize
     MemorySerializer.new(self)
   end

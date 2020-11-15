@@ -9,6 +9,35 @@ RSpec.describe 'Memory', type: :request do
   let!(:registred_headers2) { header_for_user(user2) }
 
   context '#create' do
+    context 'when has tags' do
+      let!(:tags) { create_list(:tag, 2, user: registred_user) }
+      let(:tags_ids) { tags.map(&:id) }
+      let!(:memory) { build(:memory, user: registred_user) }
+
+      describe 'when tags are empty' do
+        let!(:create_memory_params) do
+          {
+            key: 'phone',
+            value: '88123456789',
+            visibility: true,
+            tags_ids: tags_ids
+          }
+        end
+
+        before(:each) do
+          post("/api/v1/memories", params: create_memory_params, headers: registred_headers)
+        end
+
+        it { expect(response).to have_http_status(:created) }
+
+        it 'add all new tags' do
+          expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+          expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+          expect(json_response_data['tags'].length).to eq(2)
+        end
+      end
+    end
+
     context 'when data is valid' do
       let!(:create_memory_params) do
         {

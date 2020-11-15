@@ -9,4 +9,8 @@ class MemoryTagPolicy
   def owner?
     user.owner?(memory_tag.memory) && user.owner?(memory_tag.tag)
   end
+
+  def tag_owner?
+    user.owner?(memory_tag.tag)
+  end
 end
