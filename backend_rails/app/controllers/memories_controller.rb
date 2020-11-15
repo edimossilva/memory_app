@@ -14,7 +14,6 @@ class MemoriesController < ApiController
     memory_tags = tags_ids.map do |tag_id|
       memory_tag = MemoryTag.new(tag_id: tag_id, memory_id: memory.id)
       authorize memory_tag, :owner?
-      return render_unauthorized(tag_id) unless memory_tag.valid?
 
       memory_tag
     end
@@ -22,7 +21,8 @@ class MemoriesController < ApiController
     memory.update!(update_params)
 
     memory.memory_tags_not_included(tags_ids).each(&:destroy!)
-    memory_tags.each(&:save!)
+    new_memory_tags = memory.remove_old_memory_tags(memory_tags)
+    new_memory_tags.each(&:save!)
 
     render_ok(memory.reload)
   end

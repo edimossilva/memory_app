@@ -16,4 +16,10 @@ class Memory < ApplicationRecord
     not_included_tags_ids = tags.map(&:id) - tags_ids
     MemoryTag.where(tag_id: not_included_tags_ids)
   end
+
+  def remove_old_memory_tags(new_memory_tags)
+    new_memory_tags.select do |new_memory_tag|
+      memory_tags.where(tag_id: new_memory_tag.tag_id).empty?
+    end
+  end
 end

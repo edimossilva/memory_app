@@ -182,21 +182,42 @@ RSpec.describe 'Memory', type: :request do
       end
 
       describe 'when tags are not empty' do
-        let!(:update_memory_params) do
-          { 'tags_ids' => tags_ids }
+        describe 'when replace tags' do
+          let!(:update_memory_params) do
+            { 'tags_ids' => tags_ids }
+          end
+
+          before(:each) do
+            create(:memory_tag, memory_id: memory.id)
+            put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+          end
+
+          it { expect(response).to have_http_status(:ok) }
+
+          it 'remove old tag and add all new tags' do
+            expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+            expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+            expect(json_response_data['tags'].length).to eq(2)
+          end
         end
 
-        before(:each) do
-          create(:memory_tag, memory_id: memory.id)
-          put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
-        end
+        describe 'when include new tags' do
+          let!(:update_memory_params) do
+            { 'tags_ids' => tags_ids }
+          end
 
-        it { expect(response).to have_http_status(:ok) }
+          before(:each) do
+            create(:memory_tag, memory_id: memory.id, tag_id: tags_ids[0])
+            put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+          end
 
-        it 'remove old tag and add all new tags' do
-          expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
-          expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
-          expect(json_response_data['tags'].length).to eq(2)
+          it { expect(response).to have_http_status(:ok) }
+
+          it 'keep old tag and add new' do
+            expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+            expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+            expect(json_response_data['tags'].length).to eq(2)
+          end
         end
       end
     end
