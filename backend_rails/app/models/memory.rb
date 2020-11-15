@@ -11,4 +11,9 @@ class Memory < ApplicationRecord
   def serialize
     MemorySerializer.new(self)
   end
+
+  def memory_tags_not_included(tags_ids)
+    not_included_tags_ids = tags.map(&:id) - tags_ids
+    MemoryTag.where(tag_id: not_included_tags_ids)
+  end
 end
