@@ -43,9 +43,7 @@ class ApplicationController < ActionController::Base
   private
 
   def serialize_data(entity)
-    if entity.nil?
-      {}
-    elsif entity.class.name == 'Array' || entity.class.name == 'ActiveRecord::Relation'
+    if entity.class.name == 'Array' || entity.class.name == 'ActiveRecord::Relation'
       entity.map(&:serialize)
     else
       entity.serialize

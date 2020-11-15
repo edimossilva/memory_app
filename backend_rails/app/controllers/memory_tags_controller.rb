@@ -27,8 +27,4 @@ class MemoryTagsController < ApiController
       memory_tag.permit(:memory_id, :tag_id)
     end
   end
-
-  def update_params
-    params.permit(:memory_tags)
-  end
 end
