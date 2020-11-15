@@ -1,6 +1,10 @@
 <template>
   <form action="">
-    <div name="create-item-modal" class="modal-card" style="width: auto">
+    <div
+      name="create-item-modal"
+      class="modal-card"
+      style="width: auto, height:auto"
+    >
       <header class="modal-card-head">
         <p class="modal-card-title">{{ titleLabel }}</p>
         <button type="button" class="delete" @click="$emit('close')" />
@@ -21,7 +25,7 @@
           class="mx-4"
         >
           <b-input
-            @keyup.enter.native="onConfirmClick"
+            @keyup.enter.native="onConfirm()"
             type="text"
             v-model="item.key"
             data-cy="item_modal__key_input"
@@ -35,24 +39,61 @@
           class="mx-4"
         >
           <b-input
-            @keyup.enter.native="onConfirmClick"
+            @keyup.enter.native="onConfirm()"
             type="text"
             v-model="item.value"
             data-cy="item_modal__value_input"
           ></b-input>
         </b-field>
-
+        <section>
+          <b-field
+            label="*Tags"
+            label-position="inside"
+            type="is-primary"
+            class="mx-4"
+          >
+            <b-autocomplete
+              v-model="tagName"
+              ref="autocomplete"
+              :data="filteredTagsArray"
+              @select="(option) => addTag(option)"
+              dropdown-position="top"
+              :open-on-focus="true"
+              :clear-on-select="true"
+              data-cy="item_modal__tag_autocomplete"
+            >
+              <!-- <template slot="footer">
+            <a @click="showAddFruit">
+              <span> Add new... </span>
+            </a>
+          </template>
+          <template slot="empty">Tag</template> -->
+            </b-autocomplete>
+          </b-field>
+          <div class="columns mx-4">
+            <div class="column">
+              <span
+                v-for="tag in item.tags"
+                :key="tag.id"
+                class="tag is-medium is-info mx-2"
+                :data-cy="`item_modal__tag_spam_${tag.name}`"
+              >
+                {{ tag.name }}
+              </span>
+            </div>
+          </div>
+        </section>
         <b-field>
           <b-button
             class="m-2"
-            @click="onConfirmClick(item)"
+            @click="onConfirm()"
             type="is-primary"
             data-cy="item_modal__confirm_button"
             icon-left="save"
             outlined
           >
-            {{ buttonLabel }}</b-button
-          >
+            {{ buttonLabel }}
+          </b-button>
         </b-field>
       </section>
     </div>
@@ -60,6 +101,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "ItemModal",
   props: {
@@ -86,15 +129,71 @@ export default {
   },
   data() {
     return {
-      item: { key: "", value: "" },
+      item: {},
+      tagName: "",
+      selected: null,
     };
   },
+
   mounted() {
     if (this.initialItem) {
-      Object.assign(this.item, this.initialItem);
+      this.item = { ...this.initialItem };
     } else {
-      this.item = {};
+      this.item = { key: "", value: "", tags: [] };
     }
+  },
+  computed: {
+    ...mapState(["tags"]),
+    allTagsNames() {
+      return this.tags.map((tag) => tag.name);
+    },
+    itemTagsNames() {
+      if (this.item.tags) return this.item.tags.map((tag) => tag.name);
+      return [];
+    },
+    filteredTagsArray() {
+      const { subArrays, allTagsNames, itemTagsNames, tagName } = this;
+
+      return subArrays(allTagsNames, itemTagsNames).filter((typedValue) => {
+        const searchValue = typedValue.toString().toLowerCase();
+        return searchValue.indexOf(tagName.toLowerCase()) >= 0;
+      });
+    },
+  },
+  methods: {
+    addTag(selectedTagName) {
+      if (!selectedTagName) {
+        return;
+      }
+      const selectedTag = this.tags.find((tag) => tag.name == selectedTagName);
+      this.item.tags.push(selectedTag);
+      this.item = { ...this.item };
+    },
+    subArrays(array1, array2) {
+      return array1.filter((item1) => {
+        return !array2.some((item2) => {
+          return item2 === item1;
+        });
+      });
+    },
+    showAddFruit() {
+      this.$buefy.dialog.prompt({
+        message: `Fruit`,
+        inputAttrs: {
+          placeholder: "e.g. Watermelon",
+          maxlength: 20,
+          value: this.name,
+        },
+        confirmText: "Add",
+        onConfirm: (value) => {
+          this.data.push(value);
+          this.$refs.autocomplete.setSelected(value);
+        },
+      });
+    },
+    onConfirm() {
+      this.onConfirmClick(this.item);
+    },
   },
 };
 </script>

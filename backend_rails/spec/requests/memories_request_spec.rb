@@ -9,6 +9,35 @@ RSpec.describe 'Memory', type: :request do
   let!(:registred_headers2) { header_for_user(user2) }
 
   context '#create' do
+    context 'when has tags' do
+      let!(:tags) { create_list(:tag, 2, user: registred_user) }
+      let(:tags_ids) { tags.map(&:id) }
+      let!(:memory) { build(:memory, user: registred_user) }
+
+      describe 'when tags are empty' do
+        let!(:create_memory_params) do
+          {
+            key: 'phone',
+            value: '88123456789',
+            visibility: true,
+            tags_ids: tags_ids
+          }
+        end
+
+        before(:each) do
+          post("/api/v1/memories", params: create_memory_params, headers: registred_headers)
+        end
+
+        it { expect(response).to have_http_status(:created) }
+
+        it 'add all new tags' do
+          expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+          expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+          expect(json_response_data['tags'].length).to eq(2)
+        end
+      end
+    end
+
     context 'when data is valid' do
       let!(:create_memory_params) do
         {
@@ -158,71 +187,137 @@ RSpec.describe 'Memory', type: :request do
   end
 
   context '#update' do
-    let!(:memory) { create(:memory, user: registred_user, key: 'key', value: 'value', visibility: 'false') }
+    context 'when set tags' do
+      let!(:tags) { create_list(:tag, 2, user: registred_user) }
+      let(:tags_ids) { tags.map(&:id) }
+      let!(:memory) { create(:memory, user: registred_user) }
 
-    describe 'When data is valid' do
-      let!(:update_memory_params) do
-        {
-          'key' => 'new_key',
-          'value' => 'new_value',
-          'visibility' => 'true'
-        }
+      describe 'when tags are empty' do
+        let!(:update_memory_params) do
+          { 'tags_ids' => tags_ids }
+        end
+
+        before(:each) do
+          put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+        end
+
+        it { expect(response).to have_http_status(:ok) }
+
+        it 'add all new tags' do
+          expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+          expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+          expect(json_response_data['tags'].length).to eq(2)
+        end
       end
 
-      before(:each) do
-        put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
-      end
+      describe 'when tags are not empty' do
+        describe 'when replace tags' do
+          let!(:update_memory_params) do
+            { 'tags_ids' => tags_ids }
+          end
 
-      it { expect(response).to have_http_status(:ok) }
+          before(:each) do
+            create(:memory_tag, memory_id: memory.id)
+            put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+          end
 
-      it 'updates fields' do
-        expect(json_response_data['key']).to eq('new_key')
-        expect(json_response_data['value']).to eq('new_value')
-        expect(json_response_data['visibility']).to eq(true)
+          it { expect(response).to have_http_status(:ok) }
+
+          it 'remove old tag and add all new tags' do
+            expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+            expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+            expect(json_response_data['tags'].length).to eq(2)
+          end
+        end
+
+        describe 'when include new tags' do
+          let!(:update_memory_params) do
+            { 'tags_ids' => tags_ids }
+          end
+
+          before(:each) do
+            create(:memory_tag, memory_id: memory.id, tag_id: tags_ids[0])
+            put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+          end
+
+          it { expect(response).to have_http_status(:ok) }
+
+          it 'keep old tag and add new' do
+            expect(json_response_data['tags'][0]['id']).to eq(tags[0].id)
+            expect(json_response_data['tags'][1]['id']).to eq(tags[1].id)
+            expect(json_response_data['tags'].length).to eq(2)
+          end
+        end
       end
     end
 
-    describe 'When data is invalid' do
-      let!(:update_memory_params) do
-        {
-          'key' => 'new_key',
-          'value' => '',
-          'visibility' => 'true'
-        }
+    context 'when does no set tags' do
+      let!(:memory) { create(:memory, user: registred_user, key: 'key', value: 'value', visibility: 'false') }
+
+      describe 'When data is valid' do
+        let!(:update_memory_params) do
+          {
+            'key' => 'new_key',
+            'value' => 'new_value',
+            'visibility' => 'true'
+          }
+        end
+
+        before(:each) do
+          put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+        end
+
+        it { expect(response).to have_http_status(:ok) }
+
+        it 'updates fields' do
+          expect(json_response_data['key']).to eq('new_key')
+          expect(json_response_data['value']).to eq('new_value')
+          expect(json_response_data['visibility']).to eq(true)
+        end
       end
 
-      before(:each) do
-        put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+      describe 'When data is invalid' do
+        let!(:update_memory_params) do
+          {
+            'key' => 'new_key',
+            'value' => '',
+            'visibility' => 'true'
+          }
+        end
+
+        before(:each) do
+          put("/api/v1/memories/#{memory.id}", params: update_memory_params, headers: registred_headers)
+        end
+
+        it { expect(response).to have_http_status(:unprocessable_entity) }
+
+        it 'return error message related to value' do
+          expect(json_response_error).to eq("Validation failed: Value can't be blank")
+        end
       end
 
-      it { expect(response).to have_http_status(:unprocessable_entity) }
+      describe 'When not find item' do
+        before(:each) do
+          put('/api/v1/memories/999', headers: registred_headers)
+        end
 
-      it 'return error message related to value' do
-        expect(json_response_error).to eq("Validation failed: Value can't be blank")
-      end
-    end
+        it { expect(response).to have_http_status(:not_found) }
 
-    describe 'When not find item' do
-      before(:each) do
-        put('/api/v1/memories/999', headers: registred_headers)
-      end
-
-      it { expect(response).to have_http_status(:not_found) }
-
-      it 'return error message related to value' do
-        expect(json_response_error).to eq("Couldn't find Memory")
-      end
-    end
-
-    describe 'When memory not belongs to user' do
-      before(:each) do
-        put("/api/v1/memories/#{memory.id}", headers: registred_headers2)
+        it 'return error message related to value' do
+          expect(json_response_error).to eq("Couldn't find Memory")
+        end
       end
 
-      it { expect(response).to have_http_status(:unauthorized) }
+      describe 'When memory not belongs to user' do
+        before(:each) do
+          put("/api/v1/memories/#{memory.id}", headers: registred_headers2)
+        end
 
-      it 'return error message related to value' do
-        expect(json_response_error).to eq("not allowed to owner? this Memory")
+        it { expect(response).to have_http_status(:unauthorized) }
+
+        it 'return error message related to value' do
+          expect(json_response_error).to eq("not allowed to owner? this Memory")
+        end
       end
     end
   end

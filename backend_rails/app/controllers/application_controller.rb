@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :render_unauthorized
 
   def render_created(entity)
-    render json: { data: entity }, status: :created
+    render json: { data: serialize_data(entity) }, status: :created
   end
 
   def render_destroyed
@@ -21,7 +21,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_ok(entity)
-    render json: { data: entity }, status: :ok
+    render json: { data: serialize_data(entity) }, status: :ok
+  end
+
+  def render_list_ok(entity)
+    render json: { data: serialize_data(entity) }, status: :ok
   end
 
   def render_unauthorized(message = 'Unauthorized')
@@ -34,5 +38,15 @@ class ApplicationController < ActionController::Base
 
   def search_params
     params.permit(:id)
+  end
+
+  private
+
+  def serialize_data(entity)
+    if entity.is_a?(Array) || entity.is_a?(ActiveRecord::Relation)
+      entity.map(&:serialize)
+    else
+      entity.serialize
+    end
   end
 end

@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Tag, type: :model do
   describe 'relationship' do
     it { should belong_to(:user).required }
-    it { should have_many(:memories) }
+    it { should have_many(:memory_tags) }
+    it { should have_many(:memories).through(:memory_tags) }
   end
 
   describe 'validations' do

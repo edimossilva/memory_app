@@ -36,6 +36,7 @@
 import ListItems from "@/components/item/ListItems.vue";
 import ItemModal from "@/modals/ItemModal.vue";
 import { createItemApi } from "../services/itemsApi";
+import { getTagsApi } from "../services/tagsApi";
 import { mapActions } from "vuex";
 
 export default {
@@ -47,8 +48,18 @@ export default {
       itemModalErrorMessage: "",
     };
   },
+  mounted() {
+    getTagsApi().then(
+      (response) => {
+        this.setTags(response.data.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  },
   methods: {
-    ...mapActions(["addItem"]),
+    ...mapActions(["addItem", "setTags"]),
     onAddButtonClick() {
       this.isComponentModalActive = true;
       this.itemModalErrorMessage = "";

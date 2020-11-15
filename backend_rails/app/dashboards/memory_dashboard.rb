@@ -9,7 +9,6 @@ class MemoryDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    tag: Field::BelongsTo,
     id: Field::Number,
     key: Field::String,
     value: Field::String,
@@ -28,7 +27,6 @@ class MemoryDashboard < Administrate::BaseDashboard
     id
     key
     value
-    tag
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,7 +36,6 @@ class MemoryDashboard < Administrate::BaseDashboard
     id
     key
     value
-    tag
     visibility
     created_at
     updated_at
@@ -52,7 +49,6 @@ class MemoryDashboard < Administrate::BaseDashboard
     key
     value
     visibility
-    tag
   ].freeze
 
   # COLLECTION_FILTERS

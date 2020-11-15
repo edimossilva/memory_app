@@ -5,9 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    items: [],
-    tags: [],
     isLogged: {},
+    items: [],
+    modalItem: {},
+    tags: [],
   },
   mutations: {
     addElement(state, { property, element }) {
@@ -52,6 +53,9 @@ export default new Vuex.Store({
     },
     setIsLogged({ commit }, isLogged) {
       commit("mutate", { property: "isLogged", value: isLogged });
+    },
+    setModalItem({ commit }, modalItem) {
+      commit("mutate", { property: "modalItem", value: modalItem });
     },
   },
   modules: {},
