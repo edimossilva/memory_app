@@ -6,16 +6,15 @@ describe("Edit tag", () => {
   const nameupdated = `${name}-updated`;
   const value1updated = `value1${now}-updated`;
 
+  after(() => {
+    cy.deleteTestData()
+  });
 
   describe("When new data is valid", () => {
     beforeEach(() => {
       cy.login()
       cy.createTag(name)
     });
-
-    afterEach(() => {
-      cy.deleteTagByName(nameupdated)
-    })
 
     it("should be updated when click on save button", () => {
       cy.get(`[data-cy=show_tag__edit_button_${name}]`).click();
@@ -32,10 +31,6 @@ describe("Edit tag", () => {
       cy.login()
       cy.createTag(name2)
     });
-
-    afterEach(() => {
-      cy.deleteTagByName(name2)
-    })
 
     it("should be updated when click on save button", () => {
       cy.get(`[data-cy=show_tag__edit_button_${name2}]`).click();

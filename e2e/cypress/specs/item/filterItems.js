@@ -6,16 +6,16 @@ describe("Filrer items", () => {
   const key2 = `key2${Date.now()}`;
   const value2 = `value2${Date.now()}`;
 
+  after(() => {
+    cy.deleteTestData()
+  });
+
   describe("When item exists", () => {
     beforeEach(() => {
       cy.login()
       cy.createItem(key1, value1)
       cy.createItem(key2, value2)
     });
-    afterEach(() => {
-      cy.deleteItemByKey(key1)
-      cy.deleteItemByKey(key2)
-    })
     it("should be filter items by key", () => {
       cy.get(`[data-cy=show_item__card_${key1}]`).should("exist");
       cy.get(`[data-cy=show_item__card_${key2}]`).should("exist");

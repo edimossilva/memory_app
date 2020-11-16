@@ -21,4 +21,8 @@ class User < ApplicationRecord
       user.password = SecureRandom.hex
     end
   end
+
+  def serialize
+    self
+  end
 end

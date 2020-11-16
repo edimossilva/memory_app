@@ -12,7 +12,7 @@
 // -- This is a parent command --
 Cypress.Commands.add("login", () => {
   cy.visit("/login");
-  cy.get('[data-cy=username]').clear().type("registered_user1");
+  cy.get('[data-cy=username]').clear().type("test_user");
   cy.get('[data-cy=password]').clear().type("111");
   cy.get('[data-cy=loginButton]').click();
   cy.wait(600)
@@ -27,11 +27,6 @@ Cypress.Commands.add("createItem", (key, value) => {
   cy.wait(600)
 })
 
-Cypress.Commands.add("deleteItemByKey", (key) => {
-  cy.visit("/");
-  cy.get(`[data-cy=show_item__delete_button_${key}]`).click();
-})
-
 Cypress.Commands.add("createTag", (name) => {
   cy.visit('/tags')
   cy.get('[data-cy=tags__add_tag_button]').click();
@@ -40,9 +35,8 @@ Cypress.Commands.add("createTag", (name) => {
   cy.wait(600)
 })
 
-Cypress.Commands.add("deleteTagByName", (name) => {
-  cy.visit("/tags");
-  cy.get(`[data-cy=show_tag__delete_button_${name}]`).click();
+Cypress.Commands.add("deleteTestData", () => {
+  cy.visit("/api/v1/delete_test_user_data");
 })
 //
 //

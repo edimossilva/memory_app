@@ -1,6 +1,6 @@
 class Tag < ApplicationRecord
   belongs_to :user
-  has_many :memory_tags, dependent: false
+  has_many :memory_tags, dependent: :destroy
   has_many :memories, through: :memory_tags
 
   validates :name, presence: true
