@@ -9,15 +9,15 @@ describe("Edit item", () => {
   const value1updated = `value1${now}-updated`;
   const tagName1 = 'tagName1'
 
+  after(() => {
+    cy.deleteTestData()
+  });
+
   describe("When new data is valid", () => {
     beforeEach(() => {
       cy.login()
       cy.createItem(key1, value1)
     });
-
-    afterEach(() => {
-      cy.deleteItemByKey(key1updated)
-    })
 
     it("should be updated when click on save button", () => {
       cy.get(`[data-cy=show_item__edit_button_${key1}]`).click();
@@ -35,10 +35,6 @@ describe("Edit item", () => {
       cy.login()
       cy.createItem(key2, value2)
     });
-
-    afterEach(() => {
-      cy.deleteItemByKey(key2)
-    })
 
     it("should be updated when click on save button", () => {
       cy.get(`[data-cy=show_item__edit_button_${key2}]`).click();

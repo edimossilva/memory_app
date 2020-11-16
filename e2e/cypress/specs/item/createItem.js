@@ -13,12 +13,9 @@ describe("Create task", () => {
     cy.visit('/')
     cy.get('[data-cy=home__add_item_button]').click();
   });
-
-  // after(() => {
-  //   cy.deleteItemByKey(key1)
-  //   cy.deleteTagByName(tagName1)
-  // });
-
+  after(() => {
+    cy.deleteTestData()
+  });
   describe('When fill data properly', () => {
     beforeEach(() => {
       cy.get('[data-cy=item_modal__key_input]').type(key1);

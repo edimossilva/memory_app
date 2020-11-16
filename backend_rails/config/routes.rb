@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     resources :memories
     resources :tags
     resources :memory_tags
+
+    get 'delete_test_user_data' => 'tests#delete_test_user_data'
   end
 
   get '/*path' => 'vue#index'

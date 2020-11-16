@@ -9,11 +9,9 @@ describe("Create tag", () => {
     cy.get('[data-cy=tags__add_tag_button]').click();
   });
 
-  after(() =>{
-    cy.login()
-    cy.visit('/tags')
-    cy.deleteTagByName(name)
-  })
+  after(() => {
+    cy.deleteTestData()
+  });
 
   describe('When fill data properly', () => {
     beforeEach(() => {
