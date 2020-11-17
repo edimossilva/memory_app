@@ -3,6 +3,16 @@
     <div class="card" :data-cy="`show_item__card_${item.key}`">
       <div class="card-content">
         <div class="content">{{ item.key }}: {{ item.value }}</div>
+        <div class="tags is-centered">
+          <span
+            v-for="tag in item.tags"
+            :key="tag.id"
+            class="tag is-info"
+            :data-cy="`show_item__tag_${tag.name}`"
+          >
+            {{ tag.name }}
+          </span>
+        </div>
       </div>
       <footer class="card-footer">
         <a

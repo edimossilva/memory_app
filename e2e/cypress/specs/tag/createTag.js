@@ -3,14 +3,14 @@
 describe("Create tag", () => {
   const name = `tag${Date.now()}`;
 
+  before(() => {
+    cy.deleteTestData()
+  });
+
   beforeEach(() => {
     cy.login()
     cy.visit('/tags')
     cy.get('[data-cy=tags__add_tag_button]').click();
-  });
-
-  after(() => {
-    cy.deleteTestData()
   });
 
   describe('When fill data properly', () => {

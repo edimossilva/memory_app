@@ -36,7 +36,7 @@ Cypress.Commands.add("createTag", (name) => {
 })
 
 Cypress.Commands.add("deleteTestData", () => {
-  cy.visit("/api/v1/delete_test_user_data");
+  cy.request("http://localhost:3000/api/v1/delete_test_user_data");
 })
 //
 //

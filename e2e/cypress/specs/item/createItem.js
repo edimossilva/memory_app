@@ -7,15 +7,17 @@ describe("Create task", () => {
   const tagName1 = `firstTag${Date.now()}`
   const tagName2 = `secondTag${Date.now()}`
 
+  before(() => {
+    cy.deleteTestData()
+  });
+
   beforeEach(() => {
     cy.login()
     cy.createTag(tagName1);
     cy.visit('/')
     cy.get('[data-cy=home__add_item_button]').click();
   });
-  after(() => {
-    cy.deleteTestData()
-  });
+
   describe('When fill data properly', () => {
     beforeEach(() => {
       cy.get('[data-cy=item_modal__key_input]').type(key1);
@@ -49,6 +51,8 @@ describe("Create task", () => {
       cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
 
       cy.get('[data-cy=item_modal__confirm_button]').click();
+
+      cy.get(`[data-cy=show_item__tag_${tagName1}]`).should('exist');
 
       cy.get(`[data-cy=show_item__edit_button_${key2}]`).click();
       cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')

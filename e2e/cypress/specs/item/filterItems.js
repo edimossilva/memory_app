@@ -6,7 +6,7 @@ describe("Filrer items", () => {
   const key2 = `key2${Date.now()}`;
   const value2 = `value2${Date.now()}`;
 
-  after(() => {
+  before(() => {
     cy.deleteTestData()
   });
 
