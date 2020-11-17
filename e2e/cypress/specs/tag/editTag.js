@@ -6,7 +6,7 @@ describe("Edit tag", () => {
   const nameupdated = `${name}-updated`;
   const value1updated = `value1${now}-updated`;
 
-  after(() => {
+  before(() => {
     cy.deleteTestData()
   });
 

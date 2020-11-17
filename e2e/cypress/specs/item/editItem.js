@@ -9,7 +9,7 @@ describe("Edit item", () => {
   const value1updated = `value1${now}-updated`;
   const tagName1 = 'tagName1'
 
-  after(() => {
+  before(() => {
     cy.deleteTestData()
   });
 
@@ -61,9 +61,7 @@ describe("Edit item", () => {
       cy.get('.dropdown-item').click();
       cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
       cy.get('[data-cy=item_modal__confirm_button]').click();
-
-
-      cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
+      cy.get(`[data-cy=show_item__tag_${tagName1}]`).should('be.visible');
     });
   });
 });
