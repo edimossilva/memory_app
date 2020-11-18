@@ -72,14 +72,18 @@
           </b-field>
           <div class="columns mx-4">
             <div class="column">
-              <span
+              <b-tag
                 v-for="tag in item.tags"
                 :key="tag.id"
-                class="tag is-medium is-info mx-2"
+                type="is-info"
+                closable
+                aria-close-label="Close tag"
+                @close="removeTag(tag)"
                 :data-cy="`item_modal__tag_spam_${tag.name}`"
+                class="is-medium mx-2"
               >
                 {{ tag.name }}
-              </span>
+              </b-tag>
             </div>
           </div>
         </section>
@@ -167,6 +171,11 @@ export default {
       }
       const selectedTag = this.tags.find((tag) => tag.name == selectedTagName);
       this.item.tags.push(selectedTag);
+      this.item = { ...this.item };
+    },
+    removeTag(tag) {
+      const index = this.item.tags.indexOf(tag);
+      this.item.tags.splice(index, 1);
       this.item = { ...this.item };
     },
     subArrays(array1, array2) {

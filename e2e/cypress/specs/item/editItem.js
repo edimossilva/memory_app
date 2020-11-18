@@ -48,6 +48,7 @@ describe("Edit item", () => {
 
   describe('When use tags', () => {
     beforeEach(() => {
+      cy.deleteTestData()
       cy.login()
       cy.createItem(key2, value2)
       cy.createTag(tagName1)
@@ -62,6 +63,22 @@ describe("Edit item", () => {
       cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
       cy.get('[data-cy=item_modal__confirm_button]').click();
       cy.get(`[data-cy=show_item__tag_${tagName1}]`).should('be.visible');
+    });
+
+    it("Should be able to remove tags", () => {
+      cy.get(`[data-cy=show_item__edit_button_${key2}]`).click();
+
+      cy.get('[data-cy=item_modal__tag_autocomplete]').type(tagName1);
+      cy.get('.dropdown-item').click();
+      cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
+      cy.get('[data-cy=item_modal__confirm_button]').click();
+      cy.get(`[data-cy=show_item__tag_${tagName1}]`).should('be.visible');
+
+      cy.get(`[data-cy=show_item__edit_button_${key2}]`).click();
+      cy.get('.is-small.delete').click();
+      cy.get('[data-cy=item_modal__confirm_button]').click();
+      cy.get(`[data-cy=show_item__tag_${tagName1}]`).should('not.be.visible');
+
     });
   });
 });
