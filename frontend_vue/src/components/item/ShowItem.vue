@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="card" :data-cy="`show_item__card_${item.key}`">
+  <div class="h-100">
+    <div class="card bm--card-equal-height" :data-cy="`show_item__card_${item.key}`">
       <div class="card-content">
         <div class="content">{{ item.key }}: {{ item.value }}</div>
         <div class="tags is-centered">
@@ -122,3 +122,16 @@ export default {
   },
 };
 </script>
+<style lang="css" scoped>
+.h-100 {
+  height :100%;
+}
+.bm--card-equal-height {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+}
+.bm--card-equal-height .card-footer {
+   margin-top: auto;
+}
+</style>
