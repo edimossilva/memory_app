@@ -19,7 +19,7 @@ describe("Create tag", () => {
       cy.get('[data-cy=tag_modal__confirm_button]').click();
     });
 
-    it("Should contains formated name: value", () => {
+    it("Should contains formated name", () => {
       cy.contains(name);
     });
   });

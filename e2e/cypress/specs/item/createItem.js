@@ -25,8 +25,9 @@ describe("Create task", () => {
       cy.get('[data-cy=item_modal__confirm_button]').click();
     });
 
-    it("Should contains formated key: value", () => {
-      cy.contains(`${key1}: ${value1}`);
+    it("Should contains key and value", () => {
+      cy.contains(key1);
+      cy.contains(value1);
     });
   });
 

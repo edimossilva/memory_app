@@ -26,7 +26,8 @@ describe("Edit item", () => {
       cy.get('[data-cy=item_modal__value_input]').clear().type(value1updated);
       cy.wait(500)
       cy.get('[data-cy=item_modal__confirm_button]').click();
-      cy.contains(`${key1updated}: ${value1updated}`);
+      cy.contains(key1updated);
+      cy.contains(value1updated);
     });
   });
 
