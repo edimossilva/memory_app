@@ -2,16 +2,46 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: red;
+$background: hsl(212, 65%, 95%);
+
+$primary: #3D5A80;
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
-$twitter: yellow;
-$twitter-invert: findColorInvert($twitter);
+
+$info: #19d5ff;
+$info-light: findLightColor($info);
+$info-dark: findDarkColor($info);
+$info-invert: findColorInvert($info);
+
+$danger: #EE6C4D;
+$danger-light: findLightColor($danger);
+$danger-dark: findDarkColor($danger);
+$danger-invert: findColorInvert($danger);
+
+$light: #fff09d;
+// $light: #fcd757;
+$light-light: findLightColor($light);
+$light-dark: findDarkColor($light);
+$light-invert: findColorInvert($light);
+
+$white: #E0FBFC;
+// $light: #fcd757;
+$white-light: findLightColor($white);
+$white-dark: findDarkColor($white);
+$white-invert: findColorInvert($white);
 
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
+
+$navbar-background-color: $white;
+$navbar-item-hover-background-color: $primary-light;
+
+$card-background-color: $white;
+
+$modal-card-body-background-color: $white;
+$modal-card-head-background-color: $white;
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(

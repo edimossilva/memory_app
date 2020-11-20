@@ -75,7 +75,7 @@
               <b-tag
                 v-for="tag in item.tags"
                 :key="tag.id"
-                type="is-info"
+                type="is-light"
                 closable
                 aria-close-label="Close tag"
                 @close="removeTag(tag)"

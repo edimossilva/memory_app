@@ -6,6 +6,7 @@
           type="text"
           v-model="filter"
           data-cy="list_items__filter_input"
+          custom-class="has-background-white"
         ></b-input>
       </b-field>
     </div>

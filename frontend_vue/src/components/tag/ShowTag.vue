@@ -3,7 +3,7 @@
     <div class="card" :data-cy="`show_tag__card_${tag.name}`">
       <div class="card-content">
         <div class="content">
-          <span class="tag is-medium is-info"> {{ tag.name }}</span>
+          <span class="tag is-medium is-light"> {{ tag.name }}</span>
         </div>
       </div>
       <footer class="card-footer">

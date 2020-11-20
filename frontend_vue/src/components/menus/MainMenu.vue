@@ -1,5 +1,5 @@
 <template>
-  <b-navbar>
+  <b-navbar class="has-background-white" :transparent="true">
     <template slot="brand">
       <b-navbar-item>
         <a
@@ -26,7 +26,7 @@
         <b-navbar-item
           data-cy="main_menu__logout"
           @click="onLogoutButtonClick()"
-          class="button is-light"
+          class="button is-white"
         >
           Logout
         </b-navbar-item>
