@@ -5,7 +5,9 @@
       :data-cy="`show_item__card_${item.key}`"
     >
       <header class="card-header">
-        <p class="card-header-title is-centered">{{ item.key }}</p>
+        <p class="card-header-title is-centered">
+          {{ item.key }}
+        </p>
       </header>
       <div class="card-content h-100">
         <div class="content h-100">{{ item.value }}</div>
@@ -13,7 +15,7 @@
           <span
             v-for="tag in item.tags"
             :key="tag.id"
-            class="tag is-info"
+            class="tag is-light"
             :data-cy="`show_item__tag_${tag.name}`"
           >
             {{ tag.name }}

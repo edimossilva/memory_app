@@ -1,44 +1,47 @@
 <template>
-  <div class="container">
-    <div class="box">
-      <div>
-        <b-field
-          label="Username"
-          label-position="inside"
-          type="is-primary"
-          class="mx-4 mb-4"
-        >
-          <b-input type="text" v-model="username" data-cy="username"> </b-input>
-        </b-field>
-      </div>
+  <div class="columns is-centered is-vcentered login">
+    <div class="container column is-half">
+      <div class="box has-background-white">
+        <div>
+          <b-field
+            label="Username"
+            label-position="inside"
+            type="is-primary"
+            class="mx-4 mb-4"
+          >
+            <b-input type="text" v-model="username" data-cy="username">
+            </b-input>
+          </b-field>
+        </div>
 
-      <div>
-        <b-field
-          label="Password"
-          label-position="inside"
+        <div>
+          <b-field
+            label="Password"
+            label-position="inside"
+            type="is-primary"
+            class="mx-4"
+          >
+            <b-input
+              @keyup.enter.native="doLogin"
+              type="password"
+              v-model="password"
+              autocomplete="new-password"
+              data-cy="password"
+            ></b-input>
+          </b-field>
+        </div>
+        <b-button
+          class="m-4"
+          @click="doLogin()"
           type="is-primary"
-          class="mx-4"
+          data-cy="loginButton"
+          outlined
+          >Login</b-button
         >
-          <b-input
-            @keyup.enter.native="doLogin"
-            type="password"
-            v-model="password"
-            autocomplete="new-password"
-            data-cy="password"
-          ></b-input>
-        </b-field>
+        <a class="m-4 button is-danger is-outlined" :href="omniauthUrl"
+          >Login Gmail</a
+        >
       </div>
-      <b-button
-        class="m-4"
-        @click="doLogin()"
-        type="is-primary"
-        data-cy="loginButton"
-        outlined
-        >Login</b-button
-      >
-      <a class="m-4 button is-danger is-outlined" :href="omniauthUrl"
-        >Login Gmail</a
-      >
     </div>
   </div>
 </template>
@@ -96,3 +99,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.login {
+  height: 100%;
+}
+</style>

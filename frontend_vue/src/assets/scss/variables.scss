@@ -1,0 +1,112 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$background: hsl(212, 65%, 95%);
+
+$primary: #3D5A80;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+
+$info: #19d5ff;
+$info-light: findLightColor($info);
+$info-dark: findDarkColor($info);
+$info-invert: findColorInvert($info);
+
+$danger: #EE6C4D;
+$danger-light: findLightColor($danger);
+$danger-dark: findDarkColor($danger);
+$danger-invert: findColorInvert($danger);
+
+$light: #fff09d;
+// $light: #fcd757;
+$light-light: findLightColor($light);
+$light-dark: findDarkColor($light);
+$light-invert: findColorInvert($light);
+
+$white: #E0FBFC;
+// $light: #fcd757;
+$white-light: findLightColor($white);
+$white-dark: findDarkColor($white);
+$white-invert: findColorInvert($white);
+
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+
+$navbar-background-color: $white;
+$navbar-item-hover-background-color: $primary-light;
+
+$card-background-color: $white;
+
+$modal-card-body-background-color: $white;
+$modal-card-head-background-color: $white;
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: mergeColorMaps(
+    (
+        "white": (
+            $white,
+            $black,
+        ),
+        "black": (
+            $black,
+            $white,
+        ),
+        "light": (
+            $light,
+            $light-invert,
+        ),
+        "dark": (
+            $dark,
+            $dark-invert,
+        ),
+        "primary": (
+            $primary,
+            $primary-invert,
+            $primary-light,
+            $primary-dark,
+        ),
+        "link": (
+            $link,
+            $link-invert,
+            $link-light,
+            $link-dark,
+        ),
+        "info": (
+            $info,
+            $info-invert,
+            $info-light,
+            $info-dark,
+        ),
+        "success": (
+            $success,
+            $success-invert,
+            $success-light,
+            $success-dark,
+        ),
+        "warning": (
+            $warning,
+            $warning-invert,
+            $warning-light,
+            $warning-dark,
+        ),
+        "danger": (
+            $danger,
+            $danger-invert,
+            $danger-light,
+            $danger-dark,
+        ),
+    ),
+    $custom-colors
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

@@ -6,6 +6,7 @@ import store from "./store";
 import VModal from "vue-js-modal";
 import VueClipboard from "vue-clipboard2";
 import "buefy/dist/buefy.css";
+import "./assets/scss/variables.scss";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
