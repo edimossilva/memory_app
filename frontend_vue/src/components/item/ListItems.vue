@@ -1,13 +1,17 @@
 <template>
   <div data-cy="list_items">
-    <div class="mb-4">
-      <b-field label="search" label-position="inside" type="is-primary">
+    <div class="mb-6">
+      <b-field type="is-primary">
         <b-input
-          type="text"
+          placeholder="Search..."
           v-model="filter"
+          type="search"
+          icon-pack="fas"
+          icon="search"
           data-cy="list_items__filter_input"
-          custom-class="has-background-white"
-        ></b-input>
+          custom-class="is-primary has-background-white"
+        >
+        </b-input>
       </b-field>
     </div>
     <div class="columns is-multiline">
@@ -50,7 +54,12 @@ export default {
     ...mapState(["items"]),
     filteredItems() {
       const { items, filter } = this;
-      if (filter) return items.filter((item) => item.key.includes(filter));
+      if (filter)
+        return items.filter(
+          (item) =>
+            item.key.toLowerCase().includes(filter.toLowerCase()) ||
+            item.value.toLowerCase().includes(filter.toLowerCase())
+        );
       return items;
     },
   },

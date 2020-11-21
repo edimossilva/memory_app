@@ -16,10 +16,11 @@ import {
   faSignOutAlt,
   faPlus,
   faSave,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faCopy, faEdit, faTrashAlt, faSignOutAlt, faPlus, faSave);
+library.add(faCopy, faEdit, faTrashAlt, faSignOutAlt, faPlus, faSave, faSearch);
 
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 Vue.config.productionTip = false;
