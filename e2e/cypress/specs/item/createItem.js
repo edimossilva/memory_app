@@ -43,12 +43,12 @@ describe("Create task", () => {
     });
   });
 
-  describe('When use tags', () => {
+  describe('When use existing tags', () => {
     it("Should contains tags", () => {
       cy.get('[data-cy=item_modal__key_input]').type(key2);
       cy.get('[data-cy=item_modal__value_input]').type(value1);
       cy.get('[data-cy=item_modal__tag_autocomplete]').type(tagName1);
-      cy.get('.dropdown-item').click();
+      cy.get('.dropdown-item').first().click();
       cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
 
       cy.get('[data-cy=item_modal__confirm_button]').click();
@@ -57,6 +57,20 @@ describe("Create task", () => {
 
       cy.get(`[data-cy=show_item__edit_button_${key2}]`).click();
       cy.get(`[data-cy=item_modal__tag_spam_${tagName1}]`).should('exist')
+    });
+  });
+
+  describe('When create new tag', () => {
+    it("Should contains tags", () => {
+      cy.get('[data-cy=item_modal__key_input]').type(key2);
+      cy.get('[data-cy=item_modal__value_input]').type(value1);
+      cy.get('[data-cy=item_modal__tag_autocomplete]').type(tagName1);
+      cy.get('[data-cy=item_modal__add_new_tag]').click()
+
+      cy.get('[data-cy=tag_modal__name_input]').type(tagName2);
+      cy.get('[data-cy=tag_modal__confirm_button]').click();
+
+      cy.get(`[data-cy=item_modal__tag_spam_${tagName2}]`).should('exist');
     });
   });
 });
