@@ -1,6 +1,6 @@
 <template>
-  <div class="columns is-centered is-vcentered login">
-    <div class="container column is-half">
+  <div class="columns is-mobile is-centered is-vcentered login">
+    <div class="container column is-half-desktop">
       <div class="box has-background-white">
         <div>
           <b-field
