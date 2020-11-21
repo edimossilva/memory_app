@@ -56,18 +56,19 @@
               v-model="tagName"
               ref="autocomplete"
               :data="filteredTagsArray"
-              @select="(option) => addTag(option)"
+              @select="(option) => addTagByName(option)"
               dropdown-position="top"
               :open-on-focus="true"
               :clear-on-select="true"
               data-cy="item_modal__tag_autocomplete"
             >
-              <!-- <template slot="footer">
-            <a @click="showAddFruit">
-              <span> Add new... </span>
-            </a>
-          </template>
-          <template slot="empty">Tag</template> -->
+              <template slot="footer">
+                <a @click="isTagModalActive = true">
+                  <span data-cy="item_modal__add_new_tag">
+                    Add new tag...
+                  </span>
+                </a>
+              </template>
             </b-autocomplete>
           </b-field>
           <div class="columns m-2">
@@ -100,15 +101,36 @@
           </b-button>
         </b-field>
       </section>
+      <b-modal
+        v-model="isTagModalActive"
+        has-modal-card
+        trap-focus
+        :destroy-on-hide="true"
+        aria-role="dialog"
+        aria-modal
+      >
+        <template #default="props">
+          <tag-modal
+            titleLabel="Create tag"
+            buttonLabel="Save"
+            :errorMessage="tagModalErrorMessage"
+            :onConfirmClick="onCreateTagConfirmButtonClick"
+            @close="props.close"
+          ></tag-modal>
+        </template>
+      </b-modal>
     </div>
   </form>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import { createTagApi } from "../services/tagsApi";
+import TagModal from "@/modals/TagModal.vue";
 
 export default {
   name: "ItemModal",
+  components: { TagModal },
   props: {
     titleLabel: {
       type: String,
@@ -136,6 +158,8 @@ export default {
       item: {},
       tagName: "",
       selected: null,
+      isTagModalActive: false,
+      tagModalErrorMessage: "",
     };
   },
 
@@ -165,7 +189,21 @@ export default {
     },
   },
   methods: {
-    addTag(selectedTagName) {
+    ...mapActions(["addTag"]),
+    onCreateTagConfirmButtonClick(tag) {
+      createTagApi(tag).then(
+        (response) => {
+          this.addTag(response.data.data);
+          this.addTagByName(response.data.data.name);
+          this.isTagModalActive = false;
+        },
+        (error) => {
+          this.tag = {};
+          this.tagModalErrorMessage = error.response.data.error_message;
+        }
+      );
+    },
+    addTagByName(selectedTagName) {
       if (!selectedTagName) {
         return;
       }

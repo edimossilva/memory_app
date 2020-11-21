@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home has-background-white">
     <list-items class="m-4"></list-items>
     <section>
       <b-button
