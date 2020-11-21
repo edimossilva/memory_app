@@ -9,6 +9,11 @@ $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
 
+$secondary: #c9f8fa;
+$secondary-light: findLightColor($secondary);
+$secondary-dark: findDarkColor($secondary);
+$secondary-invert: findColorInvert($secondary);
+
 $info: #19d5ff;
 $info-light: findLightColor($info);
 $info-dark: findDarkColor($info);
@@ -38,10 +43,10 @@ $custom-shades: null !default;
 $navbar-background-color: $white;
 $navbar-item-hover-background-color: $primary-light;
 
-$card-background-color: $white;
-
-$modal-card-body-background-color: $white;
-$modal-card-head-background-color: $white;
+$card-color: $secondary;
+$card-background-color: $card-color;
+$modal-card-body-background-color: $card-color;
+$modal-card-head-background-color: $card-color;
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
@@ -67,6 +72,12 @@ $colors: mergeColorMaps(
             $primary-invert,
             $primary-light,
             $primary-dark,
+        ),
+        "secondary": (
+            $secondary,
+            $secondary-invert,
+            $secondary-light,
+            $secondary-dark,
         ),
         "link": (
             $link,

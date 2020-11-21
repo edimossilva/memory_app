@@ -1,7 +1,7 @@
 <template>
   <div class="columns is-mobile is-centered is-vcentered login">
     <div class="container column is-half-desktop">
-      <div class="box has-background-white">
+      <div class="box has-background-secondary">
         <div>
           <b-field
             label="Username"

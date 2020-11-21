@@ -7,6 +7,7 @@
         type="is-primary"
         @click="onAddButtonClick"
         icon-left="plus"
+        class="my-4"
       >
         Add Item
       </b-button>

@@ -10,7 +10,7 @@
         </p>
       </header>
       <div class="card-content h-100">
-        <div class="content h-100">{{ item.value }}</div>
+        <div class="content h-100 has-text-black">{{ item.value }}</div>
         <div class="tags is-centered">
           <span
             v-for="tag in item.tags"
