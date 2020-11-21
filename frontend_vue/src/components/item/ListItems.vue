@@ -20,7 +20,7 @@
         v-for="item in filteredItems"
         :key="item.key"
       >
-        <show-item :item="item"></show-item>
+        <show-item :item="item" :queries="[filter]"></show-item>
       </div>
     </div>
   </div>

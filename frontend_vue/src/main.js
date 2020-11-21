@@ -5,6 +5,8 @@ import router from "./router";
 import store from "./store";
 import VModal from "vue-js-modal";
 import VueClipboard from "vue-clipboard2";
+import TextHighlight from "vue-text-highlight";
+
 import "buefy/dist/buefy.css";
 import "./assets/scss/variables.scss";
 
@@ -21,7 +23,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faCopy, faEdit, faTrashAlt, faSignOutAlt, faPlus, faSave, faSearch);
-
+Vue.component("text-highlight", TextHighlight);
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 Vue.config.productionTip = false;
 Vue.use(VModal);
