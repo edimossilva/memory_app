@@ -6,11 +6,13 @@
     >
       <header class="card-header">
         <p class="card-header-title is-centered">
-          {{ item.key }}
+          <text-highlight :queries="queries"> {{ item.key }}</text-highlight>
         </p>
       </header>
       <div class="card-content h-100">
-        <div class="content h-100">{{ item.value }}</div>
+        <div class="content h-100 has-text-black">
+          <text-highlight :queries="queries"> {{ item.value }}</text-highlight>
+        </div>
         <div class="tags is-centered">
           <span
             v-for="tag in item.tags"
@@ -80,6 +82,7 @@ export default {
   name: "ShowItem",
   props: {
     item: { type: Object, required: true },
+    queries: { type: Array, required: true },
   },
   components: { ItemModal },
   data() {

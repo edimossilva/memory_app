@@ -70,7 +70,7 @@
           <template slot="empty">Tag</template> -->
             </b-autocomplete>
           </b-field>
-          <div class="columns mx-4">
+          <div class="columns m-2">
             <div class="column">
               <b-tag
                 v-for="tag in item.tags"

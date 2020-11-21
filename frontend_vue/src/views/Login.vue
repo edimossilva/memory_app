@@ -1,8 +1,17 @@
 <template>
-  <div class="columns is-centered is-vcentered login">
-    <div class="container column is-half">
-      <div class="box has-background-white">
+  <div class="columns is-mobile is-centered is-vcentered login">
+    <div class="container column is-half-desktop">
+      <div class="box has-background-secondary">
         <div>
+          <div class="login__image-container mb-4">
+            <b-image
+              class="login__image"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_h4yKLD7Nx0MvkuVDshGADdvB-KjNR4O6ng&usqp=CAU"
+              alt="A random image"
+              :rounded="true"
+            ></b-image>
+          </div>
+
           <b-field
             label="Username"
             label-position="inside"
@@ -102,5 +111,13 @@ export default {
 <style scoped>
 .login {
   height: 100%;
+}
+.login__image {
+  height: 100px;
+  width: 100px;
+}
+.login__image-container {
+  display: flex;
+  justify-content: center;
 }
 </style>
