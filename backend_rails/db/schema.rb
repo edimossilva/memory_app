@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_194430) do
+ActiveRecord::Schema.define(version: 2020_11_24_195916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2020_11_24_194430) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.index ["user_id", "key"], name: "index_memories_on_user_id_and_key", unique: true
+  end
+
+  create_table "memory_list_memories", force: :cascade do |t|
+    t.integer "memory_list_id", null: false
+    t.integer "memory_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["memory_id"], name: "index_memory_list_memories_on_memory_id"
+    t.index ["memory_list_id"], name: "index_memory_list_memories_on_memory_list_id"
   end
 
   create_table "memory_lists", force: :cascade do |t|

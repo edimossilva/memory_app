@@ -8,5 +8,6 @@ RSpec.describe MemoryList, type: :model do
   end
   describe 'relationship' do
     it { should belong_to(:user).required }
+    it { should have_many(:memory_list_memories) }
   end
 end
