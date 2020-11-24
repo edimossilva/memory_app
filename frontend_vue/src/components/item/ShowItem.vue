@@ -99,6 +99,14 @@ export default {
   methods: {
     ...mapActions(["removeItem", "editItem"]),
     onRemoveButtonClick() {
+      this.$buefy.dialog.confirm({
+        message: `Are you sure you want to <b>DELETE</b> "${this.item.key}"?`,
+        confirmText: "Delete",
+        type: "is-danger",
+        onConfirm: () => this.deleteItem(),
+      });
+    },
+    deleteItem() {
       const { item, removeItem, $buefy } = this;
       deleteItemApi(item.id).then(
         () => {
