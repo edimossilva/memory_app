@@ -51,7 +51,10 @@
 import { mapActions } from "vuex";
 import { deleteTagApi, editTagApi } from "../../services/tagsApi";
 import TagModal from "@/modals/TagModal.vue";
-
+import {
+  successNotify,
+  dangerNotify,
+} from "../../services/notifications/notificationsService";
 export default {
   name: "ShowTag",
   props: {
@@ -70,23 +73,13 @@ export default {
       deleteTagApi(this.tag.id).then(
         () => {
           this.removeTag(this.tag);
+          dangerNotify(this.$buefy, `"${this.tag.name}" deleted`);
         },
         (error) => {
           // this.showError();
           console.log(error.response.data.error_message);
         }
       );
-    },
-    onCopyButtonClick() {
-      const { tag, $copyText, $buefy } = this;
-      $copyText(tag.value).then(() => {
-        $buefy.dialog.alert({
-          message: `"${tag.value}" copied to clipboard :)`,
-          type: "is-primary",
-          ariaRole: "alertdialog",
-          ariaModal: true,
-        });
-      });
     },
     onEditButtonClick() {
       this.isComponentModalActive = true;
@@ -97,6 +90,7 @@ export default {
         (response) => {
           this.editTag(response.data.data);
           this.isComponentModalActive = false;
+          successNotify(this.$buefy, `"${tag.name}" saved :)`);
         },
         (error) => {
           this.tagModalErrorMessage = error.response.data.error_message;

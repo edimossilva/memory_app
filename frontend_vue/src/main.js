@@ -19,10 +19,22 @@ import {
   faPlus,
   faSave,
   faSearch,
+  faUser,
+  faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faCopy, faEdit, faTrashAlt, faSignOutAlt, faPlus, faSave, faSearch);
+library.add(
+  faCopy,
+  faEdit,
+  faTrashAlt,
+  faSignOutAlt,
+  faPlus,
+  faSave,
+  faSearch,
+  faUser,
+  faKey
+);
 Vue.component("text-highlight", TextHighlight);
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 Vue.config.productionTip = false;

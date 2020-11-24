@@ -12,6 +12,7 @@ const checkToken = function (to, from, next) {
     })
     .catch((error) => {
       console.log(error.response.data);
+      localStorage.token = "";
       logout({ tokenExpired: true });
     });
 };

@@ -37,6 +37,7 @@ import ListTags from "@/components/tag/ListTags.vue";
 import { createTagApi } from "../services/tagsApi";
 import { mapActions } from "vuex";
 import TagModal from "@/modals/TagModal.vue";
+import { successNotify } from "../services/notifications/notificationsService";
 
 export default {
   name: "Tags",
@@ -58,6 +59,7 @@ export default {
         (response) => {
           this.addTag(response.data.data);
           this.isComponentModalActive = false;
+          successNotify(this.$buefy, `"${tag.name}" saved :)`);
         },
         (error) => {
           this.tag = {};

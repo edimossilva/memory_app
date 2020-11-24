@@ -39,7 +39,7 @@ import ItemModal from "@/modals/ItemModal.vue";
 import { createItemApi } from "../services/itemsApi";
 import { getTagsApi } from "../services/tagsApi";
 import { mapActions } from "vuex";
-
+import { successNotify } from "../services/notifications/notificationsService";
 export default {
   name: "Home",
   components: { ListItems, ItemModal },
@@ -70,6 +70,7 @@ export default {
         (response) => {
           this.addItem(response.data.data);
           this.isComponentModalActive = false;
+          successNotify(this.$buefy, `"${item.key}" saved :)`);
         },
         (error) => {
           this.item = {};

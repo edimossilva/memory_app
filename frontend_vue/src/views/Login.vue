@@ -18,7 +18,12 @@
             type="is-primary"
             class="mx-4 mb-4"
           >
-            <b-input type="text" v-model="username" data-cy="username">
+            <b-input
+              type="text"
+              v-model="username"
+              data-cy="username"
+              icon="user"
+            >
             </b-input>
           </b-field>
         </div>
@@ -36,6 +41,7 @@
               v-model="password"
               autocomplete="new-password"
               data-cy="password"
+              icon="key"
             ></b-input>
           </b-field>
         </div>

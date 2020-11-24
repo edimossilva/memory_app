@@ -30,6 +30,11 @@ $light-light: findLightColor($light);
 $light-dark: findDarkColor($light);
 $light-invert: findColorInvert($light);
 
+$success: #bedbbb;
+$success-light: findLightColor($success);
+$success-dark: findDarkColor($success);
+$success-invert: findColorInvert($success);
+
 $white: #E0FBFC;
 // $light: #fcd757;
 $white-light: findLightColor($white);

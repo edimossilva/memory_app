@@ -76,6 +76,11 @@
 <script>
 import { mapActions } from "vuex";
 import { deleteItemApi, editItemApi } from "../../services/itemsApi";
+import {
+  successNotify,
+  infoNotify,
+  dangerNotify,
+} from "../../services/notifications/notificationsService";
 import ItemModal from "@/modals/ItemModal.vue";
 
 export default {
@@ -94,9 +99,11 @@ export default {
   methods: {
     ...mapActions(["removeItem", "editItem"]),
     onRemoveButtonClick() {
-      deleteItemApi(this.item.id).then(
+      const { item, removeItem, $buefy } = this;
+      deleteItemApi(item.id).then(
         () => {
-          this.removeItem(this.item);
+          removeItem(item);
+          dangerNotify($buefy, `"${item.key}" deleted`);
         },
         (error) => {
           // this.showError();
@@ -107,12 +114,7 @@ export default {
     onCopyButtonClick() {
       const { item, $copyText, $buefy } = this;
       $copyText(item.value).then(() => {
-        $buefy.dialog.alert({
-          message: `"${item.value}" copied to clipboard :)`,
-          type: "is-primary",
-          ariaRole: "alertdialog",
-          ariaModal: true,
-        });
+        infoNotify($buefy, `"${item.value}" copied to clipboard :)`);
       });
     },
     onEditButtonClick() {
@@ -120,10 +122,13 @@ export default {
       this.itemModalErrorMessage = "";
     },
     onEditModalConfirmButtonClick(item) {
+      const { editItem, $buefy } = this;
+
       editItemApi(item).then(
         (response) => {
-          this.editItem(response.data.data);
+          editItem(response.data.data);
           this.isComponentModalActive = false;
+          successNotify($buefy, `"${item.value}" saved :)`);
         },
         (error) => {
           this.itemModalErrorMessage = error.response.data.error_message;
