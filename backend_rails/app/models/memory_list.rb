@@ -4,4 +4,8 @@ class MemoryList < ApplicationRecord
   has_many :memories, through: :memory_list_memories
 
   validates :name, presence: true
+
+  def serialize
+    self
+  end
 end
