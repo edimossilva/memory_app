@@ -70,6 +70,14 @@ export default {
   methods: {
     ...mapActions(["removeTag", "editTag"]),
     onRemoveButtonClick() {
+      this.$buefy.dialog.confirm({
+        message: `Are you sure you want to <b>DELETE</b> "${this.tag.name}"?`,
+        confirmText: "Delete",
+        type: "is-danger",
+        onConfirm: () => this.deleteItem(),
+      });
+    },
+    deleteItem() {
       deleteTagApi(this.tag.id).then(
         () => {
           this.removeTag(this.tag);

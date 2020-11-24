@@ -11,7 +11,19 @@
       </header>
       <div class="card-content h-100">
         <div class="content h-100 has-text-black">
-          <text-highlight :queries="queries"> {{ item.value }}</text-highlight>
+          <a
+            v-if="isUrl"
+            :href="item.value"
+            :data-cy="`show_item__a_${item.key}`"
+            target="_blank"
+          >
+            <text-highlight :queries="queries">
+              {{ item.value }}
+            </text-highlight>
+          </a>
+          <text-highlight v-else :queries="queries">
+            {{ item.value }}</text-highlight
+          >
         </div>
         <div class="tags is-centered">
           <span
@@ -96,9 +108,26 @@ export default {
       itemModalErrorMessage: "",
     };
   },
+  computed: {
+    isUrl() {
+      const { item } = this;
+      if (item.value.includes("http://") || item.value.includes("https://")) {
+        return true;
+      }
+      return false;
+    },
+  },
   methods: {
     ...mapActions(["removeItem", "editItem"]),
     onRemoveButtonClick() {
+      this.$buefy.dialog.confirm({
+        message: `Are you sure you want to <b>DELETE</b> "${this.item.key}"?`,
+        confirmText: "Delete",
+        type: "is-danger",
+        onConfirm: () => this.deleteItem(),
+      });
+    },
+    deleteItem() {
       const { item, removeItem, $buefy } = this;
       deleteItemApi(item.id).then(
         () => {
