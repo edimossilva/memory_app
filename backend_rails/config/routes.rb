@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :memories
     resources :tags
     resources :memory_tags
-    resources :memory_lists
+    resources :shareable_lists
 
     get 'delete_test_user_data' => 'tests#delete_test_user_data'
   end

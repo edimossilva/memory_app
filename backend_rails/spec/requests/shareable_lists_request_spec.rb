@@ -19,7 +19,7 @@ RSpec.describe 'MemoryList', type: :request do
       end
 
       before(:each) do
-        post('/api/v1/memory_lists', params: create_params, headers: registred_headers)
+        post('/api/v1/shareable_lists', params: create_params, headers: registred_headers)
       end
 
       it { expect(response).to have_http_status(:created) }

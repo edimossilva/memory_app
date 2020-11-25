@@ -2,8 +2,8 @@
 
 include ActionDispatch::TestProcess
 FactoryBot.define do
-  factory :memory_list_memory do
-    association :memory_list
+  factory :shareable_list_memory do
+    association :shareable_list
     association :memory
   end
 end

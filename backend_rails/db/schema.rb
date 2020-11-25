@@ -37,23 +37,6 @@ ActiveRecord::Schema.define(version: 2020_11_24_195916) do
     t.index ["user_id", "key"], name: "index_memories_on_user_id_and_key", unique: true
   end
 
-  create_table "memory_list_memories", force: :cascade do |t|
-    t.integer "memory_list_id", null: false
-    t.integer "memory_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["memory_id"], name: "index_memory_list_memories_on_memory_id"
-    t.index ["memory_list_id"], name: "index_memory_list_memories_on_memory_list_id"
-  end
-
-  create_table "memory_lists", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_memory_lists_on_user_id"
-  end
-
   create_table "memory_tags", force: :cascade do |t|
     t.integer "memory_id", null: false
     t.integer "tag_id", null: false
@@ -62,6 +45,23 @@ ActiveRecord::Schema.define(version: 2020_11_24_195916) do
     t.index ["memory_id", "tag_id"], name: "index_memory_tags_on_memory_id_and_tag_id", unique: true
     t.index ["memory_id"], name: "index_memory_tags_on_memory_id"
     t.index ["tag_id"], name: "index_memory_tags_on_tag_id"
+  end
+
+  create_table "shareable_list_memories", force: :cascade do |t|
+    t.integer "shareable_list_id", null: false
+    t.integer "memory_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["memory_id"], name: "index_shareable_list_memories_on_memory_id"
+    t.index ["shareable_list_id"], name: "index_shareable_list_memories_on_shareable_list_id"
+  end
+
+  create_table "shareable_lists", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_shareable_lists_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
