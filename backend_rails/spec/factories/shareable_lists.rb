@@ -2,7 +2,7 @@
 
 include ActionDispatch::TestProcess
 FactoryBot.define do
-  factory :memory_list do
+  factory :shareable_list do
     association :user
     name { Faker::Book.unique.title }
   end

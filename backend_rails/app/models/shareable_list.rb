@@ -6,6 +6,6 @@ class ShareableList < ApplicationRecord
   validates :name, presence: true
 
   def serialize
-    self
+    ShareableListSerializer.new self
   end
 end
