@@ -6,6 +6,7 @@ RSpec.describe Memory, type: :model do
   describe 'relationship' do
     it { should belong_to(:user).required }
     it { should have_many(:memory_tags) }
+    it { should have_many(:shareable_list_memories) }
     it { should have_many(:tags).through(:memory_tags) }
   end
 
