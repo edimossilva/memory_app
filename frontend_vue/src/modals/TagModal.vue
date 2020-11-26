@@ -20,7 +20,6 @@
         class="mx-4"
       >
         <b-input
-          @keyup.enter.native="onConfirm()"
           type="text"
           v-model="tag.name"
           data-cy="tag_modal__name_input"

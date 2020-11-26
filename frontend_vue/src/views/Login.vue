@@ -28,7 +28,7 @@
           </b-field>
         </div>
 
-        <div>
+        <div v-on:keyup.enter="doLogin">
           <b-field
             label="Password"
             label-position="inside"
@@ -36,7 +36,6 @@
             class="mx-4"
           >
             <b-input
-              @keyup.enter.native="doLogin"
               type="password"
               v-model="password"
               autocomplete="new-password"
