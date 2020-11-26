@@ -20,6 +20,12 @@
       <b-navbar-item href="/tags" data-cy="main-menu__navbar-item-tags">
         Tags
       </b-navbar-item>
+      <b-navbar-item
+        href="/shareable_lists"
+        data-cy="main-menu__navbar-item-shareable_lists"
+      >
+        Shareable lists
+      </b-navbar-item>
     </template>
     <template slot="end">
       <b-navbar-item tag="div">

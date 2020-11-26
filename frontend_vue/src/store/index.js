@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isLogged: {},
     items: [],
     modalItem: {},
+    shareableLists: [],
     tags: [],
   },
   mutations: {
@@ -44,6 +45,9 @@ export default new Vuex.Store({
     },
     setTags({ commit }, tags) {
       commit("mutate", { property: "tags", value: tags });
+    },
+    setShareableLists({ commit }, shareableLists) {
+      commit("mutate", { property: "shareableLists", value: shareableLists });
     },
     editItem({ commit }, item) {
       commit("editElement", { property: "items", element: item });
