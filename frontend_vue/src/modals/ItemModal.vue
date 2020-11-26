@@ -25,7 +25,6 @@
           class="mx-4"
         >
           <b-input
-            @keyup.enter.native="onConfirm()"
             type="text"
             v-model="item.key"
             data-cy="item_modal__key_input"
@@ -39,7 +38,6 @@
           class="mx-4"
         >
           <b-input
-            @keyup.enter.native="onConfirm()"
             type="text"
             v-model="item.value"
             data-cy="item_modal__value_input"
@@ -62,7 +60,7 @@
               :clear-on-select="true"
               data-cy="item_modal__tag_autocomplete"
             >
-              <template slot="footer">
+              <template v-slot:footer>
                 <a @click="isTagModalActive = true">
                   <span data-cy="item_modal__add_new_tag">
                     Add new tag...
