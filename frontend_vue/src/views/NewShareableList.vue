@@ -5,7 +5,7 @@
         <div class="columns is-multiline">
           <div class="column mt-6 mb-1"></div>
           <div class="column is-12 notification is-info mr-4 mb-0">
-            <h2 class="is-size-3 notification p-1 is-primary">All Items</h2>
+            <h2 class="is-size-4 notification p-1 is-primary">All Items</h2>
             <draggable
               class="list-group columns is-multiline"
               :list="allItems"
@@ -40,7 +40,7 @@
         </div>
         <div class="columns is-multiline mb-0">
           <div class="column notification is-info mx-2 mb-2 h-auto">
-            <h2 class="is-size-3 notification p-1 is-primary">Items</h2>
+            <h2 class="is-size-4 notification p-1 is-primary">Items</h2>
             <draggable
               class="list-group columns is-multiline"
               :list="shareableList.items"
