@@ -6,8 +6,9 @@
         v-for="shareableList in shareableLists"
         :key="shareableList.key"
       >
-        <!-- <show-shareableList :shareableList="shareableList"></show-shareableList> -->
-        {{ shareableList }}
+        <show-shareable-list
+          :shareableList="shareableList"
+        ></show-shareable-list>
       </div>
     </div>
   </div>
@@ -15,12 +16,12 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-// import ShowTag from "@/components/shareableList/ShowTag.vue";
+import ShowShareableList from "@/components/shareable_list/ShowShareableList";
 import { getShareableListsApi } from "../../services/shareableListsApi";
 
 export default {
   name: "ListTags",
-  // components: { ShowTag },
+  components: { ShowShareableList },
   mounted() {
     getShareableListsApi().then(
       (response) => {
