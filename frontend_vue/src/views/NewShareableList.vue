@@ -86,6 +86,8 @@
 import { mapState, mapActions } from "vuex";
 import DraggableItem from "@/components/shareable_list/DraggableItem.vue";
 import { getItemsApi } from "../services/itemsApi";
+import { createShareableListApi } from "../services/shareableListsApi";
+import { dangerNotify } from "../services/notifications/notificationsService";
 import draggable from "vuedraggable";
 
 export default {
@@ -113,6 +115,16 @@ export default {
   },
   methods: {
     ...mapActions(["setItems"]),
+    onConfirm() {
+      createShareableListApi(this.shareableList).then(
+        () => {
+          this.$router.push({ name: "ShareableLists" });
+        },
+        (error) => {
+          dangerNotify(this.$buefy, error.response.data.error_message);
+        }
+      );
+    },
     add: function () {
       console.log("add");
     },

@@ -3,18 +3,30 @@ import { HOST, getRequestConfig, deleteApi, editApi } from "./api";
 
 const SHAREABLE_LIST_RESOURCE_URL = `${HOST}/api/v1/shareable_lists`;
 
-export const createShareableListApi = (tag) => {
-  return axios.post(SHAREABLE_LIST_RESOURCE_URL, tag, getRequestConfig());
+export const createShareableListApi = (shareableList) => {
+  const itemsIds = shareableList.items.map((item) => item.id);
+  const shareableListJson = {
+    name: shareableList.name,
+    memories_ids: itemsIds,
+  };
+  return axios.post(
+    SHAREABLE_LIST_RESOURCE_URL,
+    shareableListJson,
+    getRequestConfig()
+  );
 };
 
-export const editShareableListApi = (tag) => {
-  return editApi(`${SHAREABLE_LIST_RESOURCE_URL}/${tag.id}`, tag);
+export const editShareableListApi = (shareableList) => {
+  return editApi(
+    `${SHAREABLE_LIST_RESOURCE_URL}/${shareableList.id}`,
+    shareableList
+  );
 };
 
 export const getShareableListsApi = () => {
   return axios.get(SHAREABLE_LIST_RESOURCE_URL, getRequestConfig());
 };
 
-export const deleteShareableListApi = (tagId) => {
-  return deleteApi(`${SHAREABLE_LIST_RESOURCE_URL}/${tagId}`);
+export const deleteShareableListApi = (shareableListId) => {
+  return deleteApi(`${SHAREABLE_LIST_RESOURCE_URL}/${shareableListId}`);
 };
