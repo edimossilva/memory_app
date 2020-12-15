@@ -10,9 +10,13 @@
         </p>
       </header>
       <div class="card-content">
-        <div class="content">
-          <div class="column" v-for="item in items" :key="item.key">
-            <show-item :item="item" :hide-buttons="true"></show-item>
+        <div class="content columns is-multiline">
+          <div
+            class="column is-one-third pb-0"
+            v-for="item in items"
+            :key="item.key"
+          >
+            <show-item :item="item" :hide-content="true"></show-item>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@
           <text-highlight :queries="queries"> {{ item.key }}</text-highlight>
         </p>
       </header>
-      <div class="card-content h-100">
+      <div v-if="!hideContent" class="card-content h-100">
         <div class="content h-100 has-text-black">
           <a
             v-if="isUrl"
@@ -36,7 +36,7 @@
           </span>
         </div>
       </div>
-      <footer v-if="!hideButtons" class="card-footer">
+      <footer v-if="!hideContent" class="card-footer">
         <a
           class="card-footer-item"
           :dataId="item.key"
@@ -104,7 +104,7 @@ export default {
       required: false,
       default: () => [],
     },
-    hideButtons: {
+    hideContent: {
       type: Boolean,
       required: false,
       default: false,

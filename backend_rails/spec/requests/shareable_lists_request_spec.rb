@@ -47,4 +47,16 @@ RSpec.describe 'SareableList', type: :request do
       expect(json_response_data[1]["id"]).to eq(shareable_lists[1]["id"])
     end
   end
+
+  context '#destroy' do
+    let!(:shareable_list) { create(:shareable_list, user: registred_user) }
+
+    describe 'When find shareable_list' do
+      before(:each) do
+        delete("/api/v1/shareable_lists/#{shareable_list.id}", headers: registred_headers)
+      end
+
+      it { expect(response).to have_http_status(:no_content) }
+    end
+  end
 end
