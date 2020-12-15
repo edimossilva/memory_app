@@ -25,7 +25,7 @@
             {{ item.value }}</text-highlight
           >
         </div>
-        <div class="tags is-centered">
+        <div v-if="item.tags" class="tags is-centered">
           <span
             v-for="tag in item.tags"
             :key="tag.id"
@@ -36,7 +36,7 @@
           </span>
         </div>
       </div>
-      <footer class="card-footer">
+      <footer v-if="!hideButtons" class="card-footer">
         <a
           class="card-footer-item"
           :dataId="item.key"
@@ -99,7 +99,16 @@ export default {
   name: "ShowItem",
   props: {
     item: { type: Object, required: true },
-    queries: { type: Array, required: true },
+    queries: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+    hideButtons: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   components: { ItemModal },
   data() {

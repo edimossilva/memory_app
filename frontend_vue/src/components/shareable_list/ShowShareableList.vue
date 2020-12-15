@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="card"
+      class="card has-background-info"
       :data-cy="`show_shareable_list__card_${shareableList.name}`"
     >
       <header class="card-header">
@@ -11,9 +11,9 @@
       </header>
       <div class="card-content">
         <div class="content">
-          <span class="shareableList is-medium has-text-black">
-            Items: {{ itemsNames }}</span
-          >
+          <div class="column" v-for="item in items" :key="item.key">
+            <show-item :item="item" :hide-buttons="true"></show-item>
+          </div>
         </div>
       </div>
       <footer class="card-footer">
@@ -36,8 +36,11 @@ import {
   successNotify,
   dangerNotify,
 } from "../../services/notifications/notificationsService";
+import ShowItem from "@/components/item/ShowItem.vue";
+
 export default {
   name: "ShowShareableList",
+  components: { ShowItem },
   props: {
     shareableList: { type: Object, required: true },
   },
@@ -47,11 +50,9 @@ export default {
     };
   },
   computed: {
-    itemsNames() {
-      const items = this.shareableList.memories.map((item) => item.key);
-      const reducer = (accumulator, currentValue) =>
-        `${accumulator}, ${currentValue}`;
-      return items.reduce(reducer);
+    items() {
+      const items = this.shareableList.memories;
+      return items;
     },
   },
   methods: {
