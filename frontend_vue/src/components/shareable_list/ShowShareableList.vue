@@ -18,6 +18,13 @@
       </div>
       <footer class="card-footer">
         <a
+          class="card-footer-item"
+          :data-cy="`show_shareable_list__edit_button_${shareableList.name}`"
+          @click.prevent="onEditButtonClick"
+        >
+          <b-icon icon="edit" size="is-small"> </b-icon>
+        </a>
+        <a
           class="card-footer-item has-text-danger"
           :data-cy="`show_shareable_list__delete_button_${shareableList.name}`"
           @click.prevent="onRemoveButtonClick"
@@ -55,6 +62,7 @@ export default {
   },
   methods: {
     ...mapActions(["removeShareableList"]),
+    onEditButtonClick() {},
     onRemoveButtonClick() {
       this.$buefy.dialog.confirm({
         message: `Are you sure you want to <b>DELETE</b> "${this.shareableList.name}"?`,
