@@ -2,7 +2,7 @@
   <div data-cy="list_shareable_list">
     <div class="columns is-multiline">
       <div
-        class="column is-half"
+        class="column"
         v-for="shareableList in shareableLists"
         :key="shareableList.key"
       >
