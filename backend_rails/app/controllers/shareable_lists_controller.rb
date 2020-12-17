@@ -55,6 +55,6 @@ class ShareableListsController < ApiController
   end
 
   def memories_ids
-    params.permit(memories_ids: [])[:memories_ids]
+    params.permit(memories_ids: [])[:memories_ids] || []
   end
 end

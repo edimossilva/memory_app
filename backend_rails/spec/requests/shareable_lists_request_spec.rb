@@ -50,16 +50,55 @@ RSpec.describe 'SareableList', type: :request do
 
   context '#update' do
     let!(:shareable_list) { create(:shareable_list, user: registred_user) }
+    let!(:new_name) { 'new name' }
 
-    before(:each) do
-      put('/api/v1/shareable_lists', headers: registred_headers)
+    describe 'When update only name' do
+      before(:each) do
+        put("/api/v1/shareable_lists/#{shareable_list.id}", params:{ name: new_name }, headers: registred_headers)
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it 'contains fields from params' do
+        expect(json_response_data["name"]).to eq(new_name)
+      end
     end
 
-    it { expect(response).to have_http_status(:ok) }
+    describe 'When add new memories' do
+      let!(:memory_list) { create_list(:memory, 3, user: registred_user) }
+      let!(:memories_ids) { memory_list.pluck(:id) }
 
-    it 'contains fields from params' do
-      expect(json_response_data[0]["id"]).to eq(shareable_lists[0]["id"])
-      expect(json_response_data[1]["id"]).to eq(shareable_lists[1]["id"])
+      before(:each) do
+        put("/api/v1/shareable_lists/#{shareable_list.id}", params:{ memories_ids: memories_ids }, headers: registred_headers)
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it 'contains memories from params' do
+        expect(json_response_data["memories"].count).to eq(3)
+      end
+    end
+
+    describe 'When remove memories' do
+      let!(:memory_list) { create_list(:memory, 3, user: registred_user) }
+      let!(:memories_ids) { memory_list.pluck(:id) }
+      let!(:shareable_list_memory0) { create(:shareable_list_memory, memory: memory_list[0], shareable_list: shareable_list) }
+      let!(:shareable_list_memory1) { create(:shareable_list_memory, memory: memory_list[1], shareable_list: shareable_list) }
+      let!(:shareable_list_memory2) { create(:shareable_list_memory, memory: memory_list[2], shareable_list: shareable_list) }
+
+      before(:each) do
+        put("/api/v1/shareable_lists/#{shareable_list.id}", params:{ memories_ids: [memory_list[0].id, memory_list[1].id] }, headers: registred_headers)
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it 'contains only memories from params' do
+        expect(json_response_data["memories"].count).to eq(2)
+      end
+
+      it 'destroy shareable memory from removed memory' do
+        expect(ShareableListMemory.find_by(id: shareable_list_memory2.id)).to be_nil
+      end
     end
   end
 
