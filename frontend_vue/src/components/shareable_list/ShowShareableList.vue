@@ -62,7 +62,12 @@ export default {
   },
   methods: {
     ...mapActions(["removeShareableList"]),
-    onEditButtonClick() {},
+    onEditButtonClick() {
+      this.$router.push({
+        name: "FormShareableList",
+        params: { id: this.shareableList.id },
+      });
+    },
     onRemoveButtonClick() {
       this.$buefy.dialog.confirm({
         message: `Are you sure you want to <b>DELETE</b> "${this.shareableList.name}"?`,
