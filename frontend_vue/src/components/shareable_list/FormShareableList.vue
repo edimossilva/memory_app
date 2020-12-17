@@ -87,8 +87,14 @@ import { mapState, mapActions } from "vuex";
 import DraggableItem from "@/components/shareable_list/DraggableItem.vue";
 import { getItemsApi } from "../../services/itemsApi";
 import { getShareableListApi } from "../../services/shareableListsApi";
-import { createShareableListApi } from "../../services/shareableListsApi";
-import { dangerNotify } from "../../services/notifications/notificationsService";
+import {
+  createShareableListApi,
+  editShareableListApi,
+} from "../../services/shareableListsApi";
+import {
+  dangerNotify,
+  successNotify,
+} from "../../services/notifications/notificationsService";
 import draggable from "vuedraggable";
 
 export default {
@@ -144,7 +150,7 @@ export default {
     ...mapActions(["setItems"]),
     onConfirm() {
       if (this.id) {
-        console.log("edit");
+        this.editShareableList();
       } else {
         this.createShareableList();
       }
@@ -153,6 +159,16 @@ export default {
       createShareableListApi(this.shareableList).then(
         () => {
           this.$router.push({ name: "ShareableLists" });
+        },
+        (error) => {
+          dangerNotify(this.$buefy, error.response.data.error_message);
+        }
+      );
+    },
+    editShareableList() {
+      editShareableListApi(this.shareableList).then(
+        () => {
+          successNotify(this.$buefy, "Success");
         },
         (error) => {
           dangerNotify(this.$buefy, error.response.data.error_message);

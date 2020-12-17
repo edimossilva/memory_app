@@ -17,9 +17,15 @@ export const createShareableListApi = (shareableList) => {
 };
 
 export const editShareableListApi = (shareableList) => {
+  const itemsIds = shareableList.items.map((item) => item.id);
+  const shareableListJson = {
+    id: shareableList.id,
+    name: shareableList.name,
+    memories_ids: itemsIds,
+  };
   return editApi(
-    `${SHAREABLE_LIST_RESOURCE_URL}/${shareableList.id}`,
-    shareableList
+    `${SHAREABLE_LIST_RESOURCE_URL}/${shareableListJson.id}`,
+    shareableListJson
   );
 };
 export const getShareableListApi = (shareableListId) => {

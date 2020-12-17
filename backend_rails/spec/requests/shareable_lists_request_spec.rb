@@ -48,6 +48,21 @@ RSpec.describe 'SareableList', type: :request do
     end
   end
 
+  context '#update' do
+    let!(:shareable_list) { create(:shareable_list, user: registred_user) }
+
+    before(:each) do
+      put('/api/v1/shareable_lists', headers: registred_headers)
+    end
+
+    it { expect(response).to have_http_status(:ok) }
+
+    it 'contains fields from params' do
+      expect(json_response_data[0]["id"]).to eq(shareable_lists[0]["id"])
+      expect(json_response_data[1]["id"]).to eq(shareable_lists[1]["id"])
+    end
+  end
+
   context '#destroy' do
     let!(:shareable_list) { create(:shareable_list, user: registred_user) }
 
