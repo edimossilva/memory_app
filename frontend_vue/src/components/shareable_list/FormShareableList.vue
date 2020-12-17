@@ -155,8 +155,8 @@ export default {
         this.createShareableList();
       }
     },
-    createShareableList() {
-      createShareableListApi(this.shareableList).then(
+    async createShareableList() {
+      await createShareableListApi(this.shareableList).then(
         () => {
           this.$router.push({ name: "ShareableLists" });
         },
