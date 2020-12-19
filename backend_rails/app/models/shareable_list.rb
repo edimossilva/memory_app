@@ -5,6 +5,8 @@ class ShareableList < ApplicationRecord
 
   validates :name, presence: true
 
+  alias_attribute :shareable_list_name, :name
+
   def serialize
     ShareableListSerializer.new self
   end
