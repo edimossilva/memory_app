@@ -1,5 +1,5 @@
 class ShareableListSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :memories
 
   has_many :memories
 end

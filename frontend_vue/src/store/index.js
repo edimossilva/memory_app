@@ -40,6 +40,12 @@ export default new Vuex.Store({
     removeTag({ commit }, tag) {
       commit("removeElement", { property: "tags", element: tag });
     },
+    removeShareableList({ commit }, shareableList) {
+      commit("removeElement", {
+        property: "shareableLists",
+        element: shareableList,
+      });
+    },
     setItems({ commit }, items) {
       commit("mutate", { property: "items", value: items });
     },
