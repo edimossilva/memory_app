@@ -4,6 +4,10 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - 'DOCKER_TAG=${SEMAPHORE_GIT_PR_BRANCH:=latest}'
 blocks:
   - name: integration tests
     dependencies: []
@@ -14,7 +18,7 @@ blocks:
             - checkout
             - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - touch .env
-            - echo "VUE_APP_API_URL=http://localhost:3000" > frontend_vue/.env
+            - 'echo "VUE_APP_API_URL=http://localhost:3000" > frontend_vue/.env'
             - touch ./backend_rails/.env
             - docker-compose up -d memory_app_vue
             - docker-compose up -d memory_app_back
@@ -23,7 +27,7 @@ blocks:
             - 'docker-compose exec memory_app_back rake db:create'
             - 'docker-compose exec memory_app_back rake db:migrate'
             - 'docker-compose exec memory_app_back rake db:seed'
-            - 'docker-compose exec memory_app_e2e xvfb-run -a cypress run'
+            - docker-compose exec memory_app_e2e xvfb-run -a cypress run
       secrets:
         - name: memory-app-heroku
   - name: backend unit
@@ -71,7 +75,6 @@ blocks:
             - yarn lint --no-fix --max-warnings 0
       secrets:
         - name: memory-app-heroku
-
   - name: backend merge tests
     dependencies:
       - backend unit
@@ -98,7 +101,6 @@ blocks:
   - name: deploy
     skip:
       when: branch != 'master'
-      # when: false
     dependencies:
       - integration tests
       - lint
@@ -115,7 +117,7 @@ blocks:
             - touch ./backend_rails/.env
             - touch .env
             - cd frontend_vue
-            - curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+            - 'curl --compressed -o- -L https://yarnpkg.com/install.sh | bash'
             - yarn
             - yarn -v
             - yarn build

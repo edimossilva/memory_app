@@ -21,6 +21,7 @@ import {
   faSearch,
   faUser,
   faKey,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -33,7 +34,8 @@ library.add(
   faSave,
   faSearch,
   faUser,
-  faKey
+  faKey,
+  faEye
 );
 Vue.component("text-highlight", TextHighlight);
 Vue.component("vue-fontawesome", FontAwesomeIcon);

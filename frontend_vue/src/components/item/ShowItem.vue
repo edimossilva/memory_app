@@ -25,7 +25,7 @@
             {{ item.value }}</text-highlight
           >
         </div>
-        <div class="tags is-centered">
+        <div v-if="item.tags" class="tags is-centered">
           <span
             v-for="tag in item.tags"
             :key="tag.id"
@@ -46,6 +46,7 @@
         </a>
 
         <a
+          v-if="!copyOnly"
           class="card-footer-item"
           :data-cy="`show_item__edit_button_${item.key}`"
           @click.prevent="onEditButtonClick"
@@ -53,6 +54,7 @@
           <b-icon icon="edit" size="is-small"> </b-icon>
         </a>
         <a
+          v-if="!copyOnly"
           class="card-footer-item has-text-danger"
           :data-cy="`show_item__delete_button_${item.key}`"
           @click.prevent="onRemoveButtonClick"
@@ -99,7 +101,17 @@ export default {
   name: "ShowItem",
   props: {
     item: { type: Object, required: true },
-    queries: { type: Array, required: true },
+    queries: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+    hideContent: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    copyOnly: { type: Boolean, required: false, default: false },
   },
   components: { ItemModal },
   data() {
