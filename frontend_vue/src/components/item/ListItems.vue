@@ -14,13 +14,18 @@
         </b-input>
       </b-field>
     </div>
+    <slot></slot>
     <div class="columns is-multiline">
       <div
         class="column is-one-third"
         v-for="item in filteredItems"
         :key="item.key"
       >
-        <show-item :item="item" :queries="[filter]"></show-item>
+        <show-item
+          :item="item"
+          :copy-only="copyOnly"
+          :queries="[filter]"
+        ></show-item>
       </div>
     </div>
   </div>
@@ -34,6 +39,10 @@ import { getItemsApi } from "../../services/itemsApi";
 export default {
   name: "ListItems",
   mounted() {
+    if (this.externalItems) {
+      this.setItems(this.externalItems);
+      return;
+    }
     getItemsApi().then(
       (response) => {
         this.setItems(response.data.data);
@@ -48,6 +57,10 @@ export default {
       item: { key: "", value: "" },
       filter: "",
     };
+  },
+  props: {
+    copyOnly: { type: Boolean, required: false, default: false },
+    externalItems: { type: Array, required: false },
   },
   components: { ShowItem },
   computed: {
@@ -65,6 +78,11 @@ export default {
   },
   methods: {
     ...mapActions(["setItems"]),
+  },
+  watch: {
+    externalItems: function (newVal) {
+      this.setItems(newVal);
+    },
   },
 };
 </script>
