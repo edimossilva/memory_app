@@ -4,6 +4,7 @@ import Tags from "../views/Tags.vue";
 import ShareableLists from "../views/ShareableLists.vue";
 import NewShareableList from "../views/NewShareableList.vue";
 import FormShareableList from "../components/shareable_list/FormShareableList.vue";
+import DisplayShareableList from "../components/shareable_list/DisplayShareableList.vue";
 import OmniauthCallback from "../components/auth/OmniauthCallback.vue";
 import { checkAuthApi } from "../services/authApi";
 import { logout } from "../services/auth/authService";
@@ -69,6 +70,17 @@ export const routes = [
     path: "/shareable_list/edit/:id",
     name: "FormShareableList",
     component: FormShareableList,
+    meta: {
+      requiresAuth: true,
+    },
+    beforeEnter: (to, from, next) => {
+      checkToken(to, from, next);
+    },
+  },
+  {
+    path: "/shareable_list/show/:id",
+    name: "DisplayShareableList",
+    component: DisplayShareableList,
     meta: {
       requiresAuth: true,
     },

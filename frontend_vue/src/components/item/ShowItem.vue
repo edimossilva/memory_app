@@ -9,7 +9,7 @@
           <text-highlight :queries="queries"> {{ item.key }}</text-highlight>
         </p>
       </header>
-      <div v-if="!hideContent" class="card-content h-100">
+      <div class="card-content h-100">
         <div class="content h-100 has-text-black">
           <a
             v-if="isUrl"
@@ -36,7 +36,7 @@
           </span>
         </div>
       </div>
-      <footer v-if="!hideContent" class="card-footer">
+      <footer class="card-footer">
         <a
           class="card-footer-item"
           :dataId="item.key"
@@ -46,6 +46,7 @@
         </a>
 
         <a
+          v-if="!copyOnly"
           class="card-footer-item"
           :data-cy="`show_item__edit_button_${item.key}`"
           @click.prevent="onEditButtonClick"
@@ -53,6 +54,7 @@
           <b-icon icon="edit" size="is-small"> </b-icon>
         </a>
         <a
+          v-if="!copyOnly"
           class="card-footer-item has-text-danger"
           :data-cy="`show_item__delete_button_${item.key}`"
           @click.prevent="onRemoveButtonClick"
@@ -109,6 +111,7 @@ export default {
       required: false,
       default: false,
     },
+    copyOnly: { type: Boolean, required: false, default: false },
   },
   components: { ItemModal },
   data() {

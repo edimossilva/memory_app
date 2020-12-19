@@ -19,6 +19,13 @@
       <footer class="card-footer">
         <a
           class="card-footer-item"
+          :data-cy="`show_shareable_list__show_button_${shareableList.name}`"
+          @click.prevent="onShowButtonClick"
+        >
+          <b-icon icon="eye" size="is-small"> </b-icon>
+        </a>
+        <a
+          class="card-footer-item"
           :data-cy="`show_shareable_list__edit_button_${shareableList.name}`"
           @click.prevent="onEditButtonClick"
         >
@@ -62,6 +69,12 @@ export default {
   },
   methods: {
     ...mapActions(["removeShareableList"]),
+    onShowButtonClick() {
+      this.$router.push({
+        name: "DisplayShareableList",
+        params: { id: this.shareableList.id },
+      });
+    },
     onEditButtonClick() {
       this.$router.push({
         name: "FormShareableList",
