@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   end
 
   scope 'api/v1' do
+    get 'shareable_lists/public_shareable_list' => 'shareable_lists#public_shareable_list'
+
     resources :memories
     resources :tags
     resources :memory_tags

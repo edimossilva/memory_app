@@ -12,4 +12,14 @@ RSpec.describe ShareableList, type: :model do
     it { should have_many(:shareable_list_memories) }
     it { should have_many(:memories).through(:shareable_list_memories) }
   end
+
+  describe '.initialize' do
+    describe 'has public property false by default' do
+      let(:shareable_list) { ShareableList.new }
+
+      it 'public property is false' do
+        expect(shareable_list).to_not be_public
+      end
+    end
+  end
 end

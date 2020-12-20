@@ -113,4 +113,43 @@ RSpec.describe 'SareableList', type: :request do
       it { expect(response).to have_http_status(:no_content) }
     end
   end
+
+  context '#public_shareable_list' do
+    describe 'when shareable list exist' do
+      let!(:shareable_list_name) { 'super_name' }
+      let!(:registred_user2) { create(:user, :registred, username: 'username2') }
+
+      let!(:shareable_list) { create(:shareable_list, name: shareable_list_name, user: registred_user) }
+      let!(:shareable_list2) { create(:shareable_list, name: shareable_list_name, user: registred_user2) }
+
+      context 'when does find' do
+        before(:each) do
+          get("/api/v1/shareable_lists/public_shareable_list?username=#{registred_user2.username}&shareable_list_name=#{shareable_list_name}")
+        end
+
+        it { expect(response).to have_http_status(:ok) }
+
+        it 'contains shareable list by username and shareable list name' do
+          expect(json_response_data["name"]).to eq(shareable_list_name)
+          expect(json_response_data["user_id"]).to eq(registred_user2.id)
+        end
+      end
+
+      context 'when does not find by username' do
+        before(:each) do
+          get("/api/v1/shareable_lists/public_shareable_list?username=#{'not existing'}&shareable_list_name=#{shareable_list_name}")
+        end
+
+        it { expect(response).to have_http_status(:not_found) }
+      end
+
+      context 'when does not find by shareable list name' do
+        before(:each) do
+          get("/api/v1/shareable_lists/public_shareable_list?username=#{registred_user2.username}&shareable_list_name=#{'not existing'}")
+        end
+
+        it { expect(response).to have_http_status(:not_found) }
+      end
+    end
+  end
 end

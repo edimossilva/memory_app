@@ -3,7 +3,7 @@
 class ShareableListsController < ApiController
   skip_before_action :verify_authenticity_token
 
-  before_action :authorize_request
+  before_action :authorize_request, except: :public_shareable_list
 
   self.resource_class = ShareableList
 
@@ -40,10 +40,19 @@ class ShareableListsController < ApiController
     render_ok(shareable_list)
   end
 
+  def public_shareable_list
+    render_ok ShareableList.find_by!(find_public_params)
+  end
+
   private
 
   def find_params
     params.permit(:id)
+  end
+
+  def find_public_params
+    user_id = User.find_by!(params.permit(:username)).id
+    params.permit(:shareable_list_name).merge(user_id: user_id)
   end
 
   def create_params

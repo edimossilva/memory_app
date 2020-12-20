@@ -28,12 +28,22 @@ export const editShareableListApi = (shareableList) => {
     shareableListJson
   );
 };
+
 export const getShareableListApi = (shareableListId) => {
   return axios.get(
     `${SHAREABLE_LIST_RESOURCE_URL}/${shareableListId}`,
     getRequestConfig()
   );
 };
+
+export const getPublicShareableListApi = (username, shareableListName) => {
+  const url = `${SHAREABLE_LIST_RESOURCE_URL}/public_shareable_list`;
+  return axios.get(
+    `${url}?username=${username}&shareable_list_name=${shareableListName}`,
+    getRequestConfig()
+  );
+};
+
 export const getShareableListsApi = () => {
   return axios.get(SHAREABLE_LIST_RESOURCE_URL, getRequestConfig());
 };

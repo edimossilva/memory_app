@@ -11,7 +11,8 @@ import { logout } from "../services/auth/authService";
 
 const checkToken = function (to, from, next) {
   checkAuthApi()
-    .then(() => {
+    .then((data) => {
+      localStorage.username = data.data.username;
       next();
     })
     .catch((error) => {
@@ -86,6 +87,14 @@ export const routes = [
     },
     beforeEnter: (to, from, next) => {
       checkToken(to, from, next);
+    },
+  },
+  {
+    path: "/:username/:shareableListName",
+    name: "DisplayPublicShareableList",
+    component: DisplayShareableList,
+    meta: {
+      requiresAuth: false,
     },
   },
   {
