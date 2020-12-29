@@ -37,8 +37,6 @@ blocks:
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
         - name: unit 2/2
           commands:
-            - checkout
-            - docker-compose up -d memory_app_back
             - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
@@ -46,8 +44,6 @@ blocks:
         - name: memory-app-heroku
       prologue:
         commands:
-          - checkout
-          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
           - docker-compose up -d memory_app_back
           - 'docker-compose exec memory_app_back rake db:create db:migrate'
   - name: lint
@@ -103,7 +99,6 @@ blocks:
         - name: heroku
           commands:
             - checkout
-            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
             - cd frontend_vue
             - 'curl --compressed -o- -L https://yarnpkg.com/install.sh | bash'
             - yarn
