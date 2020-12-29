@@ -37,7 +37,6 @@ blocks:
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
         - name: unit 2/2
           commands:
-            - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
       secrets:
@@ -98,7 +97,6 @@ blocks:
       jobs:
         - name: heroku
           commands:
-            - checkout
             - cd frontend_vue
             - 'curl --compressed -o- -L https://yarnpkg.com/install.sh | bash'
             - yarn
