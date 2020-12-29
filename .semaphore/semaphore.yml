@@ -7,7 +7,10 @@ agent:
 global_job_config:
   prologue:
     commands:
-      - 'DOCKER_TAG=${SEMAPHORE_GIT_PR_BRANCH:=latest}'
+      - checkout
+      - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
+      - cp frontend_vue/.env.example frontend_vue/.env
+      - cp backend_rails/.env.example backend_rails/.env
 blocks:
   - name: integration tests
     dependencies: []
@@ -15,15 +18,9 @@ blocks:
       jobs:
         - name: cypress e2e
           commands:
-            - checkout
-            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
-            - touch .env
-            - 'echo "VUE_APP_API_URL=http://localhost:3000" > frontend_vue/.env'
-            - touch ./backend_rails/.env
             - docker-compose up -d memory_app_vue
             - docker-compose up -d memory_app_back
             - docker-compose up -d memory_app_e2e
-            - docker-compose ps
             - 'docker-compose exec memory_app_back rake db:create'
             - 'docker-compose exec memory_app_back rake db:migrate'
             - 'docker-compose exec memory_app_back rake db:seed'
@@ -40,21 +37,12 @@ blocks:
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_1.json
         - name: unit 2/2
           commands:
-            - checkout
-            - touch .env
-            - touch ./backend_rails/.env
-            - docker-compose up -d memory_app_back
-            - 'docker-compose exec memory_app_back rake db:create db:migrate'
             - 'docker-compose exec memory_app_back rake spec:sliced[1,2]'
             - artifact push workflow backend_rails/coverage/.resultset.json -d result_2.json
       secrets:
         - name: memory-app-heroku
       prologue:
         commands:
-          - checkout
-          - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
-          - touch .env
-          - touch ./backend_rails/.env
           - docker-compose up -d memory_app_back
           - 'docker-compose exec memory_app_back rake db:create db:migrate'
   - name: lint
@@ -98,6 +86,8 @@ blocks:
             - ./cc-test-reporter before-build
             - ./cc-test-reporter after-build --exit-code 0 -t simplecov -r e4c6b536aedf8301f0f2dc185cc611fa04fa0fea765fd12697b10b4f9b5e6b9a -p ./backend_rails
             - artifact push workflow collect_coverage/coverage/index.html -d index.html
+      secrets:
+        - name: memory-app-heroku
   - name: deploy
     skip:
       when: branch != 'master'
@@ -108,18 +98,11 @@ blocks:
     task:
       jobs:
         - name: heroku
-          priority:
-            - value: 90
-              when: true
           commands:
-            - checkout
-            - echo $DOCKER_PASSWORD | docker login --username "$DOCKER_USERNAME" --password-stdin
-            - touch ./backend_rails/.env
-            - touch .env
             - cd frontend_vue
+            - rm .env
             - 'curl --compressed -o- -L https://yarnpkg.com/install.sh | bash'
             - yarn
-            - yarn -v
             - yarn build
             - cd ..
             - cp -r frontend_vue/dist/* backend_rails/public/

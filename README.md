@@ -1,26 +1,4 @@
 # Read Me
-
-1. start containers in background (only use images)
-
-   `docker-compose up -d`
-
-1. config db
-
-   `docker-compose exec memory_app_back rake db:create db:migrate db:seed`
-
-1. tests backend unit
-
-   `docker-compose exec memory_app_back rspec`
-
-
-1. tests frontend e2e
-
-   `docker-compose up -d memory_app_e2e`
-
-1. access
-
-   `http://localhost:8080`
-
 1. Semaphore (parallel tests / lint)
 
    [![Build Status](https://edimossilva.semaphoreci.com/badges/memory_app/branches/master.svg?style=shields)](https://edimossilva.semaphoreci.com/projects/memory_app)
@@ -41,8 +19,42 @@
 
    https://memory-app-back.herokuapp.com/api-docs/index.html
 
-1. Docker image
+1. Docker images
 
    https://hub.docker.com/repository/docker/edimossilva/memory_app_rails
    https://hub.docker.com/repository/docker/edimossilva/memory_app_vue
    https://hub.docker.com/repository/docker/edimossilva/memory_e2e
+## Install
+1. create .env files from template
+
+    `cp frontend_vue/.env.example frontend_vue/.env`
+
+    `cp backend_rails/.env.example backend_rails/.env`
+
+1. start containers in background (only use images)
+
+   `docker-compose up -d`
+   `docker-compose ps` => should see "State=Up" for all containers
+
+1. config db
+
+   `docker-compose exec memory_app_back rake db:create db:migrate db:seed`
+
+1. tests backend unit
+
+   `docker-compose exec memory_app_back rspec`
+
+
+1. tests frontend e2e
+
+   `docker-compose exec memory_app_e2e xvfb-run -a cypress run`
+
+1. access frontend client
+
+   `http://localhost:8080` => username: registered_user1, password: 111
+
+1. access admin
+
+   `http://localhost:3000/admin` => username: admin, password: admin
+
+
