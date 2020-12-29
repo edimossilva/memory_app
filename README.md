@@ -31,6 +31,7 @@
 1. start containers in background (only use images)
 
    `docker-compose up -d`
+   `docker-compose ps` => should see "State=Up" for all containers
 
 1. config db
 
@@ -43,13 +44,13 @@
 
 1. tests frontend e2e
 
-   `docker-compose up -d memory_app_e2e`
+   `docker-compose exec memory_app_e2e xvfb-run -a cypress run`
 
 1. access frontend client
 
-   `http://localhost:8080`
+   `http://localhost:8080` => username: registered_user1, password: 111
 
 1. access admin
-   `http://localhost:3000`
+   `http://localhost:3000/admin` => username: admin, password: admin
 
 

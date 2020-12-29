@@ -14,4 +14,4 @@ user3 = User.create(username: 'admin_user1', password: '111', access_level: User
 user4 = User.create(username: 'admin_user2', password: '222', access_level: User.access_levels[:admin])
 user5 = User.create(username: 'test_user', password: '111', access_level: User.access_levels[:registred])
 AdminUser.create(email: 'edimossilva@gmail.com', password: 'edimo1')
-AdminUser.create(email: 'nogueiraiury20@gmail.com ', password: 'iurylindo')
+AdminUser.create(email: 'admin@gmail.com ', password: 'admin')
